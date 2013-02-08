@@ -1,0 +1,15 @@
+#################
+## HDL Designer
+#################
+\hds\.cache.dat
+
+
+############
+## Windows
+############
+
+# Windows image file caches
+Thumbs.db
+
+# Folder config file
+Desktop.ini
