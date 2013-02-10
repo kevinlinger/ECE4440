@@ -37,6 +37,6 @@ BEGIN
   control <= opType(1);
   
   mux:ENTITY work.Mux2to1(Behavior)
-  	GENERIC MAP (size=>16)
+	GENERIC MAP (size=>16)
     PORT MAP (aluData, rData, control, wBackData);
 END ARCHITECTURE Behavior;
