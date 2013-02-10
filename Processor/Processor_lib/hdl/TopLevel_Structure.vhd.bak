@@ -12,10 +12,30 @@ USE ieee.std_logic_1164.all;
 USE ieee.std_logic_arith.all;
 
 ENTITY TopLevel IS
+  PORT(clock, reset, interrupt : IN std_logic);
 END ENTITY TopLevel;
+
+
 
 --
 ARCHITECTURE Structure OF TopLevel IS
+  
+  signal IF_mem_data, IF_readAddress, IF_jumpAddress : std_logic_vector(15 downto 0);
+  signal IF_jumpEnable, IF_memdelay : std_logic;
+  signal IF_Instruction, IF_PCValue_output, maddr : std_logic_vector(15 downto 0);
+  
 BEGIN
+  
+IF_stage : Entity WORK.Instruction_Fetch_Stage(Structural)
+  PORT MAP(mem_data
+  Port( mem_data : IN std_logic_vector(15 downto 0);
+    readAddress : OUT std_logic_vector(15 downto 0);
+    jumpAddress : IN  std_logic_vector(15 downto 0);
+    jumpEnable, reset, interrupt, clock, memdelay, stall : IN std_logic;
+    Instruction, PCValue_output : OUT std_logic_vector(15 downto 0);
+    maddr : OUT std_logic_vector(15 downto 0));
+
+  
+  
 END ARCHITECTURE Structure;
 
