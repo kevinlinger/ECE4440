@@ -1,0 +1,147 @@
+# //  ModelSim SE 10.1c Jul 27 2012 
+# //
+# //  Copyright 1991-2012 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  THIS WORK CONTAINS TRADE SECRET AND PROPRIETARY INFORMATION
+# //  WHICH IS THE PROPERTY OF MENTOR GRAPHICS CORPORATION OR ITS
+# //  LICENSORS AND IS SUBJECT TO LICENSE TERMS.
+# //
+# vsim -L Processor_lib -l transcript.txt -i -multisource_delay latest -t ns +typdelays -foreign {hdsInit C:/MentorGraphics/HDS_2012.1/resources/downstream/modelsim/ModelSim_32Bit.dll} -pli {"C:/MentorGraphics/HDS_2012.1/resources/downstream/modelsim/ModelSim_32Bit.dll"} Processor_lib.TopLevel(Structure) 
+# ** Note: (vsim-3812) Design is being optimized...
+# 
+# ** Note: (vsim-3865) Due to PLI being present, full design access is being specified.
+# 
+# ** Note: (vopt-143) Recognized 1 FSM in architecture body "IF_State_Machine(Behavior)".
+# 
+# Loading C:/MentorGraphics/HDS_2012.1/resources/downstream/modelsim/ModelSim_32Bit.dll
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.std_logic_arith(body)
+# Loading work.toplevel(structure)#1
+# Loading work.instruction_fetch_stage(structural)#1
+# Loading work.mux_4_to_1(behavior)#1
+# Loading work.mux_2_to_1(behavior)#1
+# Loading work.reg(behavior)#1
+# Loading work.if_state_machine(behavior)#1
+# ** Warning: (vsim-8683) Uninitialized out port /toplevel/IF_stage/readAddress(15 downto 0) has no driver.
+# 
+# This port will contribute value (UUUUUUUUUUUUUUUU) to the signal network.
+# 
+# hds_restart 
+restart -force
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# 
+# ** Note: (vsim-3865) Due to PLI being present, full design access is being specified.
+# 
+# Loading C:/MentorGraphics/HDS_2012.1/resources/downstream/modelsim/ModelSim_32Bit.dll
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.std_logic_arith(body)
+# Loading work.toplevel(structure)#1
+# Loading work.instruction_fetch_stage(structural)#1
+# Loading work.mux_4_to_1(behavior)#1
+# Loading work.mux_2_to_1(behavior)#1
+# Loading work.reg(behavior)#1
+# Loading work.if_state_machine(behavior)#1
+# Loading work.decodestage(structure)#1
+# Loading work.instructionucode(behavior)#1
+# Loading work.twoonemux(behavior)#1
+# Loading work.twoonemux(behavior)#2
+# Loading work.fouronemux(behavior)#1
+# ** Warning: (vsim-8683) Uninitialized out port /toplevel/IF_stage/readAddress(15 downto 0) has no driver.
+# 
+# This port will contribute value (UUUUUUUUUUUUUUUU) to the signal network.
+# 
+force -freeze sim:/toplevel/clock 1 0, 0 {50 ns} -r 100
+force -freeze sim:/toplevel/reset 0 0
+force -freeze sim:/toplevel/interrupt 0 0
+force -freeze sim:/toplevel/IF_mem_data 0101010101010101 0
+run
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /toplevel/IF_stage
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /toplevel/IF_stage
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /toplevel/IF_stage
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 100 ns  Iteration: 1  Instance: /toplevel/IF_stage
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 100 ns  Iteration: 1  Instance: /toplevel/IF_stage
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 100 ns  Iteration: 1  Instance: /toplevel/IF_stage
+run
+# 0
+# 
+run
+# 0
+# 
+force -freeze sim:/toplevel/reset 1 0
+run
+# 0
+# 
+run
+# 0
+# 
+run
+# 0
+# 
+run
+# 0
+# 
+run
+# 0
+# 
+run
+# 0
+# 
+run
+# 0
+# 
+run
+# 0
+# 
+force -freeze sim:/toplevel/reset 0 0
+run
+# 0
+# 
+run
+# 0
+# 
+run
+# 0
+# 
+run
+# 0
+# 
+run
+# 0
+# 
+# hds_restart 
+restart -force
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# 
+# ** Note: (vsim-3865) Due to PLI being present, full design access is being specified.
+# 
+# Loading C:/MentorGraphics/HDS_2012.1/resources/downstream/modelsim/ModelSim_32Bit.dll
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.std_logic_arith(body)
+# Loading work.toplevel(structure)#1
+# Loading work.instruction_fetch_stage(structural)#1
+# Loading work.mux_4_to_1(behavior)#1
+# Loading work.mux_2_to_1(behavior)#1
+# Loading work.reg(behavior)#1
+# Loading work.if_state_machine(behavior)#1
+# Loading work.decodestage(structure)#1
+# Loading work.instructionucode(behavior)#1
+# Loading work.twoonemux(behavior)#1
+# Loading work.twoonemux(behavior)#2
+# Loading work.fouronemux(behavior)#1
+# ** Warning: (vsim-8683) Uninitialized out port /toplevel/IF_stage/readAddress(15 downto 0) has no driver.
+# 
+# This port will contribute value (UUUUUUUUUUUUUUUU) to the signal network.
+# 

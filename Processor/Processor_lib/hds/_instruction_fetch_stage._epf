@@ -1,0 +1,2 @@
+DEFAULT_ARCHITECTURE atom Structural
+DEFAULT_FILE atom Instruction_Fetch_Stage_Structural.vhd
