@@ -34,6 +34,23 @@ ARCHITECTURE Structure OF TopLevel IS
   signal RF_RD0, RF_RD1 : std_logic_vector(15 downto 0);
   
 BEGIN
+
+
+Instruction_Mem : ENTITY WORK.easy_RAM_simu(behavior)
+  PORT MAP( rst => reset, hDIn => (others => '0'), wr => '0', hAddr => IF_maddr,
+    hDOut => IF_mem_data);
+
+ENTITY easy_RAM_simu IS
+  port( 
+	  rst   : in	std_logic;                       -- active-high reset
+	  hDIn  : in	std_logic_vector (15 DOWNTO 0);  -- data to memory
+	  wr    : in	std_logic;                       -- memory write control signal
+	  hAddr : in	std_logic_vector (15 DOWNTO 0);  -- memory address
+	  hDOut : out	std_logic_vector (15 DOWNTO 0)   -- data from memory
+  );
+
+--Data_Mem : ENTITY WORK.easy_RAM_simu(behavior)
+--  PORT MAP( rst => reset, hDIn => D_Extra, hAddr => E_ALU_Out, 
   
 IF_stage : Entity WORK.Instruction_Fetch_Stage(Structural)
   PORT MAP(mem_data => IF_mem_data, readAddress => IF_readAddress, jumpAddress => IF_jumpAddress,
