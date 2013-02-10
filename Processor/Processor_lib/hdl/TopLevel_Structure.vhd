@@ -29,6 +29,7 @@ ARCHITECTURE Structure OF TopLevel IS
   signal D_ALU_Control : std_logic_vector(2 downto 0);
   signal D_Op_Type : std_logic_vector(8 downto 0);
   
+  signal E_ALU_Out : std_logic_vector(15 downto 0);
   
   signal RF_RD0, RF_RD1 : std_logic_vector(15 downto 0);
   
@@ -44,6 +45,10 @@ DecodeStage : ENTITY WORK.DecodeStage(Structure)
     RA0 => D_RA0, RA1 => D_RA1, Dest_Reg => D_Dest_Reg, Op0 => D_Op0, Op1 => D_Op1, Extra => D_Extra,
     ALU_Control => D_ALU_Control, Op_Type => D_Op_Type); 
   
-  
+ExecuteStage : ENTITY WORK.ExecuteStage(behavior)
+  PORT MAP( ALU0 => D_Op0, ALU1 => D_Op1, Extra => D_Extra, ALU_Ctrl => D_ALU_Control,
+    Op_Type => D_Op_Type, ALU_Out => E_ALU_Out, Branch_Inst => D_Dest_Reg, Branch_Ctrl => IF_JumpEnable,
+    clock => clock);
+
 END ARCHITECTURE Structure;
 

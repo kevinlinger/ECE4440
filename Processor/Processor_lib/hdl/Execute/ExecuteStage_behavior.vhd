@@ -5,7 +5,7 @@ use ieee.std_logic_arith.all;
 ENTITY ExecuteStage IS
   PORT (
     ALU0, ALU1, Extra : IN std_logic_vector (15 DOWNTO 0);
-    ALU_Ctrl : IN std_logic_vector(3 DOWNTO 0);
+    ALU_Ctrl : IN std_logic_vector(2 DOWNTO 0);
     Op_Type : IN std_logic_vector(8 DOWNTO 0);    
     ALU_Out : OUT std_logic_vector(15 DOWNTO 0);
     
