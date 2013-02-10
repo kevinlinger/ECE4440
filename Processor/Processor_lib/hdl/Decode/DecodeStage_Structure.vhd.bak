@@ -33,7 +33,7 @@ BEGIN
   signExtended <= (15 downto 8 => Instruction(7)) & Instruction(7 downto 0);
   Op_Type(8) <= Instruction(8);
   
-  InstructionMicroCode : entity work.InstructionUCode(Behavior)
+  InstructionMicroCode : entity work.InstructrionUCode(Behavior)
       port map (Instruction => Instruction, Op_Type_ROM => Op_Type_ROM);
   
   destRegMux : entity work.TwoOneMux(Behavior)

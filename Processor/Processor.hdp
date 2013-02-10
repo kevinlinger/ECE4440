@@ -1,11 +1,13 @@
+[ModelSim]
+Processor_lib = $HDS_PROJECT_DIR\Processor_lib\work
 [hdl]
-Processor_lib = $HDS_PROJECT_DIR\Processor_lib\hdl
+Processor_lib = $HDS_PROJECT_DIR/Processor_lib/hdl
 [hdl_vm]
-Processor_lib = \\home1.virginia.edu\HOME\m\mr\mrs8n\Shi\ECE4440
+Processor_lib = //home1.virginia.edu/HOME/m/mr/mrs8n/Shi/ECE4440
 [hdl_ws]
 Processor_lib = $HDS_PROJECT_DIR
 [hds]
-Processor_lib = $HDS_PROJECT_DIR\Processor_lib\hds
+Processor_lib = $HDS_PROJECT_DIR/Processor_lib/hds
 [hds_settings]
 default_library = Processor_lib
 version = 2
