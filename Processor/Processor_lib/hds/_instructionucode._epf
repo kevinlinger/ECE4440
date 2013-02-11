@@ -1,2 +1,2 @@
 DEFAULT_ARCHITECTURE atom Behavior
-DEFAULT_FILE atom Decode/DecodeStage_Structure.vhd
+DEFAULT_FILE atom Decode/InstructionUCode_Behavior.vhd

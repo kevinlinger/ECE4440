@@ -28,11 +28,11 @@ begin
   begin
 	  if (rst = '1') then
 		  table := (others => (others => '0'));
-table(0) := To_stdlogicvector(X"0010");
+table(0) := To_stdlogicvector(X"0002");
 table(1) := To_stdlogicvector(X"0100");
 table(2) := To_stdlogicvector(X"820F");
 table(3) := To_stdlogicvector(X"8431");
-table(4) := To_stdlogicvector(X"A600");
+table(4) := To_stdlogicvector(X"A240");
 --table(2) := To_stdlogicvector(X"97FF");   ---here you insert your program
 --table(3) := To_stdlogicvector(X"9A00");
 --table(4) := To_stdlogicvector(X"9900");
