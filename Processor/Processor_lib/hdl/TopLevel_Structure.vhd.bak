@@ -42,7 +42,7 @@ BEGIN
 
 MemStage : ENTITY WORK.MemStage(behavior)
   PORT MAP( addr => D_Dest_Reg, opType => D_Op_Type, aluData => E_ALU_Out, rData => M_rData,
-    wEnable => M_wEnable, rEnable => M_rEnable, wBackEnable => M_WBackEnable,
+    destAddr => D_Dest_Reg, wEnable => M_wEnable, rEnable => M_rEnable, wBackEnable => M_WBackEnable,
     wBackData => M_wBackData, wBackAddr => M_wBackAddr);
     
 

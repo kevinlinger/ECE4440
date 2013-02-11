@@ -17,7 +17,6 @@ ENTITY MemStage IS
     opType:IN std_logic_vector (8 DOWNTO 0);
     aluData:IN std_logic_vector (15 DOWNTO 0);
     rData: IN std_logic_vector (15 DOWNTO 0);
-    destAddr : OUT std_logic_vector(3 downto 0);
     wEnable:OUT std_logic;
     rEnable:OUT std_logic;
     wBackEnable : out std_logic;
@@ -33,10 +32,10 @@ BEGIN
   rEnable <= opType(1);
   wEnable <= opType(2);
   wBackEnable <= opType(1) or opType(4) or opType(5) or opType(6) or opType(3);
-  destAddr <= wBackAddr;
   control <= opType(1);
+  wBackAddr <= addr;
   
-  mux:ENTITY work.Mux2to1(Behavior)
-  	GENERIC MAP (size=>16)
+  mux:ENTITY work.Mux_2_to_1(Behavior)
+  	GENERIC MAP (width=>16)
     PORT MAP (aluData, rData, control, wBackData);
 END ARCHITECTURE Behavior;
