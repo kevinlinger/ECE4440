@@ -28,7 +28,7 @@ begin
   begin
 	  if (rst = '1') then
 		  table := (others => (others => '0'));
-table(0) := To_stdlogicvector(X"0010");
+table(0) := To_stdlogicvector(X"0002");
 table(1) := To_stdlogicvector(X"0100");
 table(2) := To_stdlogicvector(X"820F");
 table(3) := To_stdlogicvector(X"8431");
