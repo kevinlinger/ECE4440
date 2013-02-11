@@ -53,7 +53,7 @@ elsif(opcode = "101") then --arithmetic
 elsif(opcode = "110") then --Shift 
     Op_Type_ROM <= "0000000001000000";
 
-elsif(opcode = "101") then --Branch 
+elsif(opcode = "111") then --Branch 
   if(Instruction(8) = '0') then --unconditionaljump
     Op_Type_ROM <= "0011100010000000";
 else
