@@ -57,7 +57,7 @@ elsif(opcode = "111") then --Branch
   if(Instruction(8) = '0') then --unconditionaljump
     Op_Type_ROM <= "0011100010000000";
 else
-    Op_Type_ROM <= "0011010010000000";
+    Op_Type_ROM <= "0010010010000000";
   end if;
   end if;
   end process;

@@ -20,7 +20,7 @@ END ENTITY TopLevel;
 --
 ARCHITECTURE Structure OF TopLevel IS
   
-  signal IF_mem_data, IF_readAddress, IF_jumpAddress : std_logic_vector(15 downto 0);
+  signal IF_mem_data, IF_readAddress : std_logic_vector(15 downto 0);
   signal IF_jumpEnable : std_logic;
   signal IF_Instruction, IF_PCValue_output, IF_maddr : std_logic_vector(15 downto 0);
   
@@ -60,7 +60,7 @@ Data_Mem : ENTITY WORK.easy_RAM_simu(behavior)
   PORT MAP( rst => reset, hDIn => D_Extra, wr => M_wEnable, hAddr => E_ALU_Out, hDOut => M_rData);  
   
 IF_stage : Entity WORK.Instruction_Fetch_Stage(Structural)
-  PORT MAP(mem_data => IF_mem_data, readAddress => IF_readAddress, jumpAddress => IF_jumpAddress,
+  PORT MAP(mem_data => IF_mem_data, readAddress => IF_readAddress, jumpAddress => E_ALU_Out,
     jumpEnable => IF_jumpEnable, reset => reset, interrupt => interrupt, clock => clock, memdelay => '0',
     stall => '0', Instruction => IF_Instruction, PCValue_output => IF_PCValue_output, maddr => IF_maddr);
 
