@@ -1,4 +1,4 @@
-# //  ModelSim SE 10.1c Jul 27 2012 
+# //  ModelSim SE-64 10.1c Jul 28 2012 
 # //
 # //  Copyright 1991-2012 Mentor Graphics Corporation
 # //  All Rights Reserved.
@@ -7,8 +7,14 @@
 # //  WHICH IS THE PROPERTY OF MENTOR GRAPHICS CORPORATION OR ITS
 # //  LICENSORS AND IS SUBJECT TO LICENSE TERMS.
 # //
-# vsim -L Processor_lib -l transcript.txt -i -multisource_delay latest -t ns +typdelays -foreign {hdsInit C:/MentorGraphics/HDS_2012.1/resources/downstream/modelsim/ModelSim_32Bit.dll} -pli {"C:/MentorGraphics/HDS_2012.1/resources/downstream/modelsim/ModelSim_32Bit.dll"} Processor_lib.TopLevel(Structure) 
-# Loading C:/MentorGraphics/HDS_2012.1/resources/downstream/modelsim/ModelSim_32Bit.dll
+# vsim -L Processor_lib -l transcript.txt -i -multisource_delay latest -t ns +typdelays -foreign {hdsInit C:/MentorGraphics/HDS_2012.1/resources/downstream/modelsim/ModelSim_64Bit.dll} -pli {"C:/MentorGraphics/HDS_2012.1/resources/downstream/modelsim/ModelSim_64Bit.dll"} Processor_lib.TopLevel(Structure) 
+# ** Note: (vsim-3812) Design is being optimized...
+# 
+# ** Note: (vsim-3865) Due to PLI being present, full design access is being specified.
+# 
+# ** Note: (vopt-143) Recognized 1 FSM in architecture body "IF_State_Machine(Behavior)".
+# 
+# Loading C:/MentorGraphics/HDS_2012.1/resources/downstream/modelsim/ModelSim_64Bit.dll
 # Loading std.standard
 # Loading std.textio(body)
 # Loading ieee.std_logic_1164(body)
@@ -70,15 +76,6 @@ run
 #    Time: 100 ns  Iteration: 1  Instance: /toplevel/IF_stage
 # ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
 #    Time: 100 ns  Iteration: 1  Instance: /toplevel/IF_stage
-run
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 200 ns  Iteration: 1  Instance: /toplevel/IF_stage
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 200 ns  Iteration: 1  Instance: /toplevel/IF_stage
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 200 ns  Iteration: 1  Instance: /toplevel/IF_stage
-# 0
-# 
 force -freeze sim:/toplevel/reset 0 0
 run
 # 0
@@ -91,19 +88,20 @@ run
 # 
 run
 # ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 600 ns  Iteration: 9  Instance: /toplevel/Data_Mem
+#    Time: 500 ns  Iteration: 9  Instance: /toplevel/Data_Mem
 # ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 600 ns  Iteration: 9  Instance: /toplevel/Data_Mem
+#    Time: 500 ns  Iteration: 9  Instance: /toplevel/Data_Mem
 # 0
 # 
 restart
-# Loading C:/MentorGraphics/HDS_2012.1/resources/downstream/modelsim/ModelSim_32Bit.dll
+# Loading C:/MentorGraphics/HDS_2012.1/resources/downstream/modelsim/ModelSim_64Bit.dll
 # ** Warning: (vsim-8683) Uninitialized out port /toplevel/IF_stage/readAddress(15 downto 0) has no driver.
 # 
 # This port will contribute value (UUUUUUUUUUUUUUUU) to the signal network.
 # 
 force -freeze sim:/toplevel/clock 1 0, 0 {50 ns} -r 100
-force -freeze sim:/toplevel/reset 1 0
+noforce sim:/toplevel/reset
+force -freeze sim:/toplevel/reset 0 0
 force -freeze sim:/toplevel/interrupt 0 0
 run
 # ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
@@ -113,6 +111,14 @@ run
 # ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
 #    Time: 0 ns  Iteration: 0  Instance: /toplevel/IF_stage
 # ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /toplevel/Data_Mem
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 0 ns  Iteration: 0  Instance: /toplevel/Data_Mem
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /toplevel/Instruction_Mem
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 0 ns  Iteration: 0  Instance: /toplevel/Instruction_Mem
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
 #    Time: 0 ns  Iteration: 0  Instance: /toplevel/RegisterFile/rDecoder1
 # ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
 #    Time: 0 ns  Iteration: 0  Instance: /toplevel/RegisterFile/rDecoder1
@@ -120,6 +126,14 @@ run
 #    Time: 0 ns  Iteration: 0  Instance: /toplevel/RegisterFile/rDecoder0
 # ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
 #    Time: 0 ns  Iteration: 0  Instance: /toplevel/RegisterFile/rDecoder0
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 1  Instance: /toplevel/Data_Mem
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 0 ns  Iteration: 1  Instance: /toplevel/Data_Mem
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 1  Instance: /toplevel/Instruction_Mem
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 0 ns  Iteration: 1  Instance: /toplevel/Instruction_Mem
 # ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
 #    Time: 0 ns  Iteration: 2  Instance: /toplevel/RegisterFile/rDecoder1
 # ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
@@ -134,20 +148,14 @@ run
 #    Time: 100 ns  Iteration: 1  Instance: /toplevel/IF_stage
 # ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
 #    Time: 100 ns  Iteration: 1  Instance: /toplevel/IF_stage
+run
+# 0
+# 
+force -freeze sim:/toplevel/reset 1 0
+run
+# 0
+# 
 force -freeze sim:/toplevel/reset 0 0
 run
-# 0
-# 
-run
-# 0
-# 
-run
-# 0
-# 
-run
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 500 ns  Iteration: 9  Instance: /toplevel/Data_Mem
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 500 ns  Iteration: 9  Instance: /toplevel/Data_Mem
 # 0
 # 
