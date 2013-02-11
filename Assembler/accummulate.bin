@@ -1,0 +1,4 @@
+Sasm v1.0234v1.0 written by Wesley Dungan, May 1995.
+Butchered by your friendly 436 TAs, 2003
+Edited by Professor Stan and Deep (ECE 4440), Jan 2013
+USAGE: sasm [-t] input-file
