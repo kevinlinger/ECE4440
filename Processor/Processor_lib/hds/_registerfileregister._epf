@@ -1,2 +1,2 @@
 DEFAULT_ARCHITECTURE atom Behavior
-DEFAULT_FILE atom RegisterFileRegister_Behavior.vhd
+DEFAULT_FILE atom RegisterFile/RegisterFileRegister_Behavior.vhd

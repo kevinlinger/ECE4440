@@ -1,2 +1,2 @@
 DEFAULT_ARCHITECTURE atom Structure
-DEFAULT_FILE atom RegisterFile_Structure.vhd
+DEFAULT_FILE atom RegisterFile/RegisterFile_Structure.vhd

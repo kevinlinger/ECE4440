@@ -30,5 +30,10 @@ BEGIN
     PORT MAP (rAddr0, rDecodeOut0, '1');
   rDecoder1: ENTITY work.Decoder(Behavior)
     PORT MAP (rAddr1, rDecodeOut1, '1');
+  regArr: for i IN 0 to 15 GENERATE
+    BEGIN
+      regBlock: ENTITY work.RegisterFileRegister (Behavior)
+        PORT MAP (wData, wDecodeOut(i), rDecodeOut0(i), rDecodeOut1(i), clock, RD0, RD1);
+  END GENERATE regArr;
 END ARCHITECTURE Structure;
 

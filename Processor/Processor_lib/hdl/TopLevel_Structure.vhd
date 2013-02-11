@@ -46,6 +46,10 @@ MemStage : ENTITY WORK.MemStage(behavior)
     wBackData => M_wBackData, wBackAddr => M_wBackAddr);
     
 
+RegisterFile : ENTITY WORK.RegisterFile(structure)
+  PORT MAP( wAddr => M_wBackAddr, wData => M_wBackData, wEnable => M_WBackEnable,
+    rAddr0 => D_RA0, rAddr1 => D_RA1, clock =>clock, RD0 => RF_RD0, RD1 => RF_RD1);
+
 
 Instruction_Mem : ENTITY WORK.easy_RAM_simu(behavior)
   PORT MAP( rst => reset, hDIn => (others => '0'), wr => '0', hAddr => IF_maddr,
@@ -57,7 +61,7 @@ Data_Mem : ENTITY WORK.easy_RAM_simu(behavior)
   
 IF_stage : Entity WORK.Instruction_Fetch_Stage(Structural)
   PORT MAP(mem_data => IF_mem_data, readAddress => IF_readAddress, jumpAddress => IF_jumpAddress,
-    jumpEnable => IF_jumpEnable, reset =>reset, interrupt => interrupt, clock => clock, memdelay => '0',
+    jumpEnable => IF_jumpEnable, reset => reset, interrupt => interrupt, clock => clock, memdelay => '0',
     stall => '0', Instruction => IF_Instruction, PCValue_output => IF_PCValue_output, maddr => IF_maddr);
 
 DecodeStage : ENTITY WORK.DecodeStage(Structure)
