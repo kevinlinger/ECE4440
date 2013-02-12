@@ -7,13 +7,14 @@
 --
 -- using Mentor Graphics HDL Designer(TM) 2012.1 (Build 6)
 --
+
  LIBRARY ieee;
 USE ieee.std_logic_1164.all;
 USE ieee.std_logic_arith.all;
 
 ENTITY IF_State_Machine IS
   PORT (  clock, jump, int, reset, mdelay, stall : IN std_logic;
-    MuxPrePC_ctrl, MuxpreMaddr_ctrl, MuxPreInst_ctrl : OUT std_logic_vector( 1 downto 0);--Control vector
+    MuxPrePC_ctrl, MuxPreMAddr_ctrl, MuxPreInst_ctrl : OUT std_logic_vector( 1 downto 0);--Control vector
     MuxPrePCVal_ctrl : OUT std_logic);
   
 END ENTITY IF_State_Machine;
@@ -22,7 +23,7 @@ END ENTITY IF_State_Machine;
     TYPE state IS (run, interrupt, reset_state);
       signal current_state, next_state : state;
   BEGIN
-    determine_next_state :  Process(int, reset, mdelay, stall) 
+    determine_next_state :  Process(int, reset, mdelay, stall,clock) 
     BEGIN
       
     --Run state
@@ -50,10 +51,9 @@ END ENTITY IF_State_Machine;
     
     -- Reset state
     if(current_state = reset_state) then
-      if(mdelay = '1') then
+      if(mdelay = '1' or reset = '1') then
         next_state <= reset_state; -- reset
-      end if;
-      if(mdelay = '0') then
+      else
         next_state <= run; --run
       end if;
     end if;
@@ -68,33 +68,31 @@ END ENTITY IF_State_Machine;
   end PROCESS update_new_state;
     
     
-    output_control : PROCESS(current_state) IS
+    output_control : PROCESS(current_state, jump, stall, mdelay) IS
     BEGIN
---if(rising_edge(clock)) then     
+     
       if(current_state = run) then
- 
- 
  
        --jump
         if(jump = '1') then
         MuxPrePC_ctrl <= "01"; --JAddr
-        MuxpreMaddr_ctrl <= "10"; -- PCregister_value (but I believe this is a don't care)
-        MuxPreInst_ctrl <= "01"; -- nop
+        MuxPreMaddr_ctrl <= "10"; -- PCregister_value (but I believe this is a don't care)
+        MuxPreInst_ctrl <= "00"; -- (make nop when pipelined) run normally in single cycle
         MuxPrePCVal_ctrl <= '1'; -- JAddr       
         end if; 
         
         --run normally
         if(jump = '0' and mdelay = '0' and stall = '0') then       
         MuxPrePC_ctrl <= "11"; --PC + 1
-        MuxpreMaddr_ctrl <= "10"; -- PCregister_value (don't care)
+        MuxPreMaddr_ctrl <= "10"; -- PCregister_value (don't care)
         MuxPreInst_ctrl <= "00"; -- Mdata
         MuxPrePCVal_ctrl <= '0'; -- PCregister_value
-      end if;
+        end if;
       
         --mdelay
         if(jump = '0' and mdelay = '1') then
         MuxPrePC_ctrl <= "10"; --PC
-        MuxpreMaddr_ctrl <= "10"; -- PCregister_value (don't care)
+        MuxPreMaddr_ctrl <= "10"; -- PCregister_value (don't care)
         MuxPreInst_ctrl <= "01"; -- nop
         MuxPrePCVal_ctrl <= '0'; -- PCregister_value 
         end if;
@@ -102,7 +100,7 @@ END ENTITY IF_State_Machine;
          --stall
         if(jump = '0' and stall = '1') then
         MuxPrePC_ctrl <= "10"; --PC
-        MuxpreMaddr_ctrl <= "10"; -- PCregister_value (don't care)
+        MuxPreMaddr_ctrl <= "10"; -- PCregister_value (don't care)
         MuxPreInst_ctrl <= "01"; -- nop (don't care)
         MuxPrePCVal_ctrl <= '0'; -- PCregister_value
         end if;      
@@ -112,7 +110,7 @@ END ENTITY IF_State_Machine;
       --Interrupt
       IF(current_state = interrupt) then
         MuxPrePC_ctrl <= "00"; --Mdata
-        MuxpreMaddr_ctrl <= "01"; -- The 'one' value
+        MuxPreMaddr_ctrl <= "01"; -- The 'one' value
         MuxPreInst_ctrl <= "10"; -- the special instruction
         MuxPrePCVal_ctrl <= '0'; -- PCregister_value (don't care)           
       end if;
@@ -120,11 +118,13 @@ END ENTITY IF_State_Machine;
       --Reset
       IF(current_state = reset_state) then
         MuxPrePC_ctrl <= "00"; --Mdata
-        MuxpreMaddr_ctrl <= "00"; -- The 'zero' value
+        MuxPreMaddr_ctrl <= "00"; -- The 'zero' value
         MuxPreInst_ctrl <= "01"; -- nop
         MuxPrePCVal_ctrl <= '0'; -- PCregister_value (don't care)           
       end if;
---end if;
+
     end process output_control;
     
   END Architecture Behavior;
+
+

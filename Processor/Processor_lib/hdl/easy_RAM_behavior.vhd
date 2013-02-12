@@ -99,7 +99,9 @@ begin
 
 table(0) := To_stdlogicvector(X"0002");
 table(1) := To_stdlogicvector(X"0000");
-table(2) := To_stdlogicvector(X"E101");
+table(2) := To_stdlogicvector(X"0000");
+
+--table(2) := To_stdlogicvector(X"E101");
 table(3) := To_stdlogicvector(X"E13E");
 table(4) := To_stdlogicvector(X"8000");
 table(5) := To_stdlogicvector(X"8180");
