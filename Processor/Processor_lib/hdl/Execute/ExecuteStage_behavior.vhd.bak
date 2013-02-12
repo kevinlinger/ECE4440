@@ -47,7 +47,7 @@ BEGIN
 			Branch_Ctrl <= zero;
 			
 		ELSIF(Op_Type(3) = '1') THEN --mov
-			ALU_Out <= ALU0;
+			ALU_Out <= ALU1;
 			Branch_Ctrl <= zero;
 			
 		ELSIF(Op_Type(4) = '1') THEN --li
@@ -177,7 +177,7 @@ BEGIN
 				ALU_Out <= ALU0 XOR ALU1;
 			
 			ELSIF(ALU_Ctrl = "111") THEN --not
-				ALU_Out <= NOT ALU0; 
+				ALU_Out <= NOT ALU1; 
 			
 			END IF;
 			
@@ -185,36 +185,36 @@ BEGIN
 			
 		ELSIF(Op_Type(6) = '1') THEN --shift
 			IF (ALU_Ctrl = "000") THEN --sl
-				tempResult(15 DOWNTO 1) := ALU0(14 DOWNTO 0);
+				tempResult(15 DOWNTO 1) := ALU1(14 DOWNTO 0);
 				tempResult(0) := '0';
 				ALU_Out <= tempResult(15 DOWNTO 0);
 			
 			ELSIF (ALU_Ctrl = "001") THEN --srl
-				tempResult(14 DOWNTO 0) := ALU0(15 DOWNTO 1);
+				tempResult(14 DOWNTO 0) := ALU1(15 DOWNTO 1);
 				tempResult(15) := '0';
 				ALU_Out <= tempResult(15 DOWNTO 0);
 			
 			ELSIF (ALU_Ctrl = "010") THEN --sra
-				tempResult(15) := ALU0(15);
-				tempResult(14 DOWNTO 0) := ALU0(15 DOWNTO 1);
+				tempResult(15) := ALU1(15);
+				tempResult(14 DOWNTO 0) := ALU1(15 DOWNTO 1);
 				ALU_Out <= tempResult(15 DOWNTO 0);
 			
 			ELSIF (ALU_Ctrl = "110") THEN --rra
-				conzIn(3) <= ALU0(0);
-				tempResult(14 DOWNTO 0) := ALU0(15 DOWNTO 1);
-				tempResult(15) := ALU0(15);
+				conzIn(3) <= ALU1(0);
+				tempResult(14 DOWNTO 0) := ALU1(15 DOWNTO 1);
+				tempResult(15) := ALU1(15);
 				ALU_Out <= tempResult(15 DOWNTO 0);
 			
 			ELSIF (ALU_Ctrl = "101") THEN --rr
 				tempResult(15) := conzOut(3);
-				tempResult(14 DOWNTO 0) := ALU0(15 DOWNTO 1);
-				conzIn(3) <= ALU0(0);
+				tempResult(14 DOWNTO 0) := ALU1(15 DOWNTO 1);
+				conzIn(3) <= ALU1(0);
 				ALU_Out <= tempResult(15 DOWNTO 0);
 			
 			ELSIF (ALU_Ctrl = "100") THEN --rl
-				tempResult(15 DOWNTO 1) := ALU0(14 DOWNTO 0);
+				tempResult(15 DOWNTO 1) := ALU1(14 DOWNTO 0);
 				tempResult(0) := conzOut(3);
-				conzIn(3) <= ALU0(15);
+				conzIn(3) <= ALU1(15);
 				ALU_Out <= tempResult(15 DOWNTO 0);
 			
 			END IF;

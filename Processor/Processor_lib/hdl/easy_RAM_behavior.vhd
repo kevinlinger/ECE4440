@@ -101,12 +101,12 @@ table(0) := To_stdlogicvector(X"0002");
 table(1) := To_stdlogicvector(X"0000");
 --table(2) := To_stdlogicvector(X"0000");
 
-table(2) := To_stdlogicvector(X"E102");
+table(2) := To_stdlogicvector(X"E101");
 table(3) := To_stdlogicvector(X"E13E");
 table(4) := To_stdlogicvector(X"8000");
 table(5) := To_stdlogicvector(X"8180");
 table(6) := To_stdlogicvector(X"6200");
-table(7) := To_stdlogicvector(X"A202");
+table(7) := To_stdlogicvector(X"A200");
 table(8) := To_stdlogicvector(X"E901");
 table(9) := To_stdlogicvector(X"E138");
 table(10) := To_stdlogicvector(X"6200");
