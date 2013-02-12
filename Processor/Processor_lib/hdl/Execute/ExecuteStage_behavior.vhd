@@ -47,7 +47,7 @@ BEGIN
 			Branch_Ctrl <= zero;
 			
 		ELSIF(Op_Type(3) = '1') THEN --mov
-			ALU_Out <= ALU0;
+			ALU_Out <= ALU1;
 			Branch_Ctrl <= zero;
 			
 		ELSIF(Op_Type(4) = '1') THEN --li

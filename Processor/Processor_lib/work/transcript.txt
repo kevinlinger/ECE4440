@@ -1286,3 +1286,258 @@ run
 run
 # 0
 # 
+run
+# 0
+# 
+run
+# 0
+# 
+force -freeze sim:/toplevel/reset 0 0
+run
+# 0
+# 
+run
+# 0
+# 
+# hds_restart 
+restart -force
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# 
+# ** Note: (vsim-3865) Due to PLI being present, full design access is being specified.
+# 
+# Loading C:/MentorGraphics/HDS_2012.1/resources/downstream/modelsim/ModelSim_32Bit.dll
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.std_logic_arith(body)
+# Loading ieee.std_logic_unsigned(body)
+# Loading ieee.numeric_std(body)
+# Loading work.toplevel(structure)#1
+# Loading work.memstage(behavior)#1
+# Loading work.mux_2_to_1(behavior)#1
+# Loading work.registerfile(structure)#1
+# Loading work.decoder(behavior)#1
+# Loading work.registerfileregister(behavior)#1
+# Loading work.reg(behavior)#1
+# Loading work.tristate(behavior)#1
+# Loading work.easy_ram_simu(behavior)#1
+# Loading work.instruction_fetch_stage(structural)#1
+# Loading work.mux_4_to_1(behavior)#1
+# Loading work.if_state_machine(behavior)#1
+# Loading work.decodestage(structure)#1
+# Loading work.instructionucode(behavior)#1
+# Loading work.twoonemux(behavior)#1
+# Loading work.twoonemux(behavior)#2
+# Loading work.fouronemux(behavior)#1
+# Loading work.executestage(behavior)#1
+# Loading work.reg(behavior)#2
+# ** Warning: (vsim-8683) Uninitialized out port /toplevel/IF_stage/readAddress(15 downto 0) has no driver.
+# 
+# This port will contribute value (UUUUUUUUUUUUUUUU) to the signal network.
+# 
+force -freeze sim:/toplevel/clock 1 0, 0 {50 ns} -r 100
+force -freeze sim:/toplevel/reset 1 0
+force -freeze sim:/toplevel/interrupt 0 0
+run
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /toplevel/IF_stage
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /toplevel/IF_stage
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /toplevel/IF_stage
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /toplevel/RegisterFile/rDecoder1
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 0 ns  Iteration: 0  Instance: /toplevel/RegisterFile/rDecoder1
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /toplevel/RegisterFile/rDecoder0
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 0 ns  Iteration: 0  Instance: /toplevel/RegisterFile/rDecoder0
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 2  Instance: /toplevel/RegisterFile/rDecoder1
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 0 ns  Iteration: 2  Instance: /toplevel/RegisterFile/rDecoder1
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 2  Instance: /toplevel/RegisterFile/rDecoder0
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 0 ns  Iteration: 2  Instance: /toplevel/RegisterFile/rDecoder0
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 100 ns  Iteration: 1  Instance: /toplevel/IF_stage
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 100 ns  Iteration: 1  Instance: /toplevel/IF_stage
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 100 ns  Iteration: 1  Instance: /toplevel/IF_stage
+run
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 200 ns  Iteration: 1  Instance: /toplevel/IF_stage
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 200 ns  Iteration: 1  Instance: /toplevel/IF_stage
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 200 ns  Iteration: 1  Instance: /toplevel/IF_stage
+# 0
+# 
+run
+# 0
+# 
+force -freeze sim:/toplevel/reset 0 0
+run
+# 0
+# 
+run
+# 0
+# 
+run
+# 0
+# 
+run
+# 0
+# 
+run
+# 0
+# 
+run
+# 0
+# 
+run
+# 0
+# 
+restart
+# Loading C:/MentorGraphics/HDS_2012.1/resources/downstream/modelsim/ModelSim_32Bit.dll
+# ** Warning: (vsim-8683) Uninitialized out port /toplevel/IF_stage/readAddress(15 downto 0) has no driver.
+# 
+# This port will contribute value (UUUUUUUUUUUUUUUU) to the signal network.
+# 
+force -freeze sim:/toplevel/reset 1 0
+force -freeze sim:/toplevel/interrupt 0 0
+force -freeze sim:/toplevel/clock 1 0, 0 {50 ns} -r 100
+run
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /toplevel/IF_stage
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /toplevel/IF_stage
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /toplevel/IF_stage
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /toplevel/RegisterFile/rDecoder1
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 0 ns  Iteration: 0  Instance: /toplevel/RegisterFile/rDecoder1
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /toplevel/RegisterFile/rDecoder0
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 0 ns  Iteration: 0  Instance: /toplevel/RegisterFile/rDecoder0
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 2  Instance: /toplevel/RegisterFile/rDecoder1
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 0 ns  Iteration: 2  Instance: /toplevel/RegisterFile/rDecoder1
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 2  Instance: /toplevel/RegisterFile/rDecoder0
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 0 ns  Iteration: 2  Instance: /toplevel/RegisterFile/rDecoder0
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 100 ns  Iteration: 1  Instance: /toplevel/IF_stage
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 100 ns  Iteration: 1  Instance: /toplevel/IF_stage
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 100 ns  Iteration: 1  Instance: /toplevel/IF_stage
+run
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 200 ns  Iteration: 1  Instance: /toplevel/IF_stage
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 200 ns  Iteration: 1  Instance: /toplevel/IF_stage
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 200 ns  Iteration: 1  Instance: /toplevel/IF_stage
+# 0
+# 
+run
+# 0
+# 
+run
+# 0
+# 
+run
+# 0
+# 
+run
+# 0
+# 
+run
+# 0
+# 
+force -freeze sim:/toplevel/reset 0 0
+run
+# 0
+# 
+run
+# 0
+# 
+run
+# 0
+# 
+run
+# 0
+# 
+run
+# 0
+# 
+# Error opening C:/Users/Michael/GitHub/ECE4440/Processor/Processor_lib/hdl/RegisterFile/RegisterFileRegister_Behavior.vhd
+# Path name 'C:/Users/Michael/GitHub/ECE4440/Processor/Processor_lib/hdl/RegisterFile/RegisterFileRegister_Behavior.vhd' doesn't exist.
+restart
+# Loading C:/MentorGraphics/HDS_2012.1/resources/downstream/modelsim/ModelSim_32Bit.dll
+# ** Warning: (vsim-8683) Uninitialized out port /toplevel/IF_stage/readAddress(15 downto 0) has no driver.
+# 
+# This port will contribute value (UUUUUUUUUUUUUUUU) to the signal network.
+# 
+force -freeze sim:/toplevel/reset 1 0
+force -freeze sim:/toplevel/clock 1 0, 0 {50 ns} -r 100
+force -freeze sim:/toplevel/interrupt 0 0
+run
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /toplevel/IF_stage
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /toplevel/IF_stage
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /toplevel/IF_stage
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /toplevel/RegisterFile/rDecoder1
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 0 ns  Iteration: 0  Instance: /toplevel/RegisterFile/rDecoder1
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /toplevel/RegisterFile/rDecoder0
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 0 ns  Iteration: 0  Instance: /toplevel/RegisterFile/rDecoder0
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 2  Instance: /toplevel/RegisterFile/rDecoder1
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 0 ns  Iteration: 2  Instance: /toplevel/RegisterFile/rDecoder1
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 2  Instance: /toplevel/RegisterFile/rDecoder0
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 0 ns  Iteration: 2  Instance: /toplevel/RegisterFile/rDecoder0
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 100 ns  Iteration: 1  Instance: /toplevel/IF_stage
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 100 ns  Iteration: 1  Instance: /toplevel/IF_stage
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 100 ns  Iteration: 1  Instance: /toplevel/IF_stage
+run
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 200 ns  Iteration: 1  Instance: /toplevel/IF_stage
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 200 ns  Iteration: 1  Instance: /toplevel/IF_stage
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 200 ns  Iteration: 1  Instance: /toplevel/IF_stage
+# 0
+# 
+force -freeze sim:/toplevel/reset 0 0
+run
+# 0
+# 
+run
+# 0
+# 
+run
+# 0
+# 
+run
+# 0
+# 
