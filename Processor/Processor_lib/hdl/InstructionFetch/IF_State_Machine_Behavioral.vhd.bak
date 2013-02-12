@@ -73,14 +73,12 @@ END ENTITY IF_State_Machine;
      
       if(current_state = run) then
  
- 
- 
        --jump
         if(jump = '1') then
         MuxPrePC_ctrl <= "01"; --JAddr
         MuxPreMaddr_ctrl <= "10"; -- PCregister_value (but I believe this is a don't care)
         MuxPreInst_ctrl <= "00"; -- (make nop when pipelined) run normally in single cycle
-        MuxPrePCVal_ctrl <= '1'; -- JAddr       
+        MuxPrePCVal_ctrl <= '0'; -- (make JAddr when pipelined) use pc in single cycle       
         end if; 
         
         --run normally
@@ -89,7 +87,7 @@ END ENTITY IF_State_Machine;
         MuxPreMaddr_ctrl <= "10"; -- PCregister_value (don't care)
         MuxPreInst_ctrl <= "00"; -- Mdata
         MuxPrePCVal_ctrl <= '0'; -- PCregister_value
-      end if;
+        end if;
       
         --mdelay
         if(jump = '0' and mdelay = '1') then

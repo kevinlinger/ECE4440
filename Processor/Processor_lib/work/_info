@@ -10,6 +10,7 @@ V[MVh5RFzDmKVH=YQX6:>J3
 Z1 o-quiet +acc -auto_acc_if_foreign -work Processor_lib -L Processor_lib
 n@_opt
 Z2 OE;O;10.1c;51
+Z3 dC:\Users\Michael\GitHub\ECE4440\Processor\Processor_lib\work
 T_opt1
 Vb1]gGOEVJ>c2YamRl8F;K1
 04 12 8 work executestage behavior 1
@@ -17,15 +18,14 @@ Vb1]gGOEVJ>c2YamRl8F;K1
 R1
 n@_opt1
 OL;O;10.1c;51
-Z3 dC:\Users\Michael\GitHub\ECE4440\Processor\Processor_lib\work
+R3
 T_opt2
-V:NRL0[2?:T[:LP=Xc`YLG0
+Vale[A6n6NGKNLj7?Q?LgI1
 04 8 9 work toplevel structure 1
-=6-00265e081e83-5119bc81-6f-6b0
+=2-00265e081e83-5119bf62-225-1eb8
 R1
 n@_opt2
 R2
-R3
 Edecoder
 Z4 w1360536757
 Z5 DPx4 ieee 15 std_logic_arith 0 22 4`Y?g_lkdn;7UL9IiJck01
@@ -220,7 +220,7 @@ R15
 !s100 FR@ec5ReaMfCjK0noo7mg0
 !i10b 1
 Eif_state_machine
-Z45 w1360641145
+Z45 w1360641874
 R5
 R6
 R7
@@ -232,9 +232,9 @@ L15
 VOENnig>We?klTjC0[8ODO1
 R30
 32
-R31
+Z48 !s108 1360641884.746000
 R32
-R33
+Z49 !s107 C:/Users/Student/Documents/GitHub/ECE4440/Processor/Processor_lib/hdl/InstructionFetch/Instruction_Fetch_Stage_Structural.vhd|C:/Users/Student/Documents/GitHub/ECE4440/Processor/Processor_lib/hdl/InstructionFetch/IF_State_Machine_Behavioral.vhd|
 R14
 R15
 !s100 gmZBL_h1HZ?W1UEQSfblB2
@@ -243,68 +243,68 @@ Abehavior
 R5
 R6
 R7
-Z48 DEx4 work 16 if_state_machine 0 22 OENnig>We?klTjC0[8ODO1
+Z50 DEx4 work 16 if_state_machine 0 22 OENnig>We?klTjC0[8ODO1
 l25
 L22
-Vgn`h6OQ:7W@Q;khXiC@S:3
+V>QSL_1FFE_C`lYmUMIDVk1
 R30
 32
-R31
+R48
 R32
-R33
+R49
 R14
 R15
-!s100 mD@VgeZ^?<QzYPc^TMO7_3
+!s100 7U49G5m2N9HNHWzL7^k^a1
 !i10b 1
 Einstruction_fetch_stage
-Z49 w1360554403
+Z51 w1360554403
 R5
 R6
 R7
 R27
-Z50 8C:/Users/Student/Documents/GitHub/ECE4440/Processor/Processor_lib/hdl/InstructionFetch/Instruction_Fetch_Stage_Structural.vhd
-Z51 FC:/Users/Student/Documents/GitHub/ECE4440/Processor/Processor_lib/hdl/InstructionFetch/Instruction_Fetch_Stage_Structural.vhd
+Z52 8C:/Users/Student/Documents/GitHub/ECE4440/Processor/Processor_lib/hdl/InstructionFetch/Instruction_Fetch_Stage_Structural.vhd
+Z53 FC:/Users/Student/Documents/GitHub/ECE4440/Processor/Processor_lib/hdl/InstructionFetch/Instruction_Fetch_Stage_Structural.vhd
 l0
 L14
 V1BjLfilP5hXWI;cZ[;N@d2
 R30
 32
-R31
+R48
 R32
-R33
+R49
 R14
 R15
 !s100 6nXR9@OObRK:E04Pg]P9:1
 !i10b 1
 Astructural
-R48
+R50
 R40
-Z52 DEx4 work 10 mux_2_to_1 0 22 >OV_BP<6T:gdjka[lIORn1
-Z53 DEx4 work 10 mux_4_to_1 0 22 CMSXdflo_gU[zmZTDR2?02
+Z54 DEx4 work 10 mux_2_to_1 0 22 >OV_BP<6T:gdjka[lIORn1
+Z55 DEx4 work 10 mux_4_to_1 0 22 CMSXdflo_gU[zmZTDR2?02
 R5
 R6
 R7
-Z54 DEx4 work 23 instruction_fetch_stage 0 22 1BjLfilP5hXWI;cZ[;N@d2
+Z56 DEx4 work 23 instruction_fetch_stage 0 22 1BjLfilP5hXWI;cZ[;N@d2
 l35
 L25
 VBX:=_iNl6i;nbAGP31>U=1
 R30
 32
-R31
+R48
 R32
-R33
+R49
 R14
 R15
 !s100 MOMhMn6=5`cDamVmZjf:j1
 !i10b 1
 Einstructionucode
-Z55 w1360630160
+Z57 w1360630160
 R5
 R6
 R7
 R3
-Z56 8C:/Users/Michael/GitHub/ECE4440/Processor/Processor_lib/hdl/Decode/InstructionUCode_Behavior.vhd
-Z57 FC:/Users/Michael/GitHub/ECE4440/Processor/Processor_lib/hdl/Decode/InstructionUCode_Behavior.vhd
+Z58 8C:/Users/Michael/GitHub/ECE4440/Processor/Processor_lib/hdl/Decode/InstructionUCode_Behavior.vhd
+Z59 FC:/Users/Michael/GitHub/ECE4440/Processor/Processor_lib/hdl/Decode/InstructionUCode_Behavior.vhd
 l0
 L14
 V6]S`]kHgMkf2]YIB6>N<k1
@@ -335,13 +335,13 @@ R15
 !s100 QFEZeWA?zR^[>2kRZKiA20
 !i10b 1
 Ememstage
-Z58 w1360540946
+Z60 w1360540946
 R5
 R6
 R7
 R3
-Z59 8C:/Users/Michael/GitHub/ECE4440/Processor/Processor_lib/hdl/Memory/MemStage_Behavior.vhd
-Z60 FC:/Users/Michael/GitHub/ECE4440/Processor/Processor_lib/hdl/Memory/MemStage_Behavior.vhd
+Z61 8C:/Users/Michael/GitHub/ECE4440/Processor/Processor_lib/hdl/Memory/MemStage_Behavior.vhd
+Z62 FC:/Users/Michael/GitHub/ECE4440/Processor/Processor_lib/hdl/Memory/MemStage_Behavior.vhd
 l0
 L14
 VA7?PBJiH?V>TLoc3?RE:F2
@@ -355,11 +355,11 @@ R15
 !s100 :C8m7H:E`fTCC:YeU?AHD3
 !i10b 1
 Abehavior
-R52
+R54
 R5
 R6
 R7
-Z61 DEx4 work 8 memstage 0 22 A7?PBJiH?V>TLoc3?RE:F2
+Z63 DEx4 work 8 memstage 0 22 A7?PBJiH?V>TLoc3?RE:F2
 l30
 L28
 V5V>d>Y<KhHHzLKYzE4SFb0
@@ -373,13 +373,13 @@ R15
 !s100 [EnfjFCXK=Q<=j6CXS<361
 !i10b 1
 Emux_2_to_1
-Z62 w1360539472
+Z64 w1360539472
 R5
 R6
 R7
 R3
-Z63 8C:/Users/Michael/GitHub/ECE4440/Processor/Processor_lib/hdl/Component_Library/Mux_2_to_1_Behavioral.vhd
-Z64 FC:/Users/Michael/GitHub/ECE4440/Processor/Processor_lib/hdl/Component_Library/Mux_2_to_1_Behavioral.vhd
+Z65 8C:/Users/Michael/GitHub/ECE4440/Processor/Processor_lib/hdl/Component_Library/Mux_2_to_1_Behavioral.vhd
+Z66 FC:/Users/Michael/GitHub/ECE4440/Processor/Processor_lib/hdl/Component_Library/Mux_2_to_1_Behavioral.vhd
 l0
 L6
 V>OV_BP<6T:gdjka[lIORn1
@@ -396,7 +396,7 @@ Abehavior
 R5
 R6
 R7
-R52
+R54
 l14
 L13
 VCSM8Q@;9OkGDClgK^[VH?1
@@ -410,13 +410,13 @@ R15
 !s100 c[TEFPk]CW3C3bZzBcVAO0
 !i10b 1
 Emux_4_to_1
-R62
+R64
 R5
 R6
 R7
 R3
-Z65 8C:/Users/Michael/GitHub/ECE4440/Processor/Processor_lib/hdl/Component_Library/Mux_4_to_1_Behavior.vhd
-Z66 FC:/Users/Michael/GitHub/ECE4440/Processor/Processor_lib/hdl/Component_Library/Mux_4_to_1_Behavior.vhd
+Z67 8C:/Users/Michael/GitHub/ECE4440/Processor/Processor_lib/hdl/Component_Library/Mux_4_to_1_Behavior.vhd
+Z68 FC:/Users/Michael/GitHub/ECE4440/Processor/Processor_lib/hdl/Component_Library/Mux_4_to_1_Behavior.vhd
 l0
 L14
 VCMSXdflo_gU[zmZTDR2?02
@@ -433,7 +433,7 @@ Abehavior
 R5
 R6
 R7
-R53
+R55
 l23
 L22
 V]YCd5jclTJoB18:a6[N2C1
@@ -447,12 +447,12 @@ R15
 !s100 ho;kHW0QToi0ak=3ONUf63
 !i10b 1
 Ereg
-R62
+R64
 R6
 R7
 R3
-Z67 8C:/Users/Michael/GitHub/ECE4440/Processor/Processor_lib/hdl/Component_Library/Reg_behavior.vhd
-Z68 FC:/Users/Michael/GitHub/ECE4440/Processor/Processor_lib/hdl/Component_Library/Reg_behavior.vhd
+Z69 8C:/Users/Michael/GitHub/ECE4440/Processor/Processor_lib/hdl/Component_Library/Reg_behavior.vhd
+Z70 FC:/Users/Michael/GitHub/ECE4440/Processor/Processor_lib/hdl/Component_Library/Reg_behavior.vhd
 l0
 L4
 V2R04SzI9N:z8@W]Bg_lEf2
@@ -482,13 +482,13 @@ R15
 !s100 YGIH<Kc`dYK]CTO3>jfbU3
 !i10b 1
 Eregisterfile
-Z69 w1360539277
+Z71 w1360539277
 R5
 R6
 R7
 R3
-Z70 8C:/Users/Michael/GitHub/ECE4440/Processor/Processor_lib/hdl/RegisterFile/RegisterFile_Structure.vhd
-Z71 FC:/Users/Michael/GitHub/ECE4440/Processor/Processor_lib/hdl/RegisterFile/RegisterFile_Structure.vhd
+Z72 8C:/Users/Michael/GitHub/ECE4440/Processor/Processor_lib/hdl/RegisterFile/RegisterFile_Structure.vhd
+Z73 FC:/Users/Michael/GitHub/ECE4440/Processor/Processor_lib/hdl/RegisterFile/RegisterFile_Structure.vhd
 l0
 L14
 VZ?DW8WnldcOM:fZYal4D22
@@ -502,12 +502,12 @@ R15
 !s100 kRQHbT0:[Vzd0GZ3ZT?CA0
 !i10b 1
 Astructure
-Z72 DEx4 work 20 registerfileregister 0 22 UOk]5B1SX=N^3[lH;agA`2
+Z74 DEx4 work 20 registerfileregister 0 22 UOk]5B1SX=N^3[lH;agA`2
 R16
 R5
 R6
 R7
-Z73 DEx4 work 12 registerfile 0 22 Z?DW8WnldcOM:fZYal4D22
+Z75 DEx4 work 12 registerfile 0 22 Z?DW8WnldcOM:fZYal4D22
 l26
 L24
 VH3ng0dDF3HTTHhK1`c9lD2
@@ -521,13 +521,13 @@ R15
 !s100 :8?JAHOG?dIIfPYN`QmWn3
 !i10b 1
 Eregisterfileregister
-Z74 w1360633626
+Z76 w1360633626
 R5
 R6
 R7
 R3
-Z75 8C:/Users/Michael/GitHub/ECE4440/Processor/Processor_lib/hdl/RegisterFile/RegisterFileRegister_Behavior.vhd
-Z76 FC:/Users/Michael/GitHub/ECE4440/Processor/Processor_lib/hdl/RegisterFile/RegisterFileRegister_Behavior.vhd
+Z77 8C:/Users/Michael/GitHub/ECE4440/Processor/Processor_lib/hdl/RegisterFile/RegisterFileRegister_Behavior.vhd
+Z78 FC:/Users/Michael/GitHub/ECE4440/Processor/Processor_lib/hdl/RegisterFile/RegisterFileRegister_Behavior.vhd
 l0
 L14
 VUOk]5B1SX=N^3[lH;agA`2
@@ -541,12 +541,12 @@ R15
 !s100 QILlG2j4YFDdXQbc@bIKN0
 !i10b 1
 Abehavior
-Z77 DEx4 work 8 tristate 0 22 `<Bb<z^mg]Cz>LG7Wi5aj0
+Z79 DEx4 work 8 tristate 0 22 `<Bb<z^mg]Cz>LG7Wi5aj0
 R40
 R5
 R6
 R7
-R72
+R74
 l26
 L23
 VG?A71W8ghNOKJm4DZj:E;1
@@ -560,34 +560,34 @@ R15
 !s100 m0LDX6914^O2HKgdK=L[[2
 !i10b 1
 Etoplevel
-Z78 w1360635871
+Z80 w1360635871
 R5
 R6
 R7
 R27
-Z79 8C:/Users/Student/Documents/GitHub/ECE4440/Processor/Processor_lib/hdl/TopLevel_Structure.vhd
-Z80 FC:/Users/Student/Documents/GitHub/ECE4440/Processor/Processor_lib/hdl/TopLevel_Structure.vhd
+Z81 8C:/Users/Student/Documents/GitHub/ECE4440/Processor/Processor_lib/hdl/TopLevel_Structure.vhd
+Z82 FC:/Users/Student/Documents/GitHub/ECE4440/Processor/Processor_lib/hdl/TopLevel_Structure.vhd
 l0
 L14
 VeahNkL>I?Kk0[UjQH8<]:3
 R30
 33
-Z81 !s108 1360641148.659000
-Z82 !s90 -work|Processor_lib|-nologo|-2008|-f|C:/Users/Student/AppData/Local/Temp/Files1|
-Z83 !s107 C:/Users/Student/Documents/GitHub/ECE4440/Processor/Processor_lib/hdl/TopLevel_Structure.vhd|
-Z84 o-work Processor_lib -nologo -2008
+Z83 !s108 1360641148.659000
+Z84 !s90 -work|Processor_lib|-nologo|-2008|-f|C:/Users/Student/AppData/Local/Temp/Files1|
+Z85 !s107 C:/Users/Student/Documents/GitHub/ECE4440/Processor/Processor_lib/hdl/TopLevel_Structure.vhd|
+Z86 o-work Processor_lib -nologo -2008
 R15
 !s100 ]V5?[4AK`cf1;1P@zHJdh2
 !i10b 1
 Astructure
 R41
 R23
-R54
+R56
 R25
 R26
 R34
-R73
-R61
+R75
+R63
 R5
 R6
 R7
@@ -597,21 +597,21 @@ L21
 VTHBzCI`W5L?C76Bb]UL9o2
 R30
 33
-R81
-R82
 R83
 R84
+R85
+R86
 R15
 !s100 DhYGG>;[^L7BLi1UYWIa>1
 !i10b 1
 Etristate
-Z85 w1360543345
+Z87 w1360543345
 R5
 R6
 R7
 R3
-Z86 8C:/Users/Michael/GitHub/ECE4440/Processor/Processor_lib/hdl/RegisterFile/TriState_Behavior.vhd
-Z87 FC:/Users/Michael/GitHub/ECE4440/Processor/Processor_lib/hdl/RegisterFile/TriState_Behavior.vhd
+Z88 8C:/Users/Michael/GitHub/ECE4440/Processor/Processor_lib/hdl/RegisterFile/TriState_Behavior.vhd
+Z89 FC:/Users/Michael/GitHub/ECE4440/Processor/Processor_lib/hdl/RegisterFile/TriState_Behavior.vhd
 l0
 L14
 V`<Bb<z^mg]Cz>LG7Wi5aj0
@@ -628,7 +628,7 @@ Abehavior
 R5
 R6
 R7
-R77
+R79
 l23
 L22
 VK=P=70n4_>B>J]YDmli_W3
@@ -647,8 +647,8 @@ R5
 R6
 R7
 R3
-Z88 8C:/Users/Michael/GitHub/ECE4440/Processor/Processor_lib/hdl/Decode/TwoOneMux_Behavior.vhd
-Z89 FC:/Users/Michael/GitHub/ECE4440/Processor/Processor_lib/hdl/Decode/TwoOneMux_Behavior.vhd
+Z90 8C:/Users/Michael/GitHub/ECE4440/Processor/Processor_lib/hdl/Decode/TwoOneMux_Behavior.vhd
+Z91 FC:/Users/Michael/GitHub/ECE4440/Processor/Processor_lib/hdl/Decode/TwoOneMux_Behavior.vhd
 l0
 L14
 VNbY_4_[Dhg@MPY7c<bk6;2
