@@ -171,11 +171,11 @@ begin
 --table(67) := To_stdlogicvector(X"E1FF");
 
 
---Factorial Benchmark (note that this does not work because of assembler problems probably)
+--Factorial Benchmark (we fixed some assembler problems)
 table(0) := To_stdlogicvector(X"0002");
 table(1) := To_stdlogicvector(X"0000");
-table(2) := To_stdlogicvector(X"9221");
-table(3) := To_stdlogicvector(X"9300");
+table(2) := To_stdlogicvector(X"9205"); --we changed this
+table(3) := To_stdlogicvector(X"0000"); --we changed this
 table(4) := To_stdlogicvector(X"2120");
 table(5) := To_stdlogicvector(X"9400");
 table(6) := To_stdlogicvector(X"9500");
