@@ -27,7 +27,7 @@ BEGIN
   clockBar <= not clock;
   reggy: ENTITY work.Reg(Behavior)
     GENERIC MAP (size=> 16)
-    PORT MAP (a => wData, b => regout, e => wEnable,c => clockBar);
+    PORT MAP (a => wData, b => regout, e => wEnable,c => clock);
   ts0: ENTITY work.TriState(Behavior)
     GENERIC MAP(Size => 16)
     PORT MAP (regout, rEnable0, out0); 

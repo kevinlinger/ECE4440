@@ -84,7 +84,7 @@ BEGIN
 				END IF;
 			
 			ELSIF(ALU_Ctrl = "001") THEN --adc
-				tempResult := signed(ALU0) + signed(ALU1);
+				tempResult := signed(ALU0) + signed(ALU1) + conzOut(3);
 
 				ALU_Out <= tempResult(15 DOWNTO 0);
 
@@ -140,7 +140,7 @@ BEGIN
 				END IF;
 			
 			ELSIF(ALU_Ctrl = "011") THEN --sbc
-				tempResult := signed(ALU0) - signed(ALU1);
+				tempResult := signed(ALU0) - signed(ALU1) + conzOut(3) - 1;
 
 				ALU_Out <= tempResult(15 DOWNTO 0);
 

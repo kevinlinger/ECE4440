@@ -68,9 +68,9 @@ END ENTITY IF_State_Machine;
   end PROCESS update_new_state;
     
     
-    output_control : PROCESS(current_state, jump) IS
+    output_control : PROCESS(current_state) IS
     BEGIN
-     
+--if(rising_edge(clock)) then     
       if(current_state = run) then
  
  
@@ -124,7 +124,7 @@ END ENTITY IF_State_Machine;
         MuxPreInst_ctrl <= "01"; -- nop
         MuxPrePCVal_ctrl <= '0'; -- PCregister_value (don't care)           
       end if;
-
+--end if;
     end process output_control;
     
   END Architecture Behavior;
