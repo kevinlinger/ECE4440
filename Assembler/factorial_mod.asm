@@ -24,7 +24,8 @@ LOOP:   SUB     R2 R11
         OR      R1 R10
         MOV     R3 R2
         OR      R3 R10
-        SUB     R3 R11
+        MOV     R15 R3
+        SUB     R15 R11
         BZ      DONE
         BR      MULT
 MULT:   ADD     R0 R1
