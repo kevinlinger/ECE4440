@@ -12,7 +12,8 @@ USE ieee.std_logic_1164.all;
 USE ieee.std_logic_arith.all;
 
 ENTITY TopLevel IS
-  PORT(clock, reset, interrupt : IN std_logic);
+  --PORT(clock, reset, interrupt : IN std_logic);
+  PORT(interrupt : in std_logic);
 END ENTITY TopLevel;
 
 
@@ -38,7 +39,12 @@ ARCHITECTURE Structure OF TopLevel IS
   signal M_wBackData: std_logic_vector (15 downto 0);
   signal M_wBackAddr : std_logic_vector(3 downto 0);
   
+  signal clock, reset : std_logic;
+  
 BEGIN
+
+ClockGenerator : entity work.ClockGen(behavior)
+  PORT MAP( Clock => clock, Reset => reset);
 
 MemStage : ENTITY WORK.MemStage(behavior)
   PORT MAP( addr => D_Dest_Reg, opType => D_Op_Type, aluData => E_ALU_Out, rData => M_rData,
@@ -61,7 +67,7 @@ Data_Mem : ENTITY WORK.easy_RAM_simu(behavior)
   
 IF_stage : Entity WORK.Instruction_Fetch_Stage(Structural)
   PORT MAP(mem_data => IF_mem_data, readAddress => IF_readAddress, jumpAddress => E_ALU_Out,
-    jumpEnable => IF_jumpEnable, reset => reset, interrupt => interrupt, clock => clock, memdelay => '0',
+    jumpEnable => IF_jumpEnable, reset => reset, interrupt => '0', clock => clock, memdelay => '0',
     stall => '0', Instruction => IF_Instruction, PCValue_output => IF_PCValue_output, maddr => IF_maddr);
 
 DecodeStage : ENTITY WORK.DecodeStage(Structure)
