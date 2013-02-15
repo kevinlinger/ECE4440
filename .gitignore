@@ -1,7 +1,8 @@
 #################
 ## HDL Designer
 #################
-.cache.dat
+Processor/Processor_lib/hds/.cache.dat
+Processor/Processor_lib/work/*/*
 
 
 ############
