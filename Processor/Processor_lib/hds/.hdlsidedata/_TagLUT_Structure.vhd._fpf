@@ -1,0 +1,11 @@
+INCLUDE list {
+ DEFAULT atom 1
+}
+DIALECT atom VHDL_2008
+MW_META_DATA list {
+ 0 list {
+  MW_PORT_WIDTHS atom {addr 3 din 12 dout 12}
+  MW_PARAMS atom {address_width 3 clk_type 0 data_width 12 initial_value 0 we_type 0}
+  MW_MISC atom 2
+ }
+}

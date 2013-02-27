@@ -15,16 +15,19 @@ USE Processor_lib.All;
 
 ENTITY CacheMemory IS
 -- Declarations
-
+Port(clk, we : in std_logic;
+     din : in std_logic_vector(15 downto 0);
+     addr : in std_logic_vector(2 downto 0);
+     dout : out std_logic_vector(15 downto 0));
 END CacheMemory ;
 
 --
 ARCHITECTURE Structure OF CacheMemory IS
-   SIGNAL addr : std_logic_vector(2 DOWNTO 0);
-   SIGNAL clk  : std_logic;
-   SIGNAL din  : std_logic_vector(15 DOWNTO 0);
-   SIGNAL we   : std_logic;
-   SIGNAL dout : std_logic_vector(15 DOWNTO 0);
+  -- SIGNAL addr : std_logic_vector(2 DOWNTO 0);
+  -- SIGNAL clk  : std_logic;
+  -- SIGNAL din  : std_logic_vector(15 DOWNTO 0);
+  -- SIGNAL we   : std_logic;
+  -- SIGNAL dout : std_logic_vector(15 DOWNTO 0);
    COMPONENT mw_ramsp_6bd1b000
       PORT (
          addr : IN     std_logic_vector(2 DOWNTO 0);
@@ -34,7 +37,7 @@ ARCHITECTURE Structure OF CacheMemory IS
          we   : IN     std_logic
       );
    END COMPONENT mw_ramsp_6bd1b000;
-   FOR ALL : mw_ramsp_6bd1b000 USE ENTITY mw_ramsp_6bd1b000;
+   FOR ALL : mw_ramsp_6bd1b000 USE ENTITY Processor_lib.mw_ramsp_6bd1b000;
 BEGIN
    --  hds mw_cpt_inst uid 0 v1.9 **Double click THIS LINE to edit**
    instanceName0 : mw_ramsp_6bd1b000

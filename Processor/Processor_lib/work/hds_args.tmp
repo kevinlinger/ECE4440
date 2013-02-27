@@ -1,1 +1,1 @@
- -L Processor_lib -l transcript.txt -i -t ns -multisource_delay latest +typdelays Processor_lib.TopLevel(Structure)
+ -L Processor_lib -l transcript.txt -i -t ns -multisource_delay latest +typdelays Processor_lib.TagLUT(Structure)
