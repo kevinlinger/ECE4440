@@ -7,7 +7,7 @@
 # //  WHICH IS THE PROPERTY OF MENTOR GRAPHICS CORPORATION OR ITS
 # //  LICENSORS AND IS SUBJECT TO LICENSE TERMS.
 # //
-# vsim -L Processor_lib -l transcript.txt -i -multisource_delay latest -t ns +typdelays -foreign {hdsInit C:/MentorGraphics/HDS_2012.1/resources/downstream/modelsim/ModelSim_64Bit.dll} -pli {"C:/MentorGraphics/HDS_2012.1/resources/downstream/modelsim/ModelSim_64Bit.dll"} Processor_lib.TagLUT(Structure) 
+# vsim -L Processor_lib -l transcript.txt -i -multisource_delay latest -t ns +typdelays -foreign {hdsInit C:/MentorGraphics/HDS_2012.1/resources/downstream/modelsim/ModelSim_64Bit.dll} -pli {"C:/MentorGraphics/HDS_2012.1/resources/downstream/modelsim/ModelSim_64Bit.dll"} Processor_lib.CacheComparer(Behavior) 
 # ** Note: (vsim-3812) Design is being optimized...
 # 
 # ** Note: (vsim-3865) Due to PLI being present, full design access is being specified.
@@ -17,27 +17,51 @@
 # Loading std.textio(body)
 # Loading ieee.std_logic_1164(body)
 # Loading ieee.std_logic_arith(body)
-# Loading work.taglut(structure)#1
-# Loading work.mw_ramsp_24a2ff5e(mw)#1
-force -freeze sim:/taglut/clk 1 0, 0 {50 ns} -r 100
-force -freeze sim:/taglut/we 0 0
-force -freeze sim:/taglut/addr 001 0
-force -freeze sim:/taglut/din 000000111111 0
+# Loading work.cachecomparer(behavior)#1
 run
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 0 ns  Iteration: 0  Instance: /taglut/instanceName0
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 0 ns  Iteration: 0  Instance: /taglut/instanceName0
-force -freeze sim:/taglut/we 1 0
+force -freeze sim:/cachecomparer/InA 010101010101 0
+# Value length (12) does not equal array index length (11).
+# 
+# ** Error: (vsim-4011) Invalid force value: 010101010101 0.
+# 
+force -freeze sim:/cachecomparer/InB 010101010100 0
+# Value length (12) does not equal array index length (11).
+# 
+# ** Error: (vsim-4011) Invalid force value: 010101010100 0.
+# 
 run
 # 0
 # 
-force -freeze sim:/taglut/we 0 0
-force -freeze sim:/taglut/addr 111 0
 run
 # 0
 # 
-force -freeze sim:/taglut/addr 001 0
+run
+# 0
+# 
+run
+# 0
+# 
+run
+# 0
+# 
+run
+# 0
+# 
+run
+# 0
+# 
+run
+# 0
+# 
+force -freeze sim:/cachecomparer/InA 01010101010 0
+force -freeze sim:/cachecomparer/InB 01010101011 0
+run
+# 0
+# 
+force -freeze sim:/cachecomparer/InB 01010101010 0
+run
+# 0
+# 
 run
 # 0
 # 
