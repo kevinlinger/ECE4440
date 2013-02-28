@@ -15,9 +15,9 @@ USE Processor_lib.All;
 
 ENTITY TagLUT IS
   Port(clk, we : in std_logic;
-     din : in std_logic_vector(15 downto 0);
+     din : in std_logic_vector(11 downto 0);
      addr : in std_logic_vector(2 downto 0);
-     dout : out std_logic_vector(15 downto 0));
+     dout : out std_logic_vector(11 downto 0));
 END ENTITY TagLUT;
 
 --

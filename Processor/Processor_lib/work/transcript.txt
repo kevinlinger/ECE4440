@@ -7,7 +7,7 @@
 # //  WHICH IS THE PROPERTY OF MENTOR GRAPHICS CORPORATION OR ITS
 # //  LICENSORS AND IS SUBJECT TO LICENSE TERMS.
 # //
-# vsim -L Processor_lib -l transcript.txt -i -multisource_delay latest -t ns +typdelays -foreign {hdsInit C:/MentorGraphics/HDS_2012.1/resources/downstream/modelsim/ModelSim_64Bit.dll} -pli {"C:/MentorGraphics/HDS_2012.1/resources/downstream/modelsim/ModelSim_64Bit.dll"} Processor_lib.CacheComparer(Behavior) 
+# vsim -L Processor_lib -l transcript.txt -i -multisource_delay latest -t ns +typdelays -foreign {hdsInit C:/MentorGraphics/HDS_2012.1/resources/downstream/modelsim/ModelSim_64Bit.dll} -pli {"C:/MentorGraphics/HDS_2012.1/resources/downstream/modelsim/ModelSim_64Bit.dll"} Processor_lib.Cache(Structure) 
 # ** Note: (vsim-3812) Design is being optimized...
 # 
 # ** Note: (vsim-3865) Due to PLI being present, full design access is being specified.
@@ -17,48 +17,61 @@
 # Loading std.textio(body)
 # Loading ieee.std_logic_1164(body)
 # Loading ieee.std_logic_arith(body)
+# Loading work.cache(structure)#1
+# Loading work.taglut(structure)#1
+# Loading work.mw_ramsp_24a2ff5e(mw)#1
 # Loading work.cachecomparer(behavior)#1
+# Loading work.cachememory(structure)#1
+# Loading work.mw_ramsp_6bd1b000(mw)#1
+# Loading work.fouronemux(behavior)#1
+# Loading work.twoonemux(behavior)#1
+force -freeze sim:/cache/RAMData 1111000000001111000011110000111111111111000000000000000011111111 0
+force -freeze sim:/cache/AddrIn 000000001110000 0
+# Value length (15) does not equal array index length (16).
+# 
+# ** Error: (vsim-4011) Invalid force value: 000000001110000 0.
+# 
+force -freeze sim:/cache/AddrIn 0000000011100000 0
+force -freeze sim:/cache/DataIn 0101010101010101 0
+force -freeze sim:/cache/Read 0 0
+force -freeze sim:/cache/Write 0 0
+force -freeze sim:/cache/Handshake 0 0
+force -freeze sim:/cache/clk 1 0, 0 {50 ns} -r 100
+force -freeze sim:/cache/reset 0 0
+noforce sim:/cache/TagControl
+noforce sim:/cache/TagControl
+force -freeze sim:/cache/TagControl 0 0
+force -freeze sim:/cache/SRAMcontrol 0 0
 run
-force -freeze sim:/cachecomparer/InA 010101010101 0
-# Value length (12) does not equal array index length (11).
-# 
-# ** Error: (vsim-4011) Invalid force value: 010101010101 0.
-# 
-force -freeze sim:/cachecomparer/InB 010101010100 0
-# Value length (12) does not equal array index length (11).
-# 
-# ** Error: (vsim-4011) Invalid force value: 010101010100 0.
-# 
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /cache/CacheBlock3/instanceName0
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 0 ns  Iteration: 0  Instance: /cache/CacheBlock3/instanceName0
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /cache/CacheBlock2/instanceName0
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 0 ns  Iteration: 0  Instance: /cache/CacheBlock2/instanceName0
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /cache/CacheBlock1/instanceName0
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 0 ns  Iteration: 0  Instance: /cache/CacheBlock1/instanceName0
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /cache/CacheBlock0/instanceName0
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 0 ns  Iteration: 0  Instance: /cache/CacheBlock0/instanceName0
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /cache/TagBlock/instanceName0
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 0 ns  Iteration: 0  Instance: /cache/TagBlock/instanceName0
+force -freeze sim:/cache/AddrOut 0000000000000000 0
 run
 # 0
 # 
+force -freeze sim:/cache/TagLUTOut 100000000000 0
 run
 # 0
 # 
-run
-# 0
-# 
-run
-# 0
-# 
-run
-# 0
-# 
-run
-# 0
-# 
-run
-# 0
-# 
-run
-# 0
-# 
-force -freeze sim:/cachecomparer/InA 01010101010 0
-force -freeze sim:/cachecomparer/InB 01010101011 0
-run
-# 0
-# 
-force -freeze sim:/cachecomparer/InB 01010101010 0
+force -freeze sim:/cache/AddrIn 0000000000000000 0
 run
 # 0
 # 
