@@ -126,7 +126,7 @@ PORT MAP(
  stall => DCacheDelay);
     
 MemoryArbiter : ENTITY work.ArbiterStateMachine(behavior)
-  PORT MAP(RAMDelay => RAMDelay,
+  PORT MAP(RAMDelay => NOT(RAMDelay),
 		
 		IRAddress => IRAddress,
 		IREnable => IREnable,
@@ -146,6 +146,16 @@ MemoryArbiter : ENTITY work.ArbiterStateMachine(behavior)
 		DHandshake => DHandshake,
 		
 		clock => clock);
+		
+RAM : ENTITY work.ram_delay(behavior)
+  PORT MAP(rst => reset,
+	  hDIn => RAMWData,
+	  wr => RAMWEnable,
+	  rd => RAMREnable,
+	  ack  => RAMDelay,
+	  hAddr => RAMAddress,
+	  hDOut => RAMData);
+    
 
 END ARCHITECTURE Structure;
 

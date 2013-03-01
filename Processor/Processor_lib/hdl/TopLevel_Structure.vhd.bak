@@ -111,7 +111,7 @@ ICache : ENTITY work.Cache(structure)
 DCache : ENTITY work.Cache(structure)
 PORT MAP(
  AddrIn => E_ALU_Out,
- DataIn => ,
+ DataIn => D_Extra,
  Read => M_rEnable,
  Write => M_wEnable,
  Handshake => DHandshake,
@@ -120,7 +120,7 @@ PORT MAP(
  RAMData => RAMData,
  AddrOut => DAddress,
  WriteDataOut => DWData,
- DataReturn => ,
+ DataReturn => M_rData,
  WriteOut => DWEnable,
  ReadOut => DREnable,
  stall => DCacheDelay);
@@ -146,6 +146,16 @@ MemoryArbiter : ENTITY work.ArbiterStateMachine(behavior)
 		DHandshake => DHandshake,
 		
 		clock => clock);
+		
+RAM : ENTITY work.ram_delay(behavior)
+  PORT MAP(rst => reset,
+	  hDIn => RAMWData,
+	  wr => RAMWEnable,
+	  rd => RAMREnable,
+	  ack  => , --  : out	std_logic;                       -- acknowledge signal from memory
+	  hAddr => RAMAddress,
+	  hDOut => RAMData);
+    
 
 END ARCHITECTURE Structure;
 
