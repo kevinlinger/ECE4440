@@ -39,6 +39,11 @@ ARCHITECTURE Structure OF TopLevel IS
   signal M_wBackData: std_logic_vector (15 downto 0);
   signal M_wBackAddr : std_logic_vector(3 downto 0);
   
+  signal IHandshake, IREnable : std_logic;
+  signal DHandshake, DREnable, DWEnable : std_logic;
+  
+  signal RAMREnable, RAMWEnable : std_logic;
+  
   signal clock, reset : std_logic;
   
 BEGIN
@@ -79,6 +84,28 @@ ExecuteStage : ENTITY WORK.ExecuteStage(behavior)
   PORT MAP( ALU0 => D_Op0, ALU1 => D_Op1, Extra => D_Extra, ALU_Ctrl => D_ALU_Control,
     Op_Type => D_Op_Type, ALU_Out => E_ALU_Out, Branch_Inst => D_Dest_Reg, Branch_Ctrl => IF_JumpEnable,
     clock => clock);
+    
+MemoryArbiter : ENTITY work.ArbiterStateMachine(behavior)
+  PORT MAP(RAMDelay : IN std_logic;
+		
+		IRAddress : IN std_logic_vector (15 DOWNTO 0);
+		IREnable => IREnable;
+		
+		DWEnable => DWEnable;
+		DREnable => DREnable;
+		DAddress : IN std_logic_vector (15 DOWNTO 0);
+		DWData : IN std_logic_vector (15 DOWNTO 0);
+		
+		REnable => RAMREnable;
+		WEnable => RAMWEnable;
+		Address : OUT std_logic_vector (15 DOWNTO 0);
+		WData : OUT std_logic_vector (15 DOWNTO 0);
+		
+		IHandshake => IHandshake;
+		
+		DHandshake => DHandshake;
+		
+		clock => clock);
 
 END ARCHITECTURE Structure;
 
