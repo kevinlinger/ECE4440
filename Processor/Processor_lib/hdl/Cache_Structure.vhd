@@ -16,7 +16,7 @@ ENTITY Cache IS
        Read, Write, Handshake, clk, reset : in std_logic;
        RAMData : in std_logic_vector(63 downto 0);
        AddrOut, WriteDataOut, DataReturn : out std_logic_vector(15 downto 0);
-       WriteOut, ReadOUt, stall : out std_logic);
+       WriteOut, ReadOut, stall : out std_logic);
 END ENTITY Cache;
 
 --
@@ -35,6 +35,7 @@ ARCHITECTURE Structure OF Cache IS
   signal SRAMcontrol : std_logic;
   signal TagControl : std_logic;
   signal hit : std_logic;
+  signal addressMuxControl : std_logic;
   
 BEGIN
   
@@ -83,7 +84,12 @@ BEGIN
     Generic Map (size => 16)
     Port Map (a0(15 downto 2) => AddrIn(15 downto 2), a0(1 downto 0) => "00", a1 => AddrIn, c => Write, z => AddrOut);
 
-
+  
+    CacheSM : entity work.Cache_State_Machine(Behavioral)
+    Port Map(read_from_proc => Read, write_from_proc => Write, hit => hit, arbiter_handshake => handshake, SRAM_control => SRAMcontrol, Tag_LUT_control => TagControl, stall => stall, 
+             pre_address_mux_ctrl => addressMuxControl, read_to_arbiter => ReadOut, write_to_arbiter => WriteOut, clock => clk, reset => reset);
+  
+  
     WriteDataOut <= DataIn;
 
 END ARCHITECTURE Structure;
