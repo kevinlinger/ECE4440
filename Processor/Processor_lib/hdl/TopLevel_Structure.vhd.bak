@@ -22,7 +22,7 @@ END ENTITY TopLevel;
 ARCHITECTURE Structure OF TopLevel IS
   
   signal IF_mem_data, IF_readAddress : std_logic_vector(15 downto 0);
-  signal IF_jumpEnable : std_logic;
+  signal IF_jumpEnable, IF_memDelay : std_logic;
   signal IF_Instruction, IF_PCValue_output, IF_maddr : std_logic_vector(15 downto 0);
   
   signal D_RA0, D_RA1, D_Dest_Reg : std_logic_vector(3 downto 0);
@@ -40,9 +40,15 @@ ARCHITECTURE Structure OF TopLevel IS
   signal M_wBackAddr : std_logic_vector(3 downto 0);
   
   signal IHandshake, IREnable : std_logic;
+  signal IRAddress : std_logic_vector (15 DOWNTO 0);
   signal DHandshake, DREnable, DWEnable : std_logic;
+  signal DAddress, DWData : std_logic_vector (15 DOWNTO 0);
   
-  signal RAMREnable, RAMWEnable : std_logic;
+  signal RAMREnable, RAMWEnable, RAMDelay : std_logic;
+  signal RAMAddress, RAMWData : std_logic_vector (15 DOWNTO 0);
+  signal RAMData : std_logic_vector (63 DOWNTO 0);
+  
+  signal DCacheDelay : std_logic;
   
   signal clock, reset : std_logic;
   
@@ -72,8 +78,8 @@ Data_Mem : ENTITY WORK.easy_RAM_simu(behavior)
   
 IF_stage : Entity WORK.Instruction_Fetch_Stage(Structural)
   PORT MAP(mem_data => IF_mem_data, readAddress => IF_readAddress, jumpAddress => E_ALU_Out,
-    jumpEnable => IF_jumpEnable, reset => reset, interrupt => '0', clock => clock, memdelay => '0',
-    stall => '0', Instruction => IF_Instruction, PCValue_output => IF_PCValue_output, maddr => IF_maddr);
+    jumpEnable => IF_jumpEnable, reset => reset, interrupt => '0', clock => clock, memdelay => IF_memDelay,
+    stall => DCacheDelay, Instruction => IF_Instruction, PCValue_output => IF_PCValue_output, maddr => IF_maddr);
 
 DecodeStage : ENTITY WORK.DecodeStage(Structure)
   PORT MAP( Instruction => IF_Instruction, PCValue => IF_PCValue_output, RD0 => RF_RD0, RD1 => RF_RD1,
@@ -85,25 +91,59 @@ ExecuteStage : ENTITY WORK.ExecuteStage(behavior)
     Op_Type => D_Op_Type, ALU_Out => E_ALU_Out, Branch_Inst => D_Dest_Reg, Branch_Ctrl => IF_JumpEnable,
     clock => clock);
     
+ICache : ENTITY work.Cache(structure)
+ PORT MAP(
+ AddrIn => IF_maddr,
+ DataIn => "0000000000000000",
+ Read => '1',
+ Write => '0',
+ Handshake => IHandshake,
+ clk => clock,
+ reset => reset,
+ RAMData => RAMData,
+ AddrOut => IRAddress,
+ WriteDataOut => "0000000000000000",
+ DataReturn => IF_mem_data,
+ WriteOut => '0',
+ ReadOut => IREnable,
+ stall => IF_memDelay);
+    
+DCache : ENTITY work.Cache(structure)
+PORT MAP(
+ AddrIn => ,
+ DataIn => ,
+ Read => M_rEnable,
+ Write => M_wEnabl;
+ Handshake => DHandshake,
+ clk => clock,
+ reset => reset,
+ RAMData => RAMData,
+ AddrOut => DAddress,
+ WriteDataOut => DWData,
+ DataReturn => ,
+ WriteOut => DWEnable,
+ ReadOut => DREnable,
+ stall => DCacheDelay);
+    
 MemoryArbiter : ENTITY work.ArbiterStateMachine(behavior)
-  PORT MAP(RAMDelay : IN std_logic;
+  PORT MAP(RAMDelay => RAMDelay,
 		
-		IRAddress : IN std_logic_vector (15 DOWNTO 0);
-		IREnable => IREnable;
+		IRAddress => IRAddress,
+		IREnable => IREnable,
 		
-		DWEnable => DWEnable;
-		DREnable => DREnable;
-		DAddress : IN std_logic_vector (15 DOWNTO 0);
-		DWData : IN std_logic_vector (15 DOWNTO 0);
+		DWEnable => DWEnable,
+		DREnable => DREnable,
+		DAddress => DAddress,
+		DWData => DWData,
 		
-		REnable => RAMREnable;
-		WEnable => RAMWEnable;
-		Address : OUT std_logic_vector (15 DOWNTO 0);
-		WData : OUT std_logic_vector (15 DOWNTO 0);
+		REnable => RAMREnable,
+		WEnable => RAMWEnable,
+		Address => RAMAddress,
+		WData => RAMWData,
 		
-		IHandshake => IHandshake;
+		IHandshake => IHandshake,
 		
-		DHandshake => DHandshake;
+		DHandshake => DHandshake,
 		
 		clock => clock);
 
