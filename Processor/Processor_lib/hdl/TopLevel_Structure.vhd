@@ -52,6 +52,8 @@ ARCHITECTURE Structure OF TopLevel IS
   
   signal clock, reset : std_logic;
   
+  constant zero16 : std_logic_vector(15 DOWNTO 0) := (others => '0');
+  
 BEGIN
 
 ClockGenerator : entity work.ClockGen(behavior)
@@ -94,7 +96,7 @@ ExecuteStage : ENTITY WORK.ExecuteStage(behavior)
 ICache : ENTITY work.Cache(structure)
  PORT MAP(
  AddrIn => IF_maddr,
- DataIn => "0000000000000000",
+ DataIn => zero16,
  Read => '1',
  Write => '0',
  Handshake => IHandshake,
@@ -102,9 +104,7 @@ ICache : ENTITY work.Cache(structure)
  reset => reset,
  RAMData => RAMData,
  AddrOut => IRAddress,
- WriteDataOut => "0000000000000000",
  DataReturn => IF_mem_data,
- WriteOut => '0',
  ReadOut => IREnable,
  stall => IF_memDelay);
     
