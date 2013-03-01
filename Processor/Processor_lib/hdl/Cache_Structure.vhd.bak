@@ -49,16 +49,16 @@ BEGIN
     hit <= CompareMatch and TagLUTOut(11);
    
     CacheBlock0 : entity work.CacheMemory(Structure)
-    port map (clk => clk, we => SRAMcontrol or (Write and (not AddrIn(1)) and (not AddrIn(0))), din => CacheBlock0In, addr => AddrIn(4 downto 2), dout => CacheBlock0Out);     
+    port map (clk => clk, we => SRAMcontrol or (Write and (not AddrIn(1)) and (not AddrIn(0)) and hit), din => CacheBlock0In, addr => AddrIn(4 downto 2), dout => CacheBlock0Out);     
     
     CacheBlock1 : entity work.CacheMemory(Structure)
-     port map (clk => clk, we => SRAMcontrol or (Write and (not AddrIn(1)) and AddrIn(0)), din => CacheBlock1In, addr => AddrIn(4 downto 2), dout => CacheBlock1Out);
+     port map (clk => clk, we => SRAMcontrol or (Write and (not AddrIn(1)) and AddrIn(0) and hit), din => CacheBlock1In, addr => AddrIn(4 downto 2), dout => CacheBlock1Out);
     
     CacheBlock2 : entity work.CacheMemory(Structure)
-     port map (clk => clk, we => SRAMcontrol or (Write and AddrIn(1) and (not AddrIn(0))), din => CacheBlock2In, addr => AddrIn(4 downto 2), dout => CacheBlock2Out);
+     port map (clk => clk, we => SRAMcontrol or (Write and AddrIn(1) and (not AddrIn(0)) and hit), din => CacheBlock2In, addr => AddrIn(4 downto 2), dout => CacheBlock2Out);
     
     CacheBlock3 : entity work.CacheMemory(Structure)
-     port map (clk => clk, we => SRAMcontrol or (Write and AddrIn(1) and AddrIn(0)), din => CacheBlock3In, addr => AddrIn(4 downto 2), dout => CacheBlock3Out);
+     port map (clk => clk, we => SRAMcontrol or (Write and AddrIn(1) and AddrIn(0) and hit), din => CacheBlock3In, addr => AddrIn(4 downto 2), dout => CacheBlock3Out);
        
     CacheBlockOutMux : entity work.FourOneMux(Behavior)
     Generic Map (size => 16)
@@ -87,7 +87,7 @@ BEGIN
   
     CacheSM : entity work.Cache_State_Machine(Behavioral)
     Port Map(read_from_proc => Read, write_from_proc => Write, hit => hit, arbiter_handshake => handshake, SRAM_control => SRAMcontrol, Tag_LUT_control => TagControl, stall => stall, 
-             pre+address_mux_ctrl => addressMuxControl, read_to_arbiter => ReadOut, write_to_arbiter => WriteOut, clock => clk, reset => reset);
+             pre_address_mux_ctrl => addressMuxControl, read_to_arbiter => ReadOut, write_to_arbiter => WriteOut, clock => clk, reset => reset, AddrIn => AddrIn);
   
   
     WriteDataOut <= DataIn;

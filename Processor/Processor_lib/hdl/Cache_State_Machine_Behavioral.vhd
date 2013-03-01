@@ -14,6 +14,7 @@ USE ieee.std_logic_arith.all;
 ENTITY Cache_State_Machine IS
   PORT( read_from_proc, write_from_proc, hit : IN  std_logic;
     arbiter_handshake : IN std_logic;
+    AddrIn : IN std_logic_vector(15 downto 0);
     SRAM_control, Tag_LUT_control : OUT std_logic;
     stall : OUT std_logic;
     pre_address_mux_ctrl : out std_logic; --IMPORTANT!!! I assume InAddress is line '0' and * is line '1'.
@@ -37,7 +38,7 @@ ARCHITECTURE Behavioral OF Cache_State_Machine IS
     signal current_state, next_state : state;
     
   BEGIN
-    determine_next_state : Process( clock, reset, read_from_proc, write_from_proc, hit, arbiter_handshake) IS
+    determine_next_state : Process( clock, reset, read_from_proc, write_from_proc, hit, arbiter_handshake, AddrIn) IS
       BEGIN
             
       --READY
@@ -119,7 +120,7 @@ ARCHITECTURE Behavioral OF Cache_State_Machine IS
       END PROCESS determine_next_state;
   
   
-    determine_output : Process(clock, reset, read_from_proc, write_from_proc, hit, arbiter_handshake) IS
+    determine_output : Process(clock, reset, read_from_proc, write_from_proc, hit, arbiter_handshake, AddrIn) IS
       BEGIN
         --Note that the conditions for this process are copied from determine_next_state 
         --TODO
@@ -198,8 +199,8 @@ ARCHITECTURE Behavioral OF Cache_State_Machine IS
             write_to_arbiter <= '1';
           else
             --next_state <= ready;
-            SRAM_control <= '1';
-            Tag_LUT_control <= '1';
+            SRAM_control <= '0';
+            Tag_LUT_control <= '0';
             stall <= '0';
             pre_address_mux_ctrl <= '0';
             read_to_arbiter <= '0';
