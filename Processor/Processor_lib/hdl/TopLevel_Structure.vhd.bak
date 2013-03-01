@@ -110,10 +110,10 @@ ICache : ENTITY work.Cache(structure)
     
 DCache : ENTITY work.Cache(structure)
 PORT MAP(
- AddrIn => ,
+ AddrIn => E_ALU_Out,
  DataIn => ,
  Read => M_rEnable,
- Write => M_wEnabl;
+ Write => M_wEnable,
  Handshake => DHandshake,
  clk => clock,
  reset => reset,

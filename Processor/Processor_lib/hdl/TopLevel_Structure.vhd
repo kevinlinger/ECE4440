@@ -110,8 +110,8 @@ ICache : ENTITY work.Cache(structure)
     
 DCache : ENTITY work.Cache(structure)
 PORT MAP(
- AddrIn => ,
- DataIn => ,
+ AddrIn => E_ALU_Out,
+ DataIn => D_Extra,
  Read => M_rEnable,
  Write => M_wEnable,
  Handshake => DHandshake,
@@ -120,7 +120,7 @@ PORT MAP(
  RAMData => RAMData,
  AddrOut => DAddress,
  WriteDataOut => DWData,
- DataReturn => ,
+ DataReturn => M_rData,
  WriteOut => DWEnable,
  ReadOut => DREnable,
  stall => DCacheDelay);
