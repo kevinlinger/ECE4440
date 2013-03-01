@@ -14,14 +14,14 @@ ENTITY ArbiterStateMachine IS
 		DWData : IN std_logic_vector (15 DOWNTO 0);
 		
 		REnable, WEnable : OUT std_logic;
-		Address : OUT std_logic_vector (15 DOWNTO 0);
+		Address : OUT std_logic (15 DOWNTO 0);
 		WData : OUT std_logic_vector (15 DOWNTO 0);
 		
 		IHandshake : OUT std_logic;
 		
 		DHandshake : OUT std_logic;
 		
-		clock : IN std_logic
+		clock : IN std_logic;
 	);
 END ENTITY ArbiterStateMachine;
 
