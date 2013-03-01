@@ -20,6 +20,8 @@ ENTITY ArbiterStateMachine IS
 		IHandshake : OUT std_logic;
 		
 		DHandshake : OUT std_logic;
+		
+		clock : IN std_logic;
 	);
 END ENTITY ArbiterStateMachine;
 
