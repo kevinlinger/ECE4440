@@ -41,7 +41,7 @@ ARCHITECTURE Behavior OF ArbiterStateMachine IS
 		determine_next_state : PROCESS (current_state, IREnable, DREnable, DWEnable, RAMDelay)
 		BEGIN
 			IF (current_state = state_idle) THEN
-				IF (IREnable = '1' AND DREnable = '0' AND DWEnable = '0') THEN
+				IF (IREnable = '1' AND DREnable /= '1' AND DWEnable /= '1') THEN
 					next_state <= state_ir;
 				ELSIF (DREnable = '1') THEN
 					next_state <= state_dr;
