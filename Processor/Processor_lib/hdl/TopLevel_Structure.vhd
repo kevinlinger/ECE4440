@@ -70,13 +70,13 @@ RegisterFile : ENTITY WORK.RegisterFile(structure)
     rAddr0 => D_RA0, rAddr1 => D_RA1, clock =>clock, RD0 => RF_RD0, RD1 => RF_RD1);
 
 
-Instruction_Mem : ENTITY WORK.easy_RAM_simu(behavior)
-  PORT MAP( rst => reset, hDIn => (others => '0'), wr => '0', hAddr => IF_maddr,
-    hDOut => IF_mem_data);
+--Instruction_Mem : ENTITY WORK.easy_RAM_simu(behavior)
+--  PORT MAP( rst => reset, hDIn => (others => '0'), wr => '0', hAddr => IF_maddr,
+--    hDOut => IF_mem_data);
 
 
-Data_Mem : ENTITY WORK.easy_RAM_simu(behavior)
-  PORT MAP( rst => reset, hDIn => D_Extra, wr => M_wEnable, hAddr => E_ALU_Out, hDOut => M_rData);  
+--Data_Mem : ENTITY WORK.easy_RAM_simu(behavior)
+--  PORT MAP( rst => reset, hDIn => D_Extra, wr => M_wEnable, hAddr => E_ALU_Out, hDOut => M_rData);  
   
 IF_stage : Entity WORK.Instruction_Fetch_Stage(Structural)
   PORT MAP(mem_data => IF_mem_data, readAddress => IF_readAddress, jumpAddress => E_ALU_Out,
@@ -101,7 +101,7 @@ ICache : ENTITY work.Cache(structure)
  Write => '0',
  Handshake => IHandshake,
  clk => clock,
- reset => reset,
+ reset => '0',
  RAMData => RAMData,
  AddrOut => IRAddress,
  DataReturn => IF_mem_data,
@@ -116,7 +116,7 @@ PORT MAP(
  Write => M_wEnable,
  Handshake => DHandshake,
  clk => clock,
- reset => reset,
+ reset => '0',
  RAMData => RAMData,
  AddrOut => DAddress,
  WriteDataOut => DWData,

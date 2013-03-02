@@ -131,7 +131,7 @@ table(59) := To_stdlogicvector(X"0000");
             hDOut(47 downto 32) <= table(table_index+1) after delay;
             hDOut(31 downto 16) <= table(table_index+2) after delay;
             hDOut(15 downto 0) <= table(table_index+3) after delay;
-            ack <= '1';
+            ack <= '1' after delay;
 	  end if;
   end process;
 END ARCHITECTURE behavior;
