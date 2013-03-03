@@ -24,7 +24,7 @@ ENTITY ram_delay IS
 	  rd    : in	std_logic;                       -- memory read control signal
 	  ack    : out	std_logic;                       -- acknowledge signal from memory
 	  hAddr : in	std_logic_vector (15 DOWNTO 0);  -- memory address
-	  hDOut : out	std_logic_vector (63 DOWNTO 0)   -- data from memory
+	  hDOut : out	std_logic_vector (15 DOWNTO 0)   -- data from memory
   );
 END ENTITY ram_delay;
 
@@ -45,7 +45,7 @@ begin
     UNIFORM(seed1, seed2, rand);
     delay := (rand*0.0000001)*10 sec;              -- random delay between 0 and 1000 ns
 	  if (rst = '1') then
---		  table := (others => (others => '0'));
+		  table := (others => (others => '0'));
 --      --table(0) := To_stdlogicvector(X"97FF");   ---here you insert your program
 ----      table(1) := To_stdlogicvector(X"9A00");
 ----      table(2) := To_stdlogicvector(X"9900");
@@ -185,16 +185,18 @@ table(34) := To_stdlogicvector(X"0005");
 
 
 
+
           elsif (wr = '1' and rd = '0') then
         table_index :=  CONV_INTEGER(hAddr(15 downto 0));
             table(table_index) := hDIn;
-                        hDOut(63 downto 48) <= table(table_index) after delay;
+                                    hDOut(63 downto 48) <= table(table_index) after delay;
             hDOut(47 downto 32) <= table(table_index+1) after delay;
             hDOut(31 downto 16) <= table(table_index+2) after delay;
             hDOut(15 downto 0) <= table(table_index+3) after delay;
+            ack <= '1' after delay;
           elsif (rd = '1' and wr = '0') then
 	       table_index :=  CONV_INTEGER(hAddr(15 downto 0));--	       
-            hDOut(63 downto 48) <= table(table_index) after delay;
+                        hDOut(63 downto 48) <= table(table_index) after delay;
             hDOut(47 downto 32) <= table(table_index+1) after delay;
             hDOut(31 downto 16) <= table(table_index+2) after delay;
             hDOut(15 downto 0) <= table(table_index+3) after delay;
