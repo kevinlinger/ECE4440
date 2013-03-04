@@ -245,7 +245,7 @@ ARCHITECTURE Behavioral OF Cache_State_Machine IS
              --next_state <= ready;
              SRAM_control <= '1';
              Tag_LUT_control <= '1';
-             stall <= '0';
+             stall <= '1';
              pre_address_mux_ctrl <= '0';
              read_to_arbiter <= '0';
              write_to_arbiter <= '0';

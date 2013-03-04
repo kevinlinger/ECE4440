@@ -59,8 +59,10 @@ ARCHITECTURE Behavior OF ArbiterStateMachine IS
 			ELSIF (current_state = state_dw) THEN
 				IF (RAMDelay = '1') THEN
 					next_state <= state_dw;
-				ELSIF(RAMDelay = '0') THEN
+				ELSIF(RAMDelay = '0' and IREnable = '0') THEN
 					next_state <= state_idle;
+				ELSIF(RAMDelay = '0' and IREnable = '1') THEN
+				  next_state <= state_ir;
 				END IF;
 			ELSIF (current_state = state_ir) THEN
 				IF (RAMDelay = '1') THEN
@@ -98,7 +100,7 @@ ARCHITECTURE Behavior OF ArbiterStateMachine IS
 				IHandshake <= '0';
 				IF(RAMDelay = '1') THEN
 					DHandshake <= '0';
-				ELSIF (RAMDelay = '0') THEN
+				ELSIF (RAMDelay = '0' and IREnable = '0') THEN
 					DHandshake <= '1';
 				END IF;
 			ELSIF (current_state = state_ir) THEN
@@ -106,10 +108,13 @@ ARCHITECTURE Behavior OF ArbiterStateMachine IS
 				REnable <= '1';
 				WEnable <= '0';
 				
-				DHandshake <= '0';
+				--DHandshake <= '0';
 				IF(RAMDelay = '1') THEN
 					IHandshake <= '0';
 				ELSIF (RAMDelay = '0') THEN
+					IF(DWEnable = '1') THEN
+            DHandshake <= '1';
+          END IF;
 					IHandshake <= '1';
 				END IF;
 			END IF;

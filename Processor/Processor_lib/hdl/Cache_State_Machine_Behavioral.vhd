@@ -61,7 +61,9 @@ ARCHITECTURE Behavioral OF Cache_State_Machine IS
             if(write_from_proc = '1')
             then 
                 next_state <= store;
-            end if;               
+            else
+            next_state <= ready;   
+            end if;       
           end if;
         end if;
       end if;
@@ -245,7 +247,7 @@ ARCHITECTURE Behavioral OF Cache_State_Machine IS
              --next_state <= ready;
              SRAM_control <= '1';
              Tag_LUT_control <= '1';
-             stall <= '0';
+             stall <= '1';
              pre_address_mux_ctrl <= '0';
              read_to_arbiter <= '0';
              write_to_arbiter <= '0';

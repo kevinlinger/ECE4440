@@ -93,7 +93,7 @@ END ENTITY IF_State_Machine;
         if(jump = '0' and mdelay = '1') then
         MuxPrePC_ctrl <= "10"; --PC
         MuxPreMaddr_ctrl <= "10"; -- PCregister_value (don't care)
-        MuxPreInst_ctrl <= "01"; -- nop
+        MuxPreInst_ctrl <= "00"; -- current instr
         MuxPrePCVal_ctrl <= '0'; -- PCregister_value 
         end if;
         
@@ -101,7 +101,8 @@ END ENTITY IF_State_Machine;
         if(jump = '0' and stall = '1') then
         MuxPrePC_ctrl <= "10"; --PC
         MuxPreMaddr_ctrl <= "10"; -- PCregister_value (don't care)
-        MuxPreInst_ctrl <= "01"; -- nop (don't care)
+       -- MuxPreInst_ctrl <= "01"; -- nop (don't care)
+        MuxPreInst_ctrl <= "00";
         MuxPrePCVal_ctrl <= '0'; -- PCregister_value
         end if;      
       end if;
