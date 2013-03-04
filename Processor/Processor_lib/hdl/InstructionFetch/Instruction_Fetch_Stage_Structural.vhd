@@ -53,7 +53,7 @@ BEGIN
   mux_pre_PCval_output : ENTITY WORK.Mux_2_to_1(Behavior)
   GENERIC MAP( width => 16)
   --PORT MAP(line_0 => PC_val, line_1 => jumpAddress, control => MuxPrePCvalOut_ctrl(0), out_line => PCValue_output);
-  PORT MAP(line_0 => PC_plus_one, line_1 => jumpAddress, control => MuxPrePCvalOut_ctrl(0), out_line => PCValue_output);
+  PORT MAP(line_0 => PC_val, line_1 => jumpAddress, control => MuxPrePCvalOut_ctrl(0), out_line => PCValue_output);
   
   
   PC : ENTITY work.Reg(Behavior)

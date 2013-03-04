@@ -1,5 +1,6 @@
 # R0=(sum of data values) (LED=B)
-
+RESET:  DATA    2
+ISR:    DATA    0
 STRT:	LIL	R1 <STKB	
 	LIH	R1 >STKB	# Load stack bottom pointer into R1
 	LIL	R2 <STKT
