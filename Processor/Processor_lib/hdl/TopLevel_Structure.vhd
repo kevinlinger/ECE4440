@@ -112,8 +112,8 @@ DCache : ENTITY work.Cache(structure)
 PORT MAP(
  AddrIn => E_ALU_Out,
  DataIn => D_Extra,
- Read => M_rEnable,
- Write => M_wEnable,
+ Read => M_rEnable and (not IF_memDelay),
+ Write => M_wEnable and (not IF_memDelay),
  Handshake => DHandshake,
  clk => clock,
  reset => '0',

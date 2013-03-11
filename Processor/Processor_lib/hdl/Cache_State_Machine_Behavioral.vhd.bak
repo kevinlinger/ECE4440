@@ -61,7 +61,9 @@ ARCHITECTURE Behavioral OF Cache_State_Machine IS
             if(write_from_proc = '1')
             then 
                 next_state <= store;
-            end if;               
+            else
+            next_state <= ready;   
+            end if;       
           end if;
         end if;
       end if;
