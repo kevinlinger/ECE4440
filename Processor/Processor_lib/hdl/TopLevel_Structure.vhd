@@ -66,7 +66,7 @@ MemStage : ENTITY WORK.MemStage(behavior)
     
 
 RegisterFile : ENTITY WORK.RegisterFile(structure)
-  PORT MAP( wAddr => M_wBackAddr, wData => M_wBackData, wEnable => M_WBackEnable,
+  PORT MAP( wAddr => M_wBackAddr, wData => M_wBackData, wEnable => (M_WBackEnable and (not IF_memDelay)),
     rAddr0 => D_RA0, rAddr1 => D_RA1, clock =>clock, RD0 => RF_RD0, RD1 => RF_RD1);
 
 
