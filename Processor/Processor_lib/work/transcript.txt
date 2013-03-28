@@ -1,4 +1,4 @@
-# //  ModelSim SE-64 10.1c Jul 28 2012 
+# //  ModelSim SE 10.1c Jul 27 2012 
 # //
 # //  Copyright 1991-2012 Mentor Graphics Corporation
 # //  All Rights Reserved.
@@ -7,22 +7,21 @@
 # //  WHICH IS THE PROPERTY OF MENTOR GRAPHICS CORPORATION OR ITS
 # //  LICENSORS AND IS SUBJECT TO LICENSE TERMS.
 # //
-# vsim -L Processor_lib -l transcript.txt -i -multisource_delay latest -t ns +typdelays -foreign {hdsInit C:/MentorGraphics/HDS_2012.1/resources/downstream/modelsim/ModelSim_64Bit.dll} -pli {"C:/MentorGraphics/HDS_2012.1/resources/downstream/modelsim/ModelSim_64Bit.dll"} Processor_lib.TopLevel(Structure) 
-# ** Warning: (vsim-56) Problem with optimized design dependency file "C:/Users/Kevin/Documents/GitHub/ECE4440/Processor/Processor_lib/work/@_opt/_deps" - file is inconsistent with version property.
-# 
-# ** Warning: (vsim-56) Problem with optimized design dependency file "C:/Users/Kevin/Documents/GitHub/ECE4440/Processor/Processor_lib/work/@_opt1/_deps" - file is inconsistent with version property.
-# 
+# vsim -L Processor_lib -l transcript.txt -i -multisource_delay latest -t ns +typdelays -foreign {hdsInit C:/MentorGraphics/HDS_2012.1/resources/downstream/modelsim/ModelSim_32Bit.dll} -pli {"C:/MentorGraphics/HDS_2012.1/resources/downstream/modelsim/ModelSim_32Bit.dll"} Processor_lib.TopLevel(Structure) 
 # ** Note: (vsim-3812) Design is being optimized...
 # 
 # ** Note: (vsim-3865) Due to PLI being present, full design access is being specified.
 # 
+# ** Warning: (vopt-41) Failed to rename the optimized design directory "C:/Users/Student/Documents/GitHub/ECE4440/Processor/Processor_lib/work/@_opt2" to "C:/Users/Student/Documents/GitHub/ECE4440/Processor/Processor_lib/work/_temp/vopthsx5k7/@_opt2.deleted".
+# 
+# File exists. (errno = EEXIST)
 # ** Note: (vopt-143) Recognized 1 FSM in architecture body "IF_State_Machine(Behavior)".
 # 
 # ** Note: (vopt-143) Recognized 1 FSM in architecture body "Cache_State_Machine(Behavioral)".
 # 
 # ** Note: (vopt-143) Recognized 1 FSM in architecture body "ArbiterStateMachine(Behavior)".
 # 
-# Loading C:/MentorGraphics/HDS_2012.1/resources/downstream/modelsim/ModelSim_64Bit.dll
+# Loading C:/MentorGraphics/HDS_2012.1/resources/downstream/modelsim/ModelSim_32Bit.dll
 # Loading std.standard
 # Loading std.textio(body)
 # Loading ieee.std_logic_1164(body)
@@ -59,11 +58,16 @@
 # Loading work.cache_state_machine(behavioral)#1
 # Loading work.arbiterstatemachine(behavior)#1
 # Loading work.ram_delay(behavior)#1
+# Loading work.mux_32_to_1(behavior)#1
 # ** Warning: (vsim-8683) Uninitialized out port /toplevel/IF_stage/readAddress(15 downto 0) has no driver.
 # 
 # This port will contribute value (UUUUUUUUUUUUUUUU) to the signal network.
 # 
-run -all
+run
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /toplevel/Debug_Mux
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 0 ns  Iteration: 0  Instance: /toplevel/Debug_Mux
 # ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
 #    Time: 0 ns  Iteration: 0  Instance: /toplevel/DCache/CacheBlock3/instanceName0
 # ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
@@ -156,6 +160,59 @@ run -all
 #    Time: 100 ns  Iteration: 1  Instance: /toplevel/RAM
 # ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
 #    Time: 100 ns  Iteration: 1  Instance: /toplevel/RAM
+run
+# 0
+# 
+run
+# 0
+# 
+run
+# 0
+# 
+run
+# 0
+# 
+run
+# 0
+# 
+run
+# 0
+# 
+run
+# 0
+# 
+run
+# 0
+# 
+force -freeze sim:/toplevel/Debug_Mux/control 00000 0
+run
+# 0
+# 
+run
+# 0
+# 
+run
+# 0
+# 
+run
+# 0
+# 
+run
+# 0
+# 
+run
+# 0
+# 
+run
+# 0
+# 
+run
+# 0
+# 
+run
+# 0
+# 
+run
 # ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
 #    Time: 1850 ns  Iteration: 7  Instance: /toplevel/ExecuteStage
 # ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
@@ -178,6 +235,46 @@ run -all
 #    Time: 1850 ns  Iteration: 9  Instance: /toplevel/DCache/CacheBlock3/instanceName0
 # ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
 #    Time: 1850 ns  Iteration: 9  Instance: /toplevel/DCache/CacheBlock3/instanceName0
+# 0
+# 
+run
+# 0
+# 
+run
+# 0
+# 
+run
+# 0
+# 
+run
+# 0
+# 
+force -freeze sim:/toplevel/Debug_Mux/control 00001 0
+run
+# 0
+# 
+run
+# 0
+# 
+run
+# 0
+# 
+run
+# 0
+# 
+run
+# 0
+# 
+run
+# 0
+# 
+run
+# 0
+# 
+run
+# 0
+# 
+run
 # ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
 #    Time: 3150 ns  Iteration: 9  Instance: /toplevel/DCache/TagBlock/instanceName0
 # ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
@@ -198,6 +295,9 @@ run -all
 #    Time: 3150 ns  Iteration: 9  Instance: /toplevel/DCache/CacheBlock3/instanceName0
 # ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
 #    Time: 3150 ns  Iteration: 9  Instance: /toplevel/DCache/CacheBlock3/instanceName0
+# 0
+# 
+run
 # ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
 #    Time: 3250 ns  Iteration: 7  Instance: /toplevel/ExecuteStage
 # ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
@@ -220,6 +320,26 @@ run -all
 #    Time: 3250 ns  Iteration: 9  Instance: /toplevel/DCache/CacheBlock3/instanceName0
 # ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
 #    Time: 3250 ns  Iteration: 9  Instance: /toplevel/DCache/CacheBlock3/instanceName0
+# 0
+# 
+force -freeze sim:/toplevel/Debug_Mux/control 00010 0
+run
+# 0
+# 
+force -freeze sim:/toplevel/Debug_Mux/control 00011 0
+run
+# 0
+# 
+force -freeze sim:/toplevel/Debug_Mux/control 10000 0
+run
+# 0
+# 
+force -freeze sim:/toplevel/Debug_Mux/control 10001 0
+run
+# 0
+# 
+force -freeze sim:/toplevel/Debug_Mux/control 10000 0
+run -all
 # ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
 #    Time: 4950 ns  Iteration: 9  Instance: /toplevel/DCache/TagBlock/instanceName0
 # ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
@@ -4054,3 +4174,5 @@ run -all
 #    Time: 120750 ns  Iteration: 9  Instance: /toplevel/DCache/CacheBlock3/instanceName0
 # ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
 #    Time: 120750 ns  Iteration: 9  Instance: /toplevel/DCache/CacheBlock3/instanceName0
+# 0
+# 

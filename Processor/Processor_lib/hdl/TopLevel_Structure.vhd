@@ -13,13 +13,23 @@ USE ieee.std_logic_arith.all;
 
 ENTITY TopLevel IS
   --PORT(clock, reset, interrupt : IN std_logic);
-  PORT(interrupt : in std_logic);
+  PORT(interrupt : in std_logic;
+    Debug_mux_control : in std_logic_vector(4 downto 0);
+    Debug_mux_out : OUT std_logic_vector(15 downto 0));
 END ENTITY TopLevel;
 
 
 
 --
 ARCHITECTURE Structure OF TopLevel IS
+  
+  --Debug Signals
+  Signal Debug_Register_Dump: std_logic_vector(255 downto 0);
+  Signal Debug_PC, Debug_Inst, Debug_DRAM_address : std_logic_vector(15 downto 0);
+  SIGNAL  Debug_DRAM_data_return : std_logic_vector(63 downto 0);
+  Signal Pre_Debug_Mux: std_logic_vector( 511 downto 0);
+  
+  
   
   signal IF_mem_data, IF_readAddress : std_logic_vector(15 downto 0);
   signal IF_jumpEnable, IF_memDelay : std_logic;
@@ -67,7 +77,7 @@ MemStage : ENTITY WORK.MemStage(behavior)
 
 RegisterFile : ENTITY WORK.RegisterFile(structure)
   PORT MAP( wAddr => M_wBackAddr, wData => M_wBackData, wEnable => (M_WBackEnable and (not IF_memDelay)),
-    rAddr0 => D_RA0, rAddr1 => D_RA1, clock =>clock, RD0 => RF_RD0, RD1 => RF_RD1);
+    rAddr0 => D_RA0, rAddr1 => D_RA1, clock =>clock, RD0 => RF_RD0, RD1 => RF_RD1, Debug_Register_Dump => Debug_Register_Dump);
 
 
 --Instruction_Mem : ENTITY WORK.easy_RAM_simu(behavior)
@@ -156,6 +166,29 @@ RAM : ENTITY work.ram_delay(behavior)
 	  hAddr => RAMAddress,
 	  hDOut => RAMData);
     
+
+--Debug Stuff
+  Debug_PC <= IF_PCValue_output; --0
+  Debug_Inst <= IF_Instruction; --1
+  Debug_DRAM_data_return <= RAMData; --2
+  Debug_DRAM_address <= RAMAddress; --3
+  
+  --Debug_Register_Dump is directly port mapped from the register file
+      --control 16 - 31
+
+  Pre_Debug_Mux(15 downto 0) <= Debug_PC;
+  Pre_Debug_Mux(31 downto 16) <= Debug_Inst;
+  Pre_Debug_Mux(47 downto 32) <= Debug_DRAM_address;
+  Pre_Debug_Mux(111 downto 48) <= Debug_DRAM_data_return;
+
+  Pre_Debug_Mux(255 downto 112) <= (others => '0');
+  Pre_Debug_Mux(511 downto 256) <= Debug_Register_Dump;
+  
+
+Debug_Mux : ENTITY work.Mux_32_to_1(Behavior)
+  generic MAP( width => 16)
+  PORT MAP(In_vector => Pre_Debug_Mux, control => Debug_Mux_control, out_line => Debug_Mux_out);       
+
 
 END ARCHITECTURE Structure;
 

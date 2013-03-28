@@ -17,6 +17,7 @@ ENTITY RegisterFile IS
     wEnable: IN std_logic;
     rAddr0, rAddr1: IN std_logic_vector (3 downto 0);
     clock: IN std_logic;
+    Debug_Register_Dump : OUT std_logic_vector( 255 downto 0);
     RD0, RD1: OUT std_logic_vector (15 downto 0));
 END ENTITY RegisterFile;
 
@@ -33,7 +34,8 @@ BEGIN
   regArr: for i IN 0 to 15 GENERATE
     BEGIN
       regBlock: ENTITY work.RegisterFileRegister (Behavior)
-        PORT MAP (wData, wDecodeOut(i), rDecodeOut0(i), rDecodeOut1(i), clock, RD0, RD1);
+        PORT MAP (wData, wDecodeOut(i), rDecodeOut0(i), rDecodeOut1(i), clock, RD0, RD1,
+         Debug_Register_Dump( ((i * 16) + 15) downto (i *16) ));
   END GENERATE regArr;
 END ARCHITECTURE Structure;
 
