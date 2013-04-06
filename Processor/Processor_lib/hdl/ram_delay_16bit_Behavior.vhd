@@ -16,7 +16,7 @@ USE ieee.numeric_std.all;
 USE ieee.math_real.all;
 
 
-ENTITY ram_delay IS
+ENTITY ram_delay_16bit IS
   port( 
 	  rst   : in	std_logic;                       -- active-high reset
 	  hDIn  : in	std_logic_vector (15 DOWNTO 0);  -- data to memory
@@ -24,12 +24,12 @@ ENTITY ram_delay IS
 	  rd    : in	std_logic;                       -- memory read control signal
 	  ack   : out	std_logic;                      -- acknowledge signal from memory
 	  hAddr : in	std_logic_vector (15 DOWNTO 0);  -- memory address
-	  hDOut : out	std_logic_vector (63 DOWNTO 0)  -- data from memory
+	  hDOut : out	std_logic_vector (15 DOWNTO 0)  -- data from memory
   );
-END ENTITY ram_delay;
+END ENTITY ram_delay_16bit;
 
 --
-ARCHITECTURE behavior OF ram_delay IS
+ARCHITECTURE behavior OF ram_delay_16bit IS
   subtype table_address is integer range 0 to 15;
 begin
   process(hAddr,hDIn,wr,rd,rst)
@@ -273,17 +273,17 @@ table(59) := To_stdlogicvector(X"0000");
           elsif (wr = '1' and rd = '0') then
         table_index :=  CONV_INTEGER(hAddr(15 downto 0));
             table(table_index) := hDIn;
-			hDOut(63 downto 48) <= table(table_index) after delay;
-            hDOut(47 downto 32) <= table(table_index+1) after delay;
-            hDOut(31 downto 16) <= table(table_index+2) after delay;
-            hDOut(15 downto 0)  <= table(table_index+3) after delay;
+			hDOut <= table(table_index) after delay;
+         --   hDOut(47 downto 32) <= table(table_index+1) after delay;
+        --    hDOut(31 downto 16) <= table(table_index+2) after delay;
+       --     hDOut(15 downto 0)  <= table(table_index+3) after delay;
             ack <= '0', '1' after delay;
           elsif (rd = '1' and wr = '0') then
 	       table_index :=  CONV_INTEGER(hAddr(15 downto 0));--
-			hDOut(63 downto 48) <= table(table_index) after delay;
-            hDOut(47 downto 32) <= table(table_index+1) after delay;
-            hDOut(31 downto 16) <= table(table_index+2) after delay;
-            hDOut(15 downto 0) <= table(table_index+3) after delay;
+			--hDOut(63 downto 48) <= table(table_index) after delay;
+     --       hDOut(47 downto 32) <= table(table_index+1) after delay;
+       --     hDOut(31 downto 16) <= table(table_index+2) after delay;
+           hDOut <= table(table_index) after delay;
             ack <= '0', '1' after delay;
 	  end if;
   end process;
