@@ -29,7 +29,7 @@ BEGIN
       z <=a1;
     elsif(c = "10") then
       z <= a2;
-    elsif(c = "11") then
+    else
       z <= a3;
     end if;
   end process;

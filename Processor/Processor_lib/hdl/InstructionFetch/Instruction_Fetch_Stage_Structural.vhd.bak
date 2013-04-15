@@ -17,6 +17,7 @@ ENTITY Instruction_Fetch_Stage IS
     jumpAddress : IN  std_logic_vector(15 downto 0);
     jumpEnable, reset, interrupt, clock, memdelay, stall : IN std_logic;
     Instruction, PCValue_output : OUT std_logic_vector(15 downto 0);
+    fetchStateOut : out std_logic_vector(2 downto 0);
     maddr : OUT std_logic_vector(15 downto 0));
     
 END ENTITY Instruction_Fetch_Stage;
@@ -64,7 +65,9 @@ BEGIN
   SM : ENTITY work.IF_State_Machine(Behavior)
   PORT MAP( clock => clock, jump => jumpEnable, int => interrupt, reset => reset, mdelay => memdelay,
     stall => stall, MuxPrePC_ctrl => muxPrePC_ctrl, MuxpreMaddr_ctrl => MuxpreMaddr_ctrl,
-    MuxPreInst_ctrl => muxPreInst_ctrl, MuxPrePCVal_ctrl => muxprePCvalOut_ctrl(0));
+    MuxPreInst_ctrl => muxPreInst_ctrl, MuxPrePCVal_ctrl => muxprePCvalOut_ctrl(0), stateOut => fetchStateOut);
+    
+  --fetchStateOut(0) <= '1';
     
   incrementer : Process(PC_val) is
       VARIABLE temp_unsigned : unsigned(15 downto 0);

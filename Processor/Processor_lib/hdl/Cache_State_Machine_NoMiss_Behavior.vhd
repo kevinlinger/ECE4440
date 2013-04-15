@@ -11,7 +11,7 @@ LIBRARY ieee;
 USE ieee.std_logic_1164.all;
 USE ieee.std_logic_arith.all;
 
-ENTITY Cache_State_Machine IS
+ENTITY Cache_State_Machine_NoMiss IS
   PORT( read_from_proc, write_from_proc, hit : IN  std_logic;
     arbiter_handshake : IN std_logic;
     AddrIn : IN std_logic_vector(15 downto 0);
@@ -19,7 +19,6 @@ ENTITY Cache_State_Machine IS
     stall : OUT std_logic;
     pre_address_mux_ctrl : out std_logic; --IMPORTANT!!! I assume InAddress is line '0' and * is line '1'.
     read_to_arbiter, write_to_arbiter : out std_logic;
-    cacheStateOut : out std_logic_vector(3 downto 0);
     clock, reset : IN std_logic);
     
     
@@ -31,10 +30,10 @@ ENTITY Cache_State_Machine IS
     --functions as write enable to be set to 1 on the arcs back to ready state
     
     
-END ENTITY Cache_State_Machine;
+END ENTITY Cache_State_Machine_NoMiss;
 
 --
-ARCHITECTURE Behavioral OF Cache_State_Machine IS
+ARCHITECTURE Behavior OF Cache_State_Machine_NoMiss IS
   TYPE state IS (ready, store, load_miss, reset_state);
     signal current_state, next_state : state;
     
@@ -129,8 +128,8 @@ ARCHITECTURE Behavioral OF Cache_State_Machine IS
         --TODO
         
         --READY
-      if( current_state = ready)
-      then
+     -- if( current_state = ready)
+      --then
         
         if(reset = '1')
         then
@@ -141,7 +140,6 @@ ARCHITECTURE Behavioral OF Cache_State_Machine IS
             pre_address_mux_ctrl <= '0';
             read_to_arbiter <= '0';
             write_to_arbiter <= '0';
-            cacheStateOut <= "0001";
         else
           if(read_from_proc='1')
           then
@@ -154,7 +152,6 @@ ARCHITECTURE Behavioral OF Cache_State_Machine IS
                 pre_address_mux_ctrl <= '0';
                 read_to_arbiter <= '0';
                 write_to_arbiter <= '0';
-                            cacheStateOut <= "0001";
               else
                 --next_state <= load_miss;
                 SRAM_control <= '0';
@@ -163,7 +160,6 @@ ARCHITECTURE Behavioral OF Cache_State_Machine IS
                 pre_address_mux_ctrl <= '1';
                 read_to_arbiter <= '1';
                 write_to_arbiter <= '0';
-                            cacheStateOut <= "0001";
               end if;
           elsif(write_from_proc = '1')
             then 
@@ -174,7 +170,6 @@ ARCHITECTURE Behavioral OF Cache_State_Machine IS
                 pre_address_mux_ctrl <= '0';
                 read_to_arbiter <= '0';
                 write_to_arbiter <= '1';
-                            cacheStateOut <= "0001";
  
                   else
                         SRAM_control <= '0';
@@ -182,117 +177,108 @@ ARCHITECTURE Behavioral OF Cache_State_Machine IS
                 stall <= '0';
                 pre_address_mux_ctrl <= '0';
                 read_to_arbiter <= '0';
-                write_to_arbiter <= '0';    
-                            cacheStateOut <= "0001";           
+                write_to_arbiter <= '0';               
           end if;
         end if;
         
 
-      end if;
-      
-        
-        --STORE
-      if(current_state = store)
-      then
-        if(reset = '1')
-        then
-          --next_state <= reset_state;
-          SRAM_control <= '0';
-          Tag_LUT_control <= '0';
-          stall <= '0';
-          pre_address_mux_ctrl <= '0';
-          read_to_arbiter <= '0';
-          write_to_arbiter <= '0';
-                      cacheStateOut <= "0010";
-        else
-          if(arbiter_handshake = '0')
-          then
-            --next_state <= store;
-            SRAM_control <= '0';
-            Tag_LUT_control <= '0';
-            stall <= '1';
-            pre_address_mux_ctrl <= '0';
-            read_to_arbiter <= '0';
-            write_to_arbiter <= '1';
-                        cacheStateOut <= "0010";
-          else
-            --next_state <= ready;
-            SRAM_control <= '0';
-            Tag_LUT_control <= '0';
-            stall <= '0';
-            pre_address_mux_ctrl <= '0';
-            read_to_arbiter <= '0';
-            write_to_arbiter <= '0';
-                        cacheStateOut <= "0010";
-          end if;      
-        end if;      
-      end if;  
- 
- 
-      --LOAD_MISS
-      if(current_state = load_miss)
-      then
-         
-         if(reset = '1')
-         then
-           --next_state <= reset_state;
-           SRAM_control <= '0';
-           Tag_LUT_control <= '0';
-           stall <= '0';
-           pre_address_mux_ctrl <= '0';
-           read_to_arbiter <= '0';
-           write_to_arbiter <= '0';
-                       cacheStateOut <= "0100";
-         else
-           if(arbiter_handshake = '0')
-           then
-             --next_state <= load_miss;
-             SRAM_control <= '0';
-             Tag_LUT_control <= '0';
-             stall <= '1';
-             pre_address_mux_ctrl <= '1';
-             read_to_arbiter <= '1';
-             write_to_arbiter <= '0';
-                         cacheStateOut <= "0100";
-           else
-             --next_state <= ready;
-             SRAM_control <= '1';
-             Tag_LUT_control <= '1';
-             stall <= '1';
-             pre_address_mux_ctrl <= '0';
-             read_to_arbiter <= '0';
-             write_to_arbiter <= '0';
-                         cacheStateOut <= "0100";
-           end if;
-         end if;        
-      end if;
-
-      --RESET
-      if(current_state = reset_state)
-      then
-        
-        if(reset = '1')
-        then
-          --next_state <= reset_state;
-          SRAM_control <= '0';
-          Tag_LUT_control <= '0';
-          stall <= '0';
-          pre_address_mux_ctrl <= '0';
-          read_to_arbiter <= '0';
-          write_to_arbiter <= '0';
-                      cacheStateOut <= "1000";
-        else
-          --next_state <= ready;
-          SRAM_control <= '0';
-          Tag_LUT_control <= '0';
-          stall <= '0';
-          pre_address_mux_ctrl <= '0';
-          read_to_arbiter <= '0';
-          write_to_arbiter <= '0';
-                      cacheStateOut <= "1000";
-        end if;
-      end if;  
- 
+--      end if;
+--      
+--        
+--        --STORE
+--      if(current_state = store)
+--      then
+--        if(reset = '1')
+--        then
+--          --next_state <= reset_state;
+--          SRAM_control <= '0';
+--          Tag_LUT_control <= '0';
+--          stall <= '0';
+--          pre_address_mux_ctrl <= '0';
+--          read_to_arbiter <= '0';
+--          write_to_arbiter <= '0';
+--        else
+--          if(arbiter_handshake = '0')
+--          then
+--            --next_state <= store;
+--            SRAM_control <= '0';
+--            Tag_LUT_control <= '0';
+--            stall <= '1';
+--            pre_address_mux_ctrl <= '0';
+--            read_to_arbiter <= '0';
+--            write_to_arbiter <= '1';
+--          else
+--            --next_state <= ready;
+--            SRAM_control <= '0';
+--            Tag_LUT_control <= '0';
+--            stall <= '0';
+--            pre_address_mux_ctrl <= '0';
+--            read_to_arbiter <= '0';
+--            write_to_arbiter <= '0';
+--          end if;      
+--        end if;      
+--      end if;  
+-- 
+-- 
+--      --LOAD_MISS
+--      if(current_state = load_miss)
+--      then
+--         
+--         if(reset = '1')
+--         then
+--           --next_state <= reset_state;
+--           SRAM_control <= '0';
+--           Tag_LUT_control <= '0';
+--           stall <= '0';
+--           pre_address_mux_ctrl <= '0';
+--           read_to_arbiter <= '0';
+--           write_to_arbiter <= '0';
+--         else
+--           if(arbiter_handshake = '0')
+--           then
+--             --next_state <= load_miss;
+--             SRAM_control <= '0';
+--             Tag_LUT_control <= '0';
+--             stall <= '1';
+--             pre_address_mux_ctrl <= '1';
+--             read_to_arbiter <= '1';
+--             write_to_arbiter <= '0';
+--           else
+--             --next_state <= ready;
+--             SRAM_control <= '1';
+--             Tag_LUT_control <= '1';
+--             stall <= '1';
+--             pre_address_mux_ctrl <= '0';
+--             read_to_arbiter <= '0';
+--             write_to_arbiter <= '0';
+--           end if;
+--         end if;        
+--      end if;
+--
+--      --RESET
+--      if(current_state = reset_state)
+--      then
+--        
+--        if(reset = '1')
+--        then
+--          --next_state <= reset_state;
+--          SRAM_control <= '0';
+--          Tag_LUT_control <= '0';
+--          stall <= '0';
+--          pre_address_mux_ctrl <= '0';
+--          read_to_arbiter <= '0';
+--          write_to_arbiter <= '0';
+--        else
+--          --next_state <= ready;
+--          SRAM_control <= '0';
+--          Tag_LUT_control <= '0';
+--          stall <= '0';
+--          pre_address_mux_ctrl <= '0';
+--          read_to_arbiter <= '0';
+--          write_to_arbiter <= '0';
+--        end if;
+--      end if;  
+-- 
       END PROCESS determine_output;
   
     update_new_state : PROCESS(clock) IS
@@ -303,5 +289,5 @@ ARCHITECTURE Behavioral OF Cache_State_Machine IS
       END PROCESS update_new_state;
     
     
-END ARCHITECTURE Behavioral;
+END ARCHITECTURE Behavior;
 

@@ -10,7 +10,7 @@ LIBRARY ieee;
 USE ieee.std_logic_1164.all;
 USE ieee.std_logic_arith.all;
 
-ENTITY mw_ramsp_24a2ff5e IS
+ENTITY TagLUTInit IS
    PORT( 
       addr : IN     std_logic_vector (2 DOWNTO 0);
       clk  : IN     std_logic;
@@ -21,11 +21,11 @@ ENTITY mw_ramsp_24a2ff5e IS
 
 -- Declarations
 
-END mw_ramsp_24a2ff5e ;
+END TagLUTInit ;
 
-ARCHITECTURE MW OF mw_ramsp_24a2ff5e IS
+ARCHITECTURE Behavior OF TagLUTInit IS
    TYPE MW_RAM_TYPE IS ARRAY (((2**3) -1) DOWNTO 0) OF std_logic_vector(11 DOWNTO 0);
-   SIGNAL mw_ram_table : MW_RAM_TYPE := (OTHERS => "000000000000");
+   SIGNAL mw_ram_table : MW_RAM_TYPE := (OTHERS => "100000000000");
    SIGNAL mw_addr_reg: std_logic_vector(2 DOWNTO 0);
 
 BEGIN
@@ -45,4 +45,4 @@ BEGIN
    END PROCESS ram_p_proc;
    dout <= mw_ram_table(CONV_INTEGER(unsigned(mw_addr_reg)));
 
-END MW;
+END Behavior;

@@ -15,6 +15,7 @@ USE ieee.std_logic_arith.all;
 ENTITY IF_State_Machine IS
   PORT (  clock, jump, int, reset, mdelay, stall : IN std_logic;
     MuxPrePC_ctrl, MuxPreMAddr_ctrl, MuxPreInst_ctrl : OUT std_logic_vector( 1 downto 0);--Control vector
+    stateOut : out std_logic_vector(2 downto 0);
     MuxPrePCVal_ctrl : OUT std_logic);
   
 END ENTITY IF_State_Machine;
@@ -78,51 +79,80 @@ END ENTITY IF_State_Machine;
         MuxPrePC_ctrl <= "01"; --JAddr
         MuxPreMaddr_ctrl <= "10"; -- PCregister_value (but I believe this is a don't care)
         MuxPreInst_ctrl <= "00"; -- (make nop when pipelined) run normally in single cycle
-        MuxPrePCVal_ctrl <= '0'; -- (make JAddr when pipelined) use pc in single cycle       
-        end if; 
+        MuxPrePCVal_ctrl <= '0'; -- (make JAddr when pipelined) use pc in single cycle  
+        stateOut <= "001";     
+        else 
         
-        --run normally
-        if(jump = '0' and mdelay = '0' and stall = '0') then       
-        MuxPrePC_ctrl <= "11"; --PC + 1
-        MuxPreMaddr_ctrl <= "10"; -- PCregister_value (don't care)
-        MuxPreInst_ctrl <= "00"; -- Mdata
-        MuxPrePCVal_ctrl <= '0'; -- PCregister_value
-        end if;
+          --run normally
+          if(jump = '0' and mdelay = '0' and stall = '0') then       
+          MuxPrePC_ctrl <= "11"; --PC + 1
+          MuxPreMaddr_ctrl <= "10"; -- PCregister_value (don't care)
+          MuxPreInst_ctrl <= "00"; -- Mdata
+          MuxPrePCVal_ctrl <= '0'; -- PCregister_value
+               stateOut <= "001"; 
+          else
       
-        --mdelay
-        if(jump = '0' and mdelay = '1') then
-        MuxPrePC_ctrl <= "10"; --PC
-        MuxPreMaddr_ctrl <= "10"; -- PCregister_value (don't care)
-        MuxPreInst_ctrl <= "00"; -- current instr
-        MuxPrePCVal_ctrl <= '0'; -- PCregister_value 
-        end if;
+            --mdelay
+            if(jump = '0' and mdelay = '1') then
+            MuxPrePC_ctrl <= "10"; --PC
+            MuxPreMaddr_ctrl <= "10"; -- PCregister_value (don't care)
+            MuxPreInst_ctrl <= "00"; -- current instr
+            MuxPrePCVal_ctrl <= '0'; -- PCregister_value 
+                  stateOut <= "001"; 
+            else
         
-         --stall
-        if(jump = '0' and stall = '1') then
-        MuxPrePC_ctrl <= "10"; --PC
-        MuxPreMaddr_ctrl <= "10"; -- PCregister_value (don't care)
-       -- MuxPreInst_ctrl <= "01"; -- nop (don't care)
-        MuxPreInst_ctrl <= "00";
-        MuxPrePCVal_ctrl <= '0'; -- PCregister_value
+               --stall
+              if(jump = '0' and stall = '1') then
+              MuxPrePC_ctrl <= "10"; --PC
+              MuxPreMaddr_ctrl <= "10"; -- PCregister_value (don't care)
+             -- MuxPreInst_ctrl <= "01"; -- nop (don't care)
+              MuxPreInst_ctrl <= "00";
+              MuxPrePCVal_ctrl <= '0'; -- PCregister_value
+                      stateOut <= "001"; 
+        
+                else --fail
+                  stateOut <= "011";
+        
         end if;      
       end if;
       
+    
+      end if;
+      end if;
+     -- end if;
+      
       
       --Interrupt
-      IF(current_state = interrupt) then
+      elsIF(current_state = interrupt) then
         MuxPrePC_ctrl <= "00"; --Mdata
         MuxPreMaddr_ctrl <= "01"; -- The 'one' value
         MuxPreInst_ctrl <= "10"; -- the special instruction
-        MuxPrePCVal_ctrl <= '0'; -- PCregister_value (don't care)           
-      end if;
+        MuxPrePCVal_ctrl <= '0'; -- PCregister_value (don't care)  
+        stateOut <= "010";
+                
+      --else 
+      --  stateOut <= "110";                  
+      --end if;
       
       --Reset
-      IF(current_state = reset_state) then
+      elsIF(current_state = reset_state) then
         MuxPrePC_ctrl <= "00"; --Mdata
         MuxPreMaddr_ctrl <= "00"; -- The 'zero' value
         MuxPreInst_ctrl <= "01"; -- nop
-        MuxPrePCVal_ctrl <= '0'; -- PCregister_value (don't care)           
-      end if;
+        MuxPrePCVal_ctrl <= '0'; -- PCregister_value (don't care)   
+                stateOut <= "100"; 
+                
+      --else stateOut <= "101";       
+     -- end if;
+      
+    else 
+      --failState
+      stateOut <= "110";
+      
+    end if;
+      
+
+  
 
     end process output_control;
     

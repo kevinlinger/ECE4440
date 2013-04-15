@@ -28,6 +28,6 @@ ENTITY Mux_32_to_1 IS
         control_unsigned <= unsigned(control);
         control_integer <= conv_integer(control_unsigned);
         
-        out_line <= In_vector( control_integer * width + (width -1) ) downto control_integer * width );
+        out_line <= In_vector( control_integer * width + (width -1)  downto control_integer * width );
         
       end ARCHITECTURE Behavior;
