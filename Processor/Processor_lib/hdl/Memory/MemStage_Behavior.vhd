@@ -29,6 +29,9 @@ ARCHITECTURE Behavior OF MemStage IS
   SIGNAL control:std_logic;
 BEGIN
   
+  
+  
+  
   rEnable <= opType(1);
   wEnable <= opType(2);
   wBackEnable <= opType(1) or opType(4) or opType(5) or opType(6) or opType(3);

@@ -1,0 +1,2 @@
+DEFAULT_ARCHITECTURE atom Behavioral
+DEFAULT_FILE atom Pipeline_Reg_PreExecute_Behavioral.vhd

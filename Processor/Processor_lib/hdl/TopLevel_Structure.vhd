@@ -25,19 +25,38 @@ ARCHITECTURE Structure OF TopLevel IS
   signal IF_jumpEnable, IF_memDelay : std_logic;
   signal IF_Instruction, IF_PCValue_output, IF_maddr : std_logic_vector(15 downto 0);
   
+  signal pipeline_IF_Instruction, pipeline_IF_PCValue_output : std_logic_vector(15 downto 0);
+  
   signal D_RA0, D_RA1, D_Dest_Reg : std_logic_vector(3 downto 0);
   signal D_Op0, D_Op1, D_Extra : std_logic_vector(15 downto 0);
   signal D_ALU_Control : std_logic_vector(2 downto 0);
   signal D_Op_Type : std_logic_vector(8 downto 0);
   
+  signal pre_E_pipeline_D_Dest_Reg : std_logic_vector(3 downto 0);
+  signal pre_E_pipeline_D_Op0, pre_E_pipeline_D_Op1, pre_E_pipeline_D_Extra : std_logic_vector(15 downto 0);
+  signal pre_E_pipeline_D_ALU_Control : std_logic_vector(2 downto 0);
+  signal pre_E_pipeline_D_Op_Type : std_logic_vector(8 downto 0);
+  
+  
   signal E_ALU_Out : std_logic_vector(15 downto 0);
   
   signal RF_RD0, RF_RD1 : std_logic_vector(15 downto 0);
+  
+  signal pre_M_pipeline_D_Dest_Reg : std_logic_vector(3 downto 0);
+  signal pre_M_pipeline_D_Op_Type : std_logic_vector(8 downto 0);
+  signal pre_M_pipeline_E_ALU_Out : std_logic_vector(15 downto 0);
+  --addr => pre_M_pipeline_D_Dest_Reg, opType => pre_M_pipeline_D_Op_Type, aluData => pre_M_pipeline_E_ALU_Out
+  --addr => D_Dest_Reg, opType => D_Op_Type, aluData => E_ALU_Out, rData => M_rData,
   
   signal M_rData : std_logic_vector(15 downto 0);
   signal M_wEnable, M_rEnable, M_WBackEnable : std_logic;
   signal M_wBackData: std_logic_vector (15 downto 0);
   signal M_wBackAddr : std_logic_vector(3 downto 0);
+  
+  signal Pre_WB_pipeline_M_WBackEnable : std_logic;
+  signal Pre_WB_pipeline_M_wBackData : std_logic_vector (15 downto 0);
+  signal Pre_WB_pipeline_M_wBackAddr : std_logic_vector(3 downto 0);
+  
   
   signal IHandshake, IREnable : std_logic;
   signal IRAddress : std_logic_vector (15 DOWNTO 0);
@@ -59,15 +78,10 @@ BEGIN
 ClockGenerator : entity work.ClockGen(behavior)
   PORT MAP( Clock => clock, Reset => reset);
 
-MemStage : ENTITY WORK.MemStage(behavior)
-  PORT MAP( addr => D_Dest_Reg, opType => D_Op_Type, aluData => E_ALU_Out, rData => M_rData,
-    wEnable => M_wEnable, rEnable => M_rEnable, wBackEnable => M_WBackEnable,
-    wBackData => M_wBackData, wBackAddr => M_wBackAddr);
-    
 
-RegisterFile : ENTITY WORK.RegisterFile(structure)
-  PORT MAP( wAddr => M_wBackAddr, wData => M_wBackData, wEnable => (M_WBackEnable and (not IF_memDelay)),
-    rAddr0 => D_RA0, rAddr1 => D_RA1, clock =>clock, RD0 => RF_RD0, RD1 => RF_RD1);
+
+
+
 
 
 --Instruction_Mem : ENTITY WORK.easy_RAM_simu(behavior)
@@ -83,15 +97,73 @@ IF_stage : Entity WORK.Instruction_Fetch_Stage(Structural)
     jumpEnable => IF_jumpEnable, reset => reset, interrupt => '0', clock => clock, memdelay => IF_memDelay,
     stall => DCacheDelay, Instruction => IF_Instruction, PCValue_output => IF_PCValue_output, maddr => IF_maddr);
 
+Pipeline_Reg_preDecode : ENTITY Work.Pipeline_Reg_PreDecode(Behavioral)
+  PORT MAP( Instruction => IF_Instruction, PCValue => IF_PCValue_output,
+    out_Instruction => pipeline_IF_Instruction, out_PCValue => pipeline_IF_PCValue_output,
+    clock => clock, enable => '1', --TEMPORARY
+    bubble => '0' --TEMPORARY
+     );
+
+
 DecodeStage : ENTITY WORK.DecodeStage(Structure)
-  PORT MAP( Instruction => IF_Instruction, PCValue => IF_PCValue_output, RD0 => RF_RD0, RD1 => RF_RD1,
+  PORT MAP( Instruction => pipeline_IF_Instruction, PCValue => pipeline_IF_PCValue_output, RD0 => RF_RD0, RD1 => RF_RD1,
     RA0 => D_RA0, RA1 => D_RA1, Dest_Reg => D_Dest_Reg, Op0 => D_Op0, Op1 => D_Op1, Extra => D_Extra,
     ALU_Control => D_ALU_Control, Op_Type => D_Op_Type); 
   
+
+Pipeline_Reg_preExecute : ENTITY Work.Pipeline_Reg_PreExecute(Behavioral)
+  PORT MAP(
+    ALU0 => D_Op0, ALU1 => D_Op1, Extra => D_Extra, ALU_Ctrl => D_ALU_Control,
+    Op_Type => D_Op_Type, Branch_Inst => D_Dest_Reg,
+    
+    out_ALU0 => pre_E_pipeline_D_Op0, out_ALU1 => pre_E_pipeline_D_Op1, out_Extra => pre_E_pipeline_D_Extra, out_ALU_Ctrl => pre_E_pipeline_D_ALU_Control,
+    out_Op_Type => pre_E_pipeline_D_Op_Type, out_Branch_Inst => pre_E_pipeline_D_Dest_Reg,
+    
+    clock => clock, enable => '1', --temporary
+    bubble => '0' --temporary
+  
+  );
+ 
+  
 ExecuteStage : ENTITY WORK.ExecuteStage(behavior)
-  PORT MAP( ALU0 => D_Op0, ALU1 => D_Op1, Extra => D_Extra, ALU_Ctrl => D_ALU_Control,
-    Op_Type => D_Op_Type, ALU_Out => E_ALU_Out, Branch_Inst => D_Dest_Reg, Branch_Ctrl => IF_JumpEnable,
+  PORT MAP( ALU0 => pre_E_pipeline_D_Op0, ALU1 => pre_E_pipeline_D_Op1, Extra => pre_E_pipeline_D_Extra, ALU_Ctrl => pre_E_pipeline_D_ALU_Control,
+    Op_Type => pre_E_pipeline_D_Op_Type, ALU_Out => E_ALU_Out, Branch_Inst => pre_E_pipeline_D_Dest_Reg, Branch_Ctrl => IF_JumpEnable,
     clock => clock);
+
+
+Pipeline_Reg_preMem : ENTITY WORK.Pipeline_Reg_PreMem(Behavioral)
+  PORT MAP(
+    addr => pre_E_pipeline_D_Dest_Reg, opType => pre_E_pipeline_D_Op_Type, aluData => E_ALU_Out,
+    
+    out_addr => pre_M_pipeline_D_Dest_Reg, out_opType => pre_M_pipeline_D_Op_Type, out_aluData => pre_M_pipeline_E_ALU_Out,
+    
+    clock => clock, enable => '1', --temporary
+    bubble => '0' --temporary
+  );
+
+
+ 
+ MemStage : ENTITY WORK.MemStage(behavior)
+  PORT MAP( addr => pre_M_pipeline_D_Dest_Reg, opType => pre_M_pipeline_D_Op_Type, aluData => pre_M_pipeline_E_ALU_Out, rData => M_rData,
+    wEnable => M_wEnable, rEnable => M_rEnable, wBackEnable => M_WBackEnable,
+    wBackData => M_wBackData, wBackAddr => M_wBackAddr);
+    
+
+Pipeline_Reg_PreWB : ENTITY WORK.pipeline_Reg_PreWB(Behavioral)
+  PORT MAP( M_WBackEnable => M_WBackEnable, wBackData => M_wBackData, wBackAddr => M_wBackAddr,
+    
+    out_M_WBackEnable => Pre_WB_pipeline_M_WBackEnable, out_wBackData => Pre_WB_pipeline_M_wBackData, out_wBackAddr => Pre_WB_pipeline_M_wBackAddr,
+    
+    clock => clock, enable => '1', --temporary
+    bubble => '0' --temporary
+  );
+
+    
+RegisterFile : ENTITY WORK.RegisterFile(structure)
+  PORT MAP( wAddr => Pre_WB_pipeline_M_wBackAddr, wData => Pre_WB_pipeline_M_wBackData, wEnable => (Pre_WB_pipeline_M_WBackEnable and (not IF_memDelay)),
+    rAddr0 => D_RA0, rAddr1 => D_RA1, clock =>clock, RD0 => RF_RD0, RD1 => RF_RD1);
+
+ 
     
 ICache : ENTITY work.Cache(structure)
  PORT MAP(

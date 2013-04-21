@@ -32,7 +32,7 @@ ARCHITECTURE Behavioral OF Pipeline_Reg_PreExecute IS
   signal Temp_Op_Type : std_logic_vector(8 downto 0);
   BEGIN
     
-    determine_bubble : process (Op_Type, bubble, clock) is
+    determine_bubble : process (Instruction, bubble, clock) is
     BEGIN
       if(bubble = '1') then
         Temp_Op_Type <= "000000001"; --nop
