@@ -16,6 +16,7 @@ ENTITY Pipeline_Reg_PreExecute IS
     ALU_Ctrl : IN std_logic_vector(2 DOWNTO 0);
     Op_Type : IN std_logic_vector(8 DOWNTO 0);    
     Branch_Inst : IN std_logic_vector(3 DOWNTO 0);
+    Kill : IN std_logic;
        
     out_ALU0, out_ALU1, out_Extra : out std_logic_vector (15 DOWNTO 0);
     out_ALU_Ctrl : out std_logic_vector(2 DOWNTO 0);
@@ -30,16 +31,28 @@ END ENTITY Pipeline_Reg_PreExecute;
 ARCHITECTURE Behavioral OF Pipeline_Reg_PreExecute IS
   
   signal Temp_Op_Type : std_logic_vector(8 downto 0);
+  signal Temp_enable : std_logic;
   BEGIN
     
-    determine_bubble : process (Instruction, bubble, clock) is
+    determine_bubble : process (Op_Type, bubble, clock, Kill, enable) is
     BEGIN
-      if(bubble = '1') then
+      if(Kill = '1') then
         Temp_Op_Type <= "000000001"; --nop
-      else
-        Temp_Op_Type <= Op_Type;
+        elsif(enable = '1' and bubble = '1') then
+          Temp_Op_Type <= "000000001"; --nop
+          else
+            Temp_Op_Type <= Op_Type;
       end if;
-    end process determine_bubble; 
+    end process determine_bubble;
+    
+     determine_kill : process ( clock, Kill) is
+    BEGIN
+      if(Kill = '1') then
+        Temp_enable <= '1'; --SMASH
+      else
+        Temp_enable <= enable;
+      end if;
+    end process determine_kill;
 
   regy : ENTITY work.Reg(Behavior)
     generic map(size => 64)

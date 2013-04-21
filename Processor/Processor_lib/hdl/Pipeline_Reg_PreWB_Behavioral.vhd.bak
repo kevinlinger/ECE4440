@@ -34,9 +34,9 @@ ARCHITECTURE Behavioral OF Pipeline_Reg_PreWB IS
   signal temp_M_WBackEnable : std_logic;
   BEGIN
     
-    determine_bubble : process (M_WBackEnable, bubble, clock) is
+    determine_bubble : process (M_WBackEnable, bubble, clock, enable) is
     BEGIN
-      if(bubble = '1') then
+      if(bubble = '1' and enable = '1') then
         temp_M_WBackEnable <= '0'; --nop
       else
         temp_M_WBackEnable <= M_WBackEnable;
@@ -45,7 +45,7 @@ ARCHITECTURE Behavioral OF Pipeline_Reg_PreWB IS
     
 
   regy : ENTITY work.Reg(Behavior)
-    generic map(size => 22)
+    generic map(size => 21)
     port map(
       a(0) => temp_M_WBackEnable, a(16 downto 1) => wBackData, a(20 downto 17) => wBackAddr,
 

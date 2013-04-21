@@ -13,6 +13,9 @@ USE ieee.std_logic_arith.all;
 
 ENTITY DecodeStage IS
   port(Instruction, PCValue, RD0, RD1 : in std_logic_vector(15 downto 0);
+        downstream_stall, dirty : in std_logic;
+    
+        bubble_pipeline_preExe, upstream_stall : out std_logic;
        RA0, RA1, Dest_Reg : out std_logic_vector(3 downto 0);
        Op0, Op1, Extra : out std_logic_vector(15 downto 0);
        ALU_Control : out std_logic_vector(2 downto 0);
@@ -27,6 +30,11 @@ ARCHITECTURE Structure OF DecodeStage IS
   signal Op_Type_ROM : std_logic_vector(15 downto 0) := "0000000000000000";
   constant zero16 : std_logic_vector(15 downto 0) := "0000000000000000";
 BEGIN
+  
+  bubble_pipeline_preExe <= dirty;
+  upstream_stall <= downstream_stall or dirty;
+  
+  
   RA0 <= Instruction(8 downto 5);
   RA1 <= Instruction(12 downto 9);
     

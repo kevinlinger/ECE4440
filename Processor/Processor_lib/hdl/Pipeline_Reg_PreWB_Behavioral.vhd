@@ -34,9 +34,9 @@ ARCHITECTURE Behavioral OF Pipeline_Reg_PreWB IS
   signal temp_M_WBackEnable : std_logic;
   BEGIN
     
-    determine_bubble : process (M_WBackEnable, bubble, clock) is
+    determine_bubble : process (M_WBackEnable, bubble, clock, enable) is
     BEGIN
-      if(bubble = '1') then
+      if(bubble = '1' and enable = '1') then
         temp_M_WBackEnable <= '0'; --nop
       else
         temp_M_WBackEnable <= M_WBackEnable;

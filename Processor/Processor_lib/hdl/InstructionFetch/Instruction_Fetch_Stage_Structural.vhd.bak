@@ -15,9 +15,10 @@ ENTITY Instruction_Fetch_Stage IS
   Port( mem_data : IN std_logic_vector(15 downto 0);
     readAddress : OUT std_logic_vector(15 downto 0);
     jumpAddress : IN  std_logic_vector(15 downto 0);
-    jumpEnable, reset, interrupt, clock, memdelay, stall : IN std_logic;
+    jumpEnable, reset, interrupt, clock, memdelay, D_cache_stall, downstream_stall : IN std_logic;
     Instruction, PCValue_output : OUT std_logic_vector(15 downto 0);
-    maddr : OUT std_logic_vector(15 downto 0));
+    maddr : OUT std_logic_vector(15 downto 0);
+    bubble_pipeline_preDec : OUT std_logic);
     
 END ENTITY Instruction_Fetch_Stage;
 
@@ -31,8 +32,12 @@ ARCHITECTURE Structural OF Instruction_Fetch_Stage IS
   signal PC_plus_one : std_logic_vector(15 downto 0);
   signal PC_in : std_logic_vector(15 downto 0);
   
+  signal stall : std_logic;
 
 BEGIN
+  
+  stall <= D_cache_stall or downstream_stall;
+  bubble_pipeline_preDec <= memdelay;
   
   mux_pre_maddr : ENTITY work.Mux_4_to_1(Behavior)
   GENERIC MAP( width => 16)

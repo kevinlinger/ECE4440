@@ -17,9 +17,9 @@ ENTITY Pipeline_Reg_PreMem IS
     aluData:IN std_logic_vector (15 DOWNTO 0);
     
        
-    out_addr:IN std_logic_vector (3 DOWNTO 0);
-    out_opType:IN std_logic_vector (8 DOWNTO 0);
-    out_aluData:IN std_logic_vector (15 DOWNTO 0);
+    out_addr: OUT std_logic_vector (3 DOWNTO 0);
+    out_opType: OUT std_logic_vector (8 DOWNTO 0);
+    out_aluData: OUT std_logic_vector (15 DOWNTO 0);
     
           
     clock, enable, bubble : in std_logic);
@@ -32,9 +32,9 @@ ARCHITECTURE Behavioral OF Pipeline_Reg_PreMem IS
   signal Temp_Op_Type : std_logic_vector(8 downto 0);
   BEGIN
     
-    determine_bubble : process (opType, bubble, clock) is
+    determine_bubble : process (opType, bubble, clock, enable) is
     BEGIN
-      if(bubble = '1') then
+      if(enable = '1' and bubble = '1') then
         Temp_Op_Type <= "000000001"; --nop
       else
         Temp_Op_Type <= opType;

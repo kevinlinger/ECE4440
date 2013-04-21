@@ -17,6 +17,9 @@ ENTITY MemStage IS
     opType:IN std_logic_vector (8 DOWNTO 0);
     aluData:IN std_logic_vector (15 DOWNTO 0);
     rData: IN std_logic_vector (15 DOWNTO 0);
+    Dcache_stall: IN std_logic;
+    
+    mem_stall_toUpstream, bubble_preWB_pipeline : OUT std_logic;
     wEnable:OUT std_logic;
     rEnable:OUT std_logic;
     wBackEnable : out std_logic;
@@ -30,11 +33,12 @@ ARCHITECTURE Behavior OF MemStage IS
 BEGIN
   
   
-  
+  mem_stall_toUpstream <= DCache_stall;
+  bubble_preWB_pipeline <= DCache_stall;
   
   rEnable <= opType(1);
   wEnable <= opType(2);
-  wBackEnable <= opType(1) or opType(4) or opType(5) or opType(6) or opType(3);
+  wBackEnable <= (opType(1) or opType(4) or opType(5) or opType(6) or opType(3)) and (not Dcache_stall);
   control <= opType(1);
   wBackAddr <= addr;
   
