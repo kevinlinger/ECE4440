@@ -41,10 +41,13 @@ ARCHITECTURE Structure OF Cache IS
 BEGIN
   
 <<<<<<< HEAD
+<<<<<<< HEAD
     TagBlock : entity work.TagLUTInit(Behavior)
       port map (clk => clk, we => TagControl , din(11) => '1', din(10 downto 0) => AddrIn(15 downto 5), addr => AddrIn(4 downto 2), dout => TagLUTOut);
  
 =======
+=======
+>>>>>>> parent of d99609e... Changed TAG block write controls
     TagBlock : entity work.TagLUT(Structure)
       port map (clk => clk, we => TagControl or (Write and hit), din(11) => (Read or (not Write)), din(10 downto 0) => AddrIn(15 downto 5), addr => AddrIn(4 downto 2), dout => TagLUTOut);
       
