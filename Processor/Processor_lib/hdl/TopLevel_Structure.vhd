@@ -12,31 +12,14 @@ USE ieee.std_logic_1164.all;
 USE ieee.std_logic_arith.all;
 
 ENTITY TopLevel IS
- -- PORT(interrupt : IN std_logic);
-PORT(interrupt : in std_logic;
---    Debug_mux_control : in std_logic_vector(4 downto 0);
---    Debug_mux_out : OUT std_logic_vector(15 downto 0);
-	 RAMAddress : out std_logic_vector(23 downto 0);
-    RAMreadEn, RAMwriteEn : out std_logic;
-    RAMReadData : in std_logic_vector(63 downto 0);
-    RAMWriteData : out std_logic_vector(63 downto 0);
-    RAMbyteEnable : out std_logic_vector(7 downto 0);
-    RAMAcknowledge : in std_logic);
+  --PORT(clock, reset, interrupt : IN std_logic);
+  PORT(interrupt : in std_logic);
 END ENTITY TopLevel;
 
 
 
 --
 ARCHITECTURE Structure OF TopLevel IS
-  
-  --Debug Signals
-  Signal Debug_Register_Dump: std_logic_vector(255 downto 0);
-  Signal Debug_PC, Debug_Inst, Debug_DRAM_address : std_logic_vector(15 downto 0);
-  SIGNAL  Debug_DRAM_data_return : std_logic_vector(63 downto 0);
-  Signal Pre_Debug_Mux: std_logic_vector( 511 downto 0);
-  
-  Signal temp_RAMAddress : std_logic_vector(15 downto 0);
-  
   
   signal IF_mem_data, IF_readAddress : std_logic_vector(15 downto 0);
   signal IF_jumpEnable, IF_memDelay : std_logic;
@@ -61,22 +44,20 @@ ARCHITECTURE Structure OF TopLevel IS
   signal DHandshake, DREnable, DWEnable : std_logic;
   signal DAddress, DWData : std_logic_vector (15 DOWNTO 0);
   
-  -- signal RAMREnable, RAMWEnable, RAMDelay : std_logic;
-  -- signal RAMAddress, RAMWData : std_logic_vector (15 DOWNTO 0);
-  -- signal RAMData : std_logic_vector (63 DOWNTO 0);
+  signal RAMREnable, RAMWEnable, RAMDelay : std_logic;
+  signal RAMAddress, RAMWData : std_logic_vector (15 DOWNTO 0);
+  signal RAMData : std_logic_vector (63 DOWNTO 0);
   
   signal DCacheDelay : std_logic;
   
-   signal clock, reset : std_logic;
+  signal clock, reset : std_logic;
   
   constant zero16 : std_logic_vector(15 DOWNTO 0) := (others => '0');
   
 BEGIN
 
- ClockGenerator : entity work.ClockGen(behavior)
-   PORT MAP( Clock => clock, Reset => reset);
-
-RAMWriteData(63 downto 16) <= "000000000000000000000000000000000000000000000000";
+ClockGenerator : entity work.ClockGen(behavior)
+  PORT MAP( Clock => clock, Reset => reset);
 
 MemStage : ENTITY WORK.MemStage(behavior)
   PORT MAP( addr => D_Dest_Reg, opType => D_Op_Type, aluData => E_ALU_Out, rData => M_rData,
@@ -86,7 +67,7 @@ MemStage : ENTITY WORK.MemStage(behavior)
 
 RegisterFile : ENTITY WORK.RegisterFile(structure)
   PORT MAP( wAddr => M_wBackAddr, wData => M_wBackData, wEnable => (M_WBackEnable and (not IF_memDelay)),
-    rAddr0 => D_RA0, rAddr1 => D_RA1, clock =>clock, RD0 => RF_RD0, RD1 => RF_RD1, Debug_Register_Dump => Debug_Register_Dump);
+    rAddr0 => D_RA0, rAddr1 => D_RA1, clock =>clock, RD0 => RF_RD0, RD1 => RF_RD1);
 
 
 --Instruction_Mem : ENTITY WORK.easy_RAM_simu(behavior)
@@ -121,7 +102,7 @@ ICache : ENTITY work.Cache(structure)
  Handshake => IHandshake,
  clk => clock,
  reset => '0',
- RAMData => RAMReadData,
+ RAMData => RAMData,
  AddrOut => IRAddress,
  DataReturn => IF_mem_data,
  ReadOut => IREnable,
@@ -136,7 +117,7 @@ PORT MAP(
  Handshake => DHandshake,
  clk => clock,
  reset => '0',
- RAMData => RAMReadData,
+ RAMData => RAMData,
  AddrOut => DAddress,
  WriteDataOut => DWData,
  DataReturn => M_rData,
@@ -145,7 +126,7 @@ PORT MAP(
  stall => DCacheDelay);
     
 MemoryArbiter : ENTITY work.ArbiterStateMachine(behavior)
-  PORT MAP(RAMDelay => NOT(RAMAcknowledge),
+  PORT MAP(RAMDelay => NOT(RAMDelay),
 		
 		IRAddress => IRAddress,
 		IREnable => IREnable,
@@ -155,10 +136,10 @@ MemoryArbiter : ENTITY work.ArbiterStateMachine(behavior)
 		DAddress => DAddress,
 		DWData => DWData,
 		
-		REnable => RAMReadEn,
-		WEnable => RAMWriteEn,
-		Address => temp_RAMAddress,
-		WData => RAMWriteData(15 downto 0),
+		REnable => RAMREnable,
+		WEnable => RAMWEnable,
+		Address => RAMAddress,
+		WData => RAMWData,
 		
 		IHandshake => IHandshake,
 		
@@ -166,42 +147,15 @@ MemoryArbiter : ENTITY work.ArbiterStateMachine(behavior)
 		
 		clock => clock);
 		
-	RAMbyteEnable <= "11111111";
-	
---	RAMAddress(23 DOWNTO 16) <= (others => '0');
---	RAMAddress(15 DOWNTO 0) <= Temp_RAMAddress;	
---RAM : ENTITY work.ram_delay(behavior)
---  PORT MAP(rst => reset,
---	  hDIn => RAMWData,
---	  wr => RAMWEnable,
---	  rd => RAMREnable,
-	--  ack  => RAMDelay,
-	--  hAddr => RAMAddress,
-	--  hDOut => RAMData);
+RAM : ENTITY work.ram_delay(behavior)
+  PORT MAP(rst => reset,
+	  hDIn => RAMWData,
+	  wr => RAMWEnable,
+	  rd => RAMREnable,
+	  ack  => RAMDelay,
+	  hAddr => RAMAddress,
+	  hDOut => RAMData);
     
---
-----Debug Stuff
---  Debug_PC <= IF_PCValue_output; --0
---  Debug_Inst <= IF_Instruction; --1
---  Debug_DRAM_data_return <= RAMReadData; --2
---  Debug_DRAM_address <= Temp_RAMAddress; --3
---  
---  --Debug_Register_Dump is directly port mapped from the register file
---      --control 16 - 31
---
---  Pre_Debug_Mux(15 downto 0) <= Debug_PC;
---  Pre_Debug_Mux(31 downto 16) <= Debug_Inst;
---  Pre_Debug_Mux(47 downto 32) <= Debug_DRAM_address;
---  Pre_Debug_Mux(111 downto 48) <= Debug_DRAM_data_return;
---
---  Pre_Debug_Mux(255 downto 112) <= (others => '0');
---  Pre_Debug_Mux(511 downto 256) <= Debug_Register_Dump;
---  
---
---Debug_Mux : ENTITY work.Mux_32_to_1(Behavior)
---  generic MAP( width => 16)
---  PORT MAP(In_vector => Pre_Debug_Mux, control => Debug_Mux_control, out_line => Debug_Mux_out);       
---
 
 END ARCHITECTURE Structure;
 

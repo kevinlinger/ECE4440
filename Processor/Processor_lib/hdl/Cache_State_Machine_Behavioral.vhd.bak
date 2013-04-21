@@ -19,7 +19,6 @@ ENTITY Cache_State_Machine IS
     stall : OUT std_logic;
     pre_address_mux_ctrl : out std_logic; --IMPORTANT!!! I assume InAddress is line '0' and * is line '1'.
     read_to_arbiter, write_to_arbiter : out std_logic;
-    cacheStateOut : out std_logic_vector(3 downto 0);
     clock, reset : IN std_logic);
     
     
@@ -52,7 +51,7 @@ ARCHITECTURE Behavioral OF Cache_State_Machine IS
         else
           if(read_from_proc='1')
           then
-              if(hit /= '0')
+              if(hit ='1')
               then
                 next_state <= ready;
               else
@@ -141,7 +140,6 @@ ARCHITECTURE Behavioral OF Cache_State_Machine IS
             pre_address_mux_ctrl <= '0';
             read_to_arbiter <= '0';
             write_to_arbiter <= '0';
-            cacheStateOut <= "0001";
         else
           if(read_from_proc='1')
           then
@@ -154,7 +152,6 @@ ARCHITECTURE Behavioral OF Cache_State_Machine IS
                 pre_address_mux_ctrl <= '0';
                 read_to_arbiter <= '0';
                 write_to_arbiter <= '0';
-                            cacheStateOut <= "0001";
               else
                 --next_state <= load_miss;
                 SRAM_control <= '0';
@@ -163,7 +160,6 @@ ARCHITECTURE Behavioral OF Cache_State_Machine IS
                 pre_address_mux_ctrl <= '1';
                 read_to_arbiter <= '1';
                 write_to_arbiter <= '0';
-                            cacheStateOut <= "0001";
               end if;
           elsif(write_from_proc = '1')
             then 
@@ -174,7 +170,6 @@ ARCHITECTURE Behavioral OF Cache_State_Machine IS
                 pre_address_mux_ctrl <= '0';
                 read_to_arbiter <= '0';
                 write_to_arbiter <= '1';
-                            cacheStateOut <= "0001";
  
                   else
                         SRAM_control <= '0';
@@ -182,8 +177,7 @@ ARCHITECTURE Behavioral OF Cache_State_Machine IS
                 stall <= '0';
                 pre_address_mux_ctrl <= '0';
                 read_to_arbiter <= '0';
-                write_to_arbiter <= '0';    
-                            cacheStateOut <= "0001";           
+                write_to_arbiter <= '0';               
           end if;
         end if;
         
@@ -203,7 +197,6 @@ ARCHITECTURE Behavioral OF Cache_State_Machine IS
           pre_address_mux_ctrl <= '0';
           read_to_arbiter <= '0';
           write_to_arbiter <= '0';
-                      cacheStateOut <= "0010";
         else
           if(arbiter_handshake = '0')
           then
@@ -214,7 +207,6 @@ ARCHITECTURE Behavioral OF Cache_State_Machine IS
             pre_address_mux_ctrl <= '0';
             read_to_arbiter <= '0';
             write_to_arbiter <= '1';
-                        cacheStateOut <= "0010";
           else
             --next_state <= ready;
             SRAM_control <= '0';
@@ -223,7 +215,6 @@ ARCHITECTURE Behavioral OF Cache_State_Machine IS
             pre_address_mux_ctrl <= '0';
             read_to_arbiter <= '0';
             write_to_arbiter <= '0';
-                        cacheStateOut <= "0010";
           end if;      
         end if;      
       end if;  
@@ -242,7 +233,6 @@ ARCHITECTURE Behavioral OF Cache_State_Machine IS
            pre_address_mux_ctrl <= '0';
            read_to_arbiter <= '0';
            write_to_arbiter <= '0';
-                       cacheStateOut <= "0100";
          else
            if(arbiter_handshake = '0')
            then
@@ -253,7 +243,6 @@ ARCHITECTURE Behavioral OF Cache_State_Machine IS
              pre_address_mux_ctrl <= '1';
              read_to_arbiter <= '1';
              write_to_arbiter <= '0';
-                         cacheStateOut <= "0100";
            else
              --next_state <= ready;
              SRAM_control <= '1';
@@ -262,7 +251,6 @@ ARCHITECTURE Behavioral OF Cache_State_Machine IS
              pre_address_mux_ctrl <= '0';
              read_to_arbiter <= '0';
              write_to_arbiter <= '0';
-                         cacheStateOut <= "0100";
            end if;
          end if;        
       end if;
@@ -280,7 +268,6 @@ ARCHITECTURE Behavioral OF Cache_State_Machine IS
           pre_address_mux_ctrl <= '0';
           read_to_arbiter <= '0';
           write_to_arbiter <= '0';
-                      cacheStateOut <= "1000";
         else
           --next_state <= ready;
           SRAM_control <= '0';
@@ -289,7 +276,6 @@ ARCHITECTURE Behavioral OF Cache_State_Machine IS
           pre_address_mux_ctrl <= '0';
           read_to_arbiter <= '0';
           write_to_arbiter <= '0';
-                      cacheStateOut <= "1000";
         end if;
       end if;  
  

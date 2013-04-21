@@ -232,14 +232,8 @@ BEGIN
 			
 			ALU_Out <= signed(ALU0)+ signed(ALU1);
 			Branch_Ctrl <= jump;		
-		
-	--	ELSE 
-	--		ALU_Out <= zero16;
-	--		Branch_Ctrl <= zero;
-	--		conzIn <= "0000";
+			
 		END IF;
-		
-		
     END PROCESS;
 END ARCHITECTURE;
 

@@ -16,8 +16,7 @@ ENTITY RegisterFileRegister IS
     wEnable:IN std_logic;
     rEnable0,rEnable1: IN std_logic;
     clock: IN std_logic;
-    out0, out1: OUT std_logic_vector(15 downto 0);
-    debug_unTriStateBuffered_out: OUT std_logic_vector(15 downto 0));
+    out0, out1: OUT std_logic_vector(15 downto 0));
 END ENTITY RegisterFileRegister;
 
 --
@@ -34,7 +33,5 @@ BEGIN
     PORT MAP (regout, rEnable0, out0); 
   ts1: ENTITY work.TriState(Behavior)
     GENERIC MAP(Size => 16)
-    PORT MAP (regout, rEnable1, out1);
-    
-  debug_unTriStateBuffered_out <= regout;
+    PORT MAP (regout, rEnable1, out1); 
 END ARCHITECTURE Behavior;

@@ -1,7 +1,9 @@
 --
 -- VHDL Architecture Processor_lib.ClockGen.Behavior
 --
--- Adapted from VHDL Tutorials from TKT-1426
+-- Created:
+--          by - Kevin.UNKNOWN (KEVIN-PC)
+--          at - 14:37:31 02/13/2013
 --
 -- using Mentor Graphics HDL Designer(TM) 2012.1 (Build 6)
 --
@@ -22,7 +24,7 @@ END ENTITY ClockGen;
 --
 ARCHITECTURE Behavior OF ClockGen IS
 
-  signal TBClk : std_logic := '1';
+  signal TBClk : std_logic := '0';
   signal TBReset : std_logic := '1';
 
 BEGIN
