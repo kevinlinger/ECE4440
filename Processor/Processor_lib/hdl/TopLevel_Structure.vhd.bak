@@ -44,7 +44,7 @@ ARCHITECTURE Structure OF TopLevel IS
   
   signal pre_M_pipeline_D_Dest_Reg : std_logic_vector(3 downto 0);
   signal pre_M_pipeline_D_Op_Type : std_logic_vector(8 downto 0);
-  signal pre_M_pipeline_E_ALU_Out : std_logic_vector(15 downto 0);
+  signal pre_M_pipeline_E_ALU_Out, pre_M_Pipeline_d_extra : std_logic_vector(15 downto 0);
   --addr => pre_M_pipeline_D_Dest_Reg, opType => pre_M_pipeline_D_Op_Type, aluData => pre_M_pipeline_E_ALU_Out
   --addr => D_Dest_Reg, opType => D_Op_Type, aluData => E_ALU_Out, rData => M_rData,
   
@@ -140,9 +140,9 @@ ExecuteStage : ENTITY WORK.ExecuteStage(behavior)
 
 Pipeline_Reg_preMem : ENTITY WORK.Pipeline_Reg_PreMem(Behavioral)
   PORT MAP(
-    addr => pre_E_pipeline_D_Dest_Reg, opType => pre_E_pipeline_D_Op_Type, aluData => E_ALU_Out,
+    addr => pre_E_pipeline_D_Dest_Reg, opType => pre_E_pipeline_D_Op_Type, aluData => E_ALU_Out, D_extra => pre_E_pipeline_d_Extra,
     
-    out_addr => pre_M_pipeline_D_Dest_Reg, out_opType => pre_M_pipeline_D_Op_Type, out_aluData => pre_M_pipeline_E_ALU_Out,
+    out_addr => pre_M_pipeline_D_Dest_Reg, out_opType => pre_M_pipeline_D_Op_Type, out_aluData => pre_M_pipeline_E_ALU_Out, out_D_extra => pre_M_Pipeline_d_extra,
     
     clock => clock, enable => (not mem_stall_toUpstream),
     bubble => '0' --EXE never causes a stall
@@ -193,8 +193,8 @@ ICache : ENTITY work.Cache(structure)
     
 DCache : ENTITY work.Cache(structure)
 PORT MAP(
- AddrIn => E_ALU_Out,
- DataIn => D_Extra,
+ AddrIn => pre_M_pipeline_E_ALU_Out,
+ DataIn => pre_M_Pipeline_d_extra,
  Read => M_rEnable and (not IF_memDelay),
  Write => M_wEnable and (not IF_memDelay),
  Handshake => DHandshake,

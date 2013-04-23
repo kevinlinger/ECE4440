@@ -12,7 +12,7 @@ USE ieee.std_logic_1164.all;
 USE ieee.std_logic_arith.all;
 
 ENTITY Full_Reservation_Station IS
-  PORT(clock, reset, decode_stalled, wb_enabled : in std_logic; --R0En, R1En, WenDecode, WenWriteBack, clock : in std_logic;
+  PORT(clock, reset, decode_stalled, wb_enabled, jumping : in std_logic; --R0En, R1En, WenDecode, WenWriteBack, clock : in std_logic;
       decode_opType : in std_logic_vector(8 downto 0);
        Rselect0addr, Rselect1addr, Wselectaddr, WselectWriteBackaddr : in std_logic_vector(3 downto 0);
        dirty : out std_logic
@@ -77,10 +77,10 @@ BEGIN
     end case;    
   END PROCESS;
   
-  Decode_Wselectaddr : Process(Wselectaddr, decode_stalled, reset) is
+  Decode_Wselectaddr : Process(Wselectaddr, decode_stalled, reset, jumping) is
   BEGIN
     
-    if( decode_stalled = '1' or reset = '1') then
+    if( decode_stalled = '1' or reset = '1' or juping = '1') then
       WselectDecode <= "0000000000000000";
     else
       
@@ -109,8 +109,12 @@ BEGIN
   end PROCESS;
   
   
-  Decode_WselectWriteBackaddr : Process(WselectWriteBackaddr) is
+  Decode_WselectWriteBackaddr : Process(WselectWriteBackaddr, wb_enabled) is
   BEGIN
+    
+    if(wb_enabled = '0') then
+      WselectWriteBack <= "0000000000000000";
+    else
     
     CASE WselectWriteBackaddr is
       
@@ -133,6 +137,7 @@ BEGIN
       
       
     end case;    
+  end if;
   END PROCESS;
       
       

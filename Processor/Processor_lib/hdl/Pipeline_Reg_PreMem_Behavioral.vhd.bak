@@ -14,12 +14,13 @@ USE ieee.std_logic_arith.all;
 ENTITY Pipeline_Reg_PreMem IS
   Port( addr:IN std_logic_vector (3 DOWNTO 0);
     opType:IN std_logic_vector (8 DOWNTO 0);
-    aluData:IN std_logic_vector (15 DOWNTO 0);
+    aluData, D_extra:IN std_logic_vector (15 DOWNTO 0);
+    
     
        
     out_addr: OUT std_logic_vector (3 DOWNTO 0);
     out_opType: OUT std_logic_vector (8 DOWNTO 0);
-    out_aluData: OUT std_logic_vector (15 DOWNTO 0);
+    out_aluData, out_D_extra: OUT std_logic_vector (15 DOWNTO 0);
     
           
     clock, enable, bubble : in std_logic);
@@ -42,11 +43,11 @@ ARCHITECTURE Behavioral OF Pipeline_Reg_PreMem IS
     end process determine_bubble; 
 
   regy : ENTITY work.Reg(Behavior)
-    generic map(size => 29)
+    generic map(size => 45)
     port map(
-      a(3 downto 0) => addr, a(12 downto 4) => Temp_Op_Type, a(28 downto 13) => aluData,
+      a(3 downto 0) => addr, a(12 downto 4) => Temp_Op_Type, a(28 downto 13) => aluData, a(44 downto 29) => D_extra,
       
-      b(3 downto 0) => out_addr, b(12 downto 4) => out_opType, b(28 downto 13) => out_aluData,     
+      b(3 downto 0) => out_addr, b(12 downto 4) => out_opType, b(28 downto 13) => out_aluData, b(44 downto 29) => out_D_extra,    
       
       c => clock, e => enable
     );

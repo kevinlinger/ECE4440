@@ -46,6 +46,9 @@ begin
     delay := (rand*0.0000001)*10 sec;              -- random delay between 0 and 1000 ns
 	  if (rst = '1') then
 --	  table := (others => (others => '0'));
+
+
+--Factorial with branches intending PC
 table(0) := To_stdlogicvector(X"0002");
 table(1) := To_stdlogicvector(X"0000");
 table(2) := To_stdlogicvector(X"9222");
@@ -57,13 +60,13 @@ table(7) := To_stdlogicvector(X"9601");
 table(8) := To_stdlogicvector(X"9700");
 table(9) := To_stdlogicvector(X"7E00");
 table(10) := To_stdlogicvector(X"BF42");
-table(11) := To_stdlogicvector(X"E303");
+table(11) := To_stdlogicvector(X"E304");
 table(12) := To_stdlogicvector(X"6400");
 table(13) := To_stdlogicvector(X"A545");
-table(14) := To_stdlogicvector(X"E103");
+table(14) := To_stdlogicvector(X"E104");
 table(15) := To_stdlogicvector(X"6160");
 table(16) := To_stdlogicvector(X"A145");
-table(17) := To_stdlogicvector(X"E10F");
+table(17) := To_stdlogicvector(X"E110");
 table(18) := To_stdlogicvector(X"A562");
 table(19) := To_stdlogicvector(X"6200");
 table(20) := To_stdlogicvector(X"A345");
@@ -71,16 +74,53 @@ table(21) := To_stdlogicvector(X"6640");
 table(22) := To_stdlogicvector(X"A745");
 table(23) := To_stdlogicvector(X"7E60");
 table(24) := To_stdlogicvector(X"BF62");
-table(25) := To_stdlogicvector(X"E307");
-table(26) := To_stdlogicvector(X"E100");
+table(25) := To_stdlogicvector(X"E308");
+table(26) := To_stdlogicvector(X"E101");
 table(27) := To_stdlogicvector(X"A020");
 table(28) := To_stdlogicvector(X"A762");
 table(29) := To_stdlogicvector(X"7E60");
 table(30) := To_stdlogicvector(X"BF62");
-table(31) := To_stdlogicvector(X"E3F2");
-table(32) := To_stdlogicvector(X"E1FA");
-table(33) := To_stdlogicvector(X"E1FF");
+table(31) := To_stdlogicvector(X"E3F3");
+table(32) := To_stdlogicvector(X"E1FB");
+table(33) := To_stdlogicvector(X"E100");
 table(34) := To_stdlogicvector(X"0005");
+
+----Factorial with branches intending for PC +1
+--table(0) := To_stdlogicvector(X"0002");
+--table(1) := To_stdlogicvector(X"0000");
+--table(2) := To_stdlogicvector(X"9222");
+--table(3) := To_stdlogicvector(X"9300");
+--table(4) := To_stdlogicvector(X"2120");
+--table(5) := To_stdlogicvector(X"9400");
+--table(6) := To_stdlogicvector(X"9500");
+--table(7) := To_stdlogicvector(X"9601");
+--table(8) := To_stdlogicvector(X"9700");
+--table(9) := To_stdlogicvector(X"7E00");
+--table(10) := To_stdlogicvector(X"BF42");
+--table(11) := To_stdlogicvector(X"E303");
+--table(12) := To_stdlogicvector(X"6400");
+--table(13) := To_stdlogicvector(X"A545");
+--table(14) := To_stdlogicvector(X"E103");
+--table(15) := To_stdlogicvector(X"6160");
+--table(16) := To_stdlogicvector(X"A145");
+--table(17) := To_stdlogicvector(X"E10F");
+--table(18) := To_stdlogicvector(X"A562");
+--table(19) := To_stdlogicvector(X"6200");
+--table(20) := To_stdlogicvector(X"A345");
+--table(21) := To_stdlogicvector(X"6640");
+--table(22) := To_stdlogicvector(X"A745");
+--table(23) := To_stdlogicvector(X"7E60");
+--table(24) := To_stdlogicvector(X"BF62");
+--table(25) := To_stdlogicvector(X"E307");
+--table(26) := To_stdlogicvector(X"E100");
+--table(27) := To_stdlogicvector(X"A020");
+--table(28) := To_stdlogicvector(X"A762");
+--table(29) := To_stdlogicvector(X"7E60");
+--table(30) := To_stdlogicvector(X"BF62");
+--table(31) := To_stdlogicvector(X"E3F2");
+--table(32) := To_stdlogicvector(X"E1FA");
+--table(33) := To_stdlogicvector(X"E1FF");
+--table(34) := To_stdlogicvector(X"0005");
 
 --table(0) := To_stdlogicvector(X"0002");
 --table(1) := To_stdlogicvector(X"0000");
@@ -232,41 +272,7 @@ table(34) := To_stdlogicvector(X"0005");
 --table(62) := To_stdlogicvector(X"F0F7");
 --table(63) := To_stdlogicvector(X"00BB");
 
---table(0) := To_stdlogicvector(X"0002");
---table(1) := To_stdlogicvector(X"0000");
---table(2) := To_stdlogicvector(X"9222");
---table(3) := To_stdlogicvector(X"9300");
---table(4) := To_stdlogicvector(X"2120");
---table(5) := To_stdlogicvector(X"9400");
---table(6) := To_stdlogicvector(X"9500");
---table(7) := To_stdlogicvector(X"9601");
---table(8) := To_stdlogicvector(X"9700");
---table(9) := To_stdlogicvector(X"7E00");
---table(10) := To_stdlogicvector(X"BF42");
---table(11) := To_stdlogicvector(X"E304");
---table(12) := To_stdlogicvector(X"6400");
---table(13) := To_stdlogicvector(X"A545");
---table(14) := To_stdlogicvector(X"E104");
---table(15) := To_stdlogicvector(X"6160");
---table(16) := To_stdlogicvector(X"A145");
---table(17) := To_stdlogicvector(X"E110");
---table(18) := To_stdlogicvector(X"A562");
---table(19) := To_stdlogicvector(X"6200");
---table(20) := To_stdlogicvector(X"A345");
---table(21) := To_stdlogicvector(X"6640");
---table(22) := To_stdlogicvector(X"A745");
---table(23) := To_stdlogicvector(X"7E60");
---table(24) := To_stdlogicvector(X"BF62");
---table(25) := To_stdlogicvector(X"E308");
---table(26) := To_stdlogicvector(X"E101");
---table(27) := To_stdlogicvector(X"A020");
---table(28) := To_stdlogicvector(X"A762");
---table(29) := To_stdlogicvector(X"7E60");
---table(30) := To_stdlogicvector(X"BF62");
---table(31) := To_stdlogicvector(X"E3F3");
---table(32) := To_stdlogicvector(X"E1FB");
---table(33) := To_stdlogicvector(X"E100");
---table(34) := To_stdlogicvector(X"0005");
+
 
 
 

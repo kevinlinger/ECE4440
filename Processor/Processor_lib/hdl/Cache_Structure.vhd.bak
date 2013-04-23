@@ -40,7 +40,7 @@ ARCHITECTURE Structure OF Cache IS
 BEGIN
   
     TagBlock : entity work.TagLUT(Structure)
-      port map (clk => clk, we => TagControl or (Write and hit), din(11) => (Read or (not Write)), din(10 downto 0) => AddrIn(15 downto 5), addr => AddrIn(4 downto 2), dout => TagLUTOut);
+      port map (clk => clk, we => TagControl , din(11) => '1', din(10 downto 0) => AddrIn(15 downto 5), addr => AddrIn(4 downto 2), dout => TagLUTOut);
       
     TagComparer : entity work.CacheComparer(Behavior)
     Generic Map(size => 11)

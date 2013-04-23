@@ -27,7 +27,7 @@ BEGIN
 
  suppress_false_d_Wselect : process(WselectDecode, decode_opType) is
    begin
-     if(decode_opType(0) = '1' or decode_opType(2) = '1' or decode_opType(7) = '1' or decode_opType(8) = '1') then
+     if(decode_opType(0) = '1' or decode_opType(2) = '1' or decode_opType(7) = '1' ) then
        tempWselectDecode <= (others => '0');
      else
        tempWselectDecode <= WselectDecode;
@@ -36,6 +36,8 @@ BEGIN
 
 
 
+--elsif(WB_enabled = '1') then
+--     
 
   --writeDecodeAddrEn <= WenDecode and WselectDecode; 
   --writeBackAddrEn <= WenWriteBack and WselectWriteBack;
@@ -44,10 +46,8 @@ BEGIN
   if(reset = '1')
   then
    flipFlopEnable <= (others => '1');
-    elsif(WB_enabled = '1') then
-      flipFlopEnable <= tempWselectDecode or WselectWriteBack;
       else
-        flipFlopEnable <= (others => '0');
+       flipFlopEnable <= tempWselectDecode or WselectWriteBack; 
   end if;
   END PROCESS;
   
@@ -69,7 +69,7 @@ BEGIN
    
    suppress_false_dirties : process(decode_opType, temp_dirty) is
    begin
-     if(decode_opType(0) = '1' or decode_opType(2) = '1' or decode_opType(7) = '1' or decode_opType(8) = '1') then
+     if(decode_opType(0) = '1' or decode_opType(2) = '1' or decode_opType(7) = '1' ) then
        dirty <= '0';
      else
        dirty <= temp_dirty;
