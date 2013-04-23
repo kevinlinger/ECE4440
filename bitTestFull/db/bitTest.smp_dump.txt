@@ -1,0 +1,64 @@
+
+State Machine - |bitTest|qsysOUt:bridgeLOL|qsysOUt_sdram_0:sdram_0|m_next
+Name m_next.010000000 m_next.000010000 m_next.000001000 m_next.000000001 
+m_next.000000001 0 0 0 0 
+m_next.000001000 0 0 1 1 
+m_next.000010000 0 1 0 1 
+m_next.010000000 1 0 0 1 
+
+State Machine - |bitTest|qsysOUt:bridgeLOL|qsysOUt_sdram_0:sdram_0|m_state
+Name m_state.100000000 m_state.010000000 m_state.001000000 m_state.000100000 m_state.000010000 m_state.000001000 m_state.000000100 m_state.000000010 m_state.000000001 
+m_state.000000001 0 0 0 0 0 0 0 0 0 
+m_state.000000010 0 0 0 0 0 0 0 1 1 
+m_state.000000100 0 0 0 0 0 0 1 0 1 
+m_state.000001000 0 0 0 0 0 1 0 0 1 
+m_state.000010000 0 0 0 0 1 0 0 0 1 
+m_state.000100000 0 0 0 1 0 0 0 0 1 
+m_state.001000000 0 0 1 0 0 0 0 0 1 
+m_state.010000000 0 1 0 0 0 0 0 0 1 
+m_state.100000000 1 0 0 0 0 0 0 0 1 
+
+State Machine - |bitTest|qsysOUt:bridgeLOL|qsysOUt_sdram_0:sdram_0|i_next
+Name i_next.111 i_next.101 i_next.010 i_next.000 
+i_next.000 0 0 0 0 
+i_next.010 0 0 1 1 
+i_next.101 0 1 0 1 
+i_next.111 1 0 0 1 
+
+State Machine - |bitTest|qsysOUt:bridgeLOL|qsysOUt_sdram_0:sdram_0|i_state
+Name i_state.111 i_state.101 i_state.011 i_state.010 i_state.001 i_state.000 
+i_state.000 0 0 0 0 0 0 
+i_state.001 0 0 0 0 1 1 
+i_state.010 0 0 0 1 0 1 
+i_state.011 0 0 1 0 0 1 
+i_state.101 0 1 0 0 0 1 
+i_state.111 1 0 0 0 0 1 
+
+State Machine - |bitTest|ArbiterStateMachineNew:arb|current_state
+Name current_state.state_dack current_state.state_iack current_state.state_ir current_state.state_dw current_state.state_dr current_state.state_idle 
+current_state.state_idle 0 0 0 0 0 0 
+current_state.state_dr 0 0 0 0 1 1 
+current_state.state_dw 0 0 0 1 0 1 
+current_state.state_ir 0 0 1 0 0 1 
+current_state.state_iack 0 1 0 0 0 1 
+current_state.state_dack 1 0 0 0 0 1 
+
+State Machine - |bitTest|Cache:DCache|Cache_State_Machine:CacheSM|current_state
+Name current_state.reset_state current_state.load_miss current_state.store current_state.ready 
+current_state.ready 0 0 0 0 
+current_state.store 0 0 1 1 
+current_state.load_miss 0 1 0 1 
+current_state.reset_state 1 0 0 1 
+
+State Machine - |bitTest|Cache:ICache|Cache_State_Machine:CacheSM|current_state
+Name current_state.reset_state current_state.load_miss current_state.store current_state.ready 
+current_state.ready 0 0 0 0 
+current_state.store 0 0 1 1 
+current_state.load_miss 0 1 0 1 
+current_state.reset_state 1 0 0 1 
+
+State Machine - |bitTest|Instruction_Fetch_Stage:IF_stage|IF_State_Machine:SM|current_state
+Name current_state.reset_state current_state.interrupt current_state.run 
+current_state.run 0 0 0 
+current_state.interrupt 0 1 1 
+current_state.reset_state 1 0 1 

@@ -1,0 +1,119 @@
+Info: Starting: Create block symbol file (.bsf)
+Info: ip-generate --project-directory=C:/Users/Kevin/Desktop/bitTest/ --output-directory=C:/Users/Kevin/Desktop/bitTest/qsysOUt/ --report-file=bsf:C:/Users/Kevin/Desktop/bitTest/qsysOUt.bsf --system-info=DEVICE_FAMILY="Cyclone IV E" --system-info=DEVICE=EP4CE115F29C7 --system-info=DEVICE_SPEEDGRADE=7 --component-file=C:/Users/Kevin/Desktop/bitTest/qsysOUt.qsys
+Progress: Loading bitTest/qsysOUt.qsys
+Progress: Reading input file
+Progress: Adding clk_0 [clock_source 12.1]
+Progress: Parameterizing module clk_0
+Progress: Adding bridge_0 [altera_up_external_bus_to_avalon_bridge 12.0]
+Progress: Parameterizing module bridge_0
+Progress: Adding up_clocks_0 [altera_up_clocks 12.0]
+Progress: Parameterizing module up_clocks_0
+Progress: Adding sdram_0 [altera_avalon_new_sdram_controller 12.1]
+Progress: Parameterizing module sdram_0
+Progress: Adding jtag_uart_0 [altera_avalon_jtag_uart 12.1]
+Progress: Parameterizing module jtag_uart_0
+Progress: Building connections
+Progress: Parameterizing connections
+Progress: Validating
+Progress: Done reading input file
+Warning: qsysOUt.jtag_uart_0: Interrupt sender jtag_uart_0.irq is not connected to an interrupt receiver
+Info: ip-generate succeeded.
+Info: Finished: Create block symbol file (.bsf)
+Info: 
+Info: Starting: Create HDL design files for synthesis
+Info: ip-generate --project-directory=C:/Users/Kevin/Desktop/bitTest/ --output-directory=C:/Users/Kevin/Desktop/bitTest/qsysOUt/synthesis/ --file-set=QUARTUS_SYNTH --report-file=sopcinfo:C:/Users/Kevin/Desktop/bitTest/qsysOUt.sopcinfo --report-file=html:C:/Users/Kevin/Desktop/bitTest/qsysOUt.html --report-file=qip:C:/Users/Kevin/Desktop/bitTest/qsysOUt/synthesis/qsysOUt.qip --report-file=cmp:C:/Users/Kevin/Desktop/bitTest/qsysOUt.cmp --system-info=DEVICE_FAMILY="Cyclone IV E" --system-info=DEVICE=EP4CE115F29C7 --system-info=DEVICE_SPEEDGRADE=7 --component-file=C:/Users/Kevin/Desktop/bitTest/qsysOUt.qsys
+Progress: Loading bitTest/qsysOUt.qsys
+Progress: Reading input file
+Progress: Adding clk_0 [clock_source 12.1]
+Progress: Parameterizing module clk_0
+Progress: Adding bridge_0 [altera_up_external_bus_to_avalon_bridge 12.0]
+Progress: Parameterizing module bridge_0
+Progress: Adding up_clocks_0 [altera_up_clocks 12.0]
+Progress: Parameterizing module up_clocks_0
+Progress: Adding sdram_0 [altera_avalon_new_sdram_controller 12.1]
+Progress: Parameterizing module sdram_0
+Progress: Adding jtag_uart_0 [altera_avalon_jtag_uart 12.1]
+Progress: Parameterizing module jtag_uart_0
+Progress: Building connections
+Progress: Parameterizing connections
+Progress: Validating
+Progress: Done reading input file
+Warning: qsysOUt.jtag_uart_0: Interrupt sender jtag_uart_0.irq is not connected to an interrupt receiver
+Info: qsysOUt: Generating qsysOUt "qsysOUt" for QUARTUS_SYNTH
+Info: pipeline_bridge_swap_transform: After transform: 5 modules, 10 connections
+Info: No custom instruction connections, skipping transform 
+Info: merlin_translator_transform: After transform: 8 modules, 19 connections
+Info: merlin_domain_transform: After transform: 14 modules, 48 connections
+Info: merlin_router_transform: After transform: 17 modules, 57 connections
+Info: merlin_burst_transform: After transform: 19 modules, 63 connections
+Info: reset_adaptation_transform: After transform: 21 modules, 67 connections
+Info: merlin_network_to_switch_transform: After transform: 26 modules, 77 connections
+Info: merlin_width_transform: After transform: 30 modules, 89 connections
+Info: bridge_0: Starting Generation of External Bus to Avalon Bridge
+Info: bridge_0: "qsysOUt" instantiated altera_up_external_bus_to_avalon_bridge "bridge_0"
+Info: up_clocks_0: Starting Generation of Required Clocks for DE-Series Boards
+Info: up_clocks_0: "qsysOUt" instantiated altera_up_clocks "up_clocks_0"
+Info: Starting classic module elaboration.
+cygwin warning:
+  MS-DOS style path detected: C:/altera/12.1/quartus/sopc_builder/bin/nios_sh
+  Preferred POSIX equivalent is: /cygdrive/c/altera/12.1/quartus/sopc_builder/bin/nios_sh
+  CYGWIN environment variable option "nodosfilewarning" turns off this warning.
+  Consult the user's guide for more details about POSIX paths:
+    http://cygwin.com/cygwin-ug-net/using.html#using-pathnames
+"c:/altera/12.1/quartus/bin/jre/bin/java.exe" -Xmx512M -classpath "c:/altera/12.1/quartus/sopc_builder/bin/sopc_builder.jar;c:/altera/12.1/quartus/sopc_builder/bin/PinAssigner.jar;c:/altera/12.1/quartus/sopc_builder/bin/sopc_wizard.jar;c:/altera/12.1/quartus/sopc_builder/bin/jptf.jar" sopc_builder.sopc_builder  -d"c:/altera/12.1/quartus/sopc_builder" -notalkback=1 -projectnameyysystem.qpf -projectpathC:/Users/Kevin/AppData/Local/Temp/alt5817_8030817811945938882.dir/0003_sopclgen  --no_splash --refresh C:/Users/Kevin/AppData/Local/Temp/alt5817_8030817811945938882.dir/0003_sopclgen/yysystem.v --quartus_dir="c:/altera/12.1/quartus" --sopc_perl="c:/altera/12.1/quartus/bin/perl" --sopc_lib_path="++c:/altera/12.1/quartus/../ip/altera/sopc_builder_ip+c:/altera/12.1/quartus/../ip/altera/nios2_ip"
+Info: Finished elaborating classic module.
+Executing: C:/altera/12.1/quartus//sopc_builder/bin/sopc_builder --classic --generate C:/Users/Kevin/AppData/Local/Temp/alt5817_8030817811945938882.dir/0003_sopclgen/yysystem.ptf
+Info: Running sopc_builder...
+cygwin warning:
+  MS-DOS style path detected: C:/altera/12.1/quartus/sopc_builder/bin/nios_sh
+  Preferred POSIX equivalent is: /cygdrive/c/altera/12.1/quartus/sopc_builder/bin/nios_sh
+  CYGWIN environment variable option "nodosfilewarning" turns off this warning.
+  Consult the user's guide for more details about POSIX paths:
+    http://cygwin.com/cygwin-ug-net/using.html#using-pathnames
+"c:/altera/12.1/quartus/bin/jre/bin/java.exe" -Xmx512M -classpath "c:/altera/12.1/quartus/sopc_builder/bin/sopc_builder.jar;c:/altera/12.1/quartus/sopc_builder/bin/PinAssigner.jar;c:/altera/12.1/quartus/sopc_builder/bin/sopc_wizard.jar;c:/altera/12.1/quartus/sopc_builder/bin/jptf.jar" sopc_builder.sopc_builder  -d"c:/altera/12.1/quartus/sopc_builder" -notalkback=1 -projectnameyysystem.qpf -projectpathC:/Users/Kevin/AppData/Local/Temp/alt5817_8030817811945938882.dir/0003_sopclgen  --generate C:/Users/Kevin/AppData/Local/Temp/alt5817_8030817811945938882.dir/0003_sopclgen/yysystem.v --quartus_dir="c:/altera/12.1/quartus" --sopc_perl="c:/altera/12.1/quartus/bin/perl" --sopc_lib_path="++c:/altera/12.1/quartus/../ip/altera/sopc_builder_ip+c:/altera/12.1/quartus/../ip/altera/nios2_ip"
+No .sopc_builder configuration file(!)
+.
+.
+# 2013.04.22 16:34:45 (*) Running Test Generator Program for qsysOUt_sdram_0
+# 2013.04.22 16:34:47 (*) Success: sopc_builder finished.
+Info: sdram_0: "qsysOUt" instantiated altera_avalon_new_sdram_controller "sdram_0"
+Info: Starting classic module elaboration.
+cygwin warning:
+  MS-DOS style path detected: C:/altera/12.1/quartus/sopc_builder/bin/nios_sh
+  Preferred POSIX equivalent is: /cygdrive/c/altera/12.1/quartus/sopc_builder/bin/nios_sh
+  CYGWIN environment variable option "nodosfilewarning" turns off this warning.
+  Consult the user's guide for more details about POSIX paths:
+    http://cygwin.com/cygwin-ug-net/using.html#using-pathnames
+"c:/altera/12.1/quartus/bin/jre/bin/java.exe" -Xmx512M -classpath "c:/altera/12.1/quartus/sopc_builder/bin/sopc_builder.jar;c:/altera/12.1/quartus/sopc_builder/bin/PinAssigner.jar;c:/altera/12.1/quartus/sopc_builder/bin/sopc_wizard.jar;c:/altera/12.1/quartus/sopc_builder/bin/jptf.jar" sopc_builder.sopc_builder  -d"c:/altera/12.1/quartus/sopc_builder" -notalkback=1 -projectnameyysystem.qpf -projectpathC:/Users/Kevin/AppData/Local/Temp/alt5817_8030817811945938882.dir/0004_sopclgen  --no_splash --refresh C:/Users/Kevin/AppData/Local/Temp/alt5817_8030817811945938882.dir/0004_sopclgen/yysystem.v --quartus_dir="c:/altera/12.1/quartus" --sopc_perl="c:/altera/12.1/quartus/bin/perl" --sopc_lib_path="++c:/altera/12.1/quartus/../ip/altera/sopc_builder_ip+c:/altera/12.1/quartus/../ip/altera/nios2_ip"
+Info: Finished elaborating classic module.
+Executing: C:/altera/12.1/quartus//sopc_builder/bin/sopc_builder --classic --generate C:/Users/Kevin/AppData/Local/Temp/alt5817_8030817811945938882.dir/0004_sopclgen/yysystem.ptf
+Info: Running sopc_builder...
+cygwin warning:
+  MS-DOS style path detected: C:/altera/12.1/quartus/sopc_builder/bin/nios_sh
+  Preferred POSIX equivalent is: /cygdrive/c/altera/12.1/quartus/sopc_builder/bin/nios_sh
+  CYGWIN environment variable option "nodosfilewarning" turns off this warning.
+  Consult the user's guide for more details about POSIX paths:
+    http://cygwin.com/cygwin-ug-net/using.html#using-pathnames
+"c:/altera/12.1/quartus/bin/jre/bin/java.exe" -Xmx512M -classpath "c:/altera/12.1/quartus/sopc_builder/bin/sopc_builder.jar;c:/altera/12.1/quartus/sopc_builder/bin/PinAssigner.jar;c:/altera/12.1/quartus/sopc_builder/bin/sopc_wizard.jar;c:/altera/12.1/quartus/sopc_builder/bin/jptf.jar" sopc_builder.sopc_builder  -d"c:/altera/12.1/quartus/sopc_builder" -notalkback=1 -projectnameyysystem.qpf -projectpathC:/Users/Kevin/AppData/Local/Temp/alt5817_8030817811945938882.dir/0004_sopclgen  --generate C:/Users/Kevin/AppData/Local/Temp/alt5817_8030817811945938882.dir/0004_sopclgen/yysystem.v --quartus_dir="c:/altera/12.1/quartus" --sopc_perl="c:/altera/12.1/quartus/bin/perl" --sopc_lib_path="++c:/altera/12.1/quartus/../ip/altera/sopc_builder_ip+c:/altera/12.1/quartus/../ip/altera/nios2_ip"
+No .sopc_builder configuration file(!)
+.
+# 2013.04.22 16:34:53 (*) Success: sopc_builder finished.
+Info: jtag_uart_0: "qsysOUt" instantiated altera_avalon_jtag_uart "jtag_uart_0"
+Info: bridge_0_avalon_master_translator: "qsysOUt" instantiated altera_merlin_master_translator "bridge_0_avalon_master_translator"
+Info: sdram_0_s1_translator: "qsysOUt" instantiated altera_merlin_slave_translator "sdram_0_s1_translator"
+Info: bridge_0_avalon_master_translator_avalon_universal_master_0_agent: "qsysOUt" instantiated altera_merlin_master_agent "bridge_0_avalon_master_translator_avalon_universal_master_0_agent"
+Info: sdram_0_s1_translator_avalon_universal_slave_0_agent: "qsysOUt" instantiated altera_merlin_slave_agent "sdram_0_s1_translator_avalon_universal_slave_0_agent"
+Info: sdram_0_s1_translator_avalon_universal_slave_0_agent_rsp_fifo: "qsysOUt" instantiated altera_avalon_sc_fifo "sdram_0_s1_translator_avalon_universal_slave_0_agent_rsp_fifo"
+Info: addr_router: "qsysOUt" instantiated altera_merlin_router "addr_router"
+Info: id_router: "qsysOUt" instantiated altera_merlin_router "id_router"
+Info: burst_adapter: "qsysOUt" instantiated altera_merlin_burst_adapter "burst_adapter"
+Info: rst_controller: "qsysOUt" instantiated altera_reset_controller "rst_controller"
+Info: cmd_xbar_demux: "qsysOUt" instantiated altera_merlin_demultiplexer "cmd_xbar_demux"
+Info: rsp_xbar_demux: "qsysOUt" instantiated altera_merlin_demultiplexer "rsp_xbar_demux"
+Info: rsp_xbar_mux: "qsysOUt" instantiated altera_merlin_multiplexer "rsp_xbar_mux"
+Info: width_adapter: "qsysOUt" instantiated altera_merlin_width_adapter "width_adapter"
+Info: Reusing file C:/Users/Kevin/Desktop/bitTest/qsysOUt/synthesis/submodules/altera_merlin_burst_uncompressor.sv
+Info: Reusing file C:/Users/Kevin/Desktop/bitTest/qsysOUt/synthesis/submodules/altera_merlin_address_alignment.sv
+Info: qsysOUt: Done qsysOUt" with 18 modules, 46 files, 878571 bytes
+Info: ip-generate succeeded.
+Info: Finished: Create HDL design files for synthesis

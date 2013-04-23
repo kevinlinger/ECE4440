@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<LOG_ROOT>
+	<PROJECT NAME="bitTest">
+		<CBX_INST_ENTRY INSTANCE_NAME="|bitTest|qsysOUt:bridgeLOL|qsysOUt_jtag_uart_0:jtag_uart_0|qsysOUt_jtag_uart_0_scfifo_r:the_qsysOUt_jtag_uart_0_scfifo_r|scfifo:rfifo" CBX_FILE_NAME="scfifo_jr21.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|bitTest|qsysOUt:bridgeLOL|qsysOUt_jtag_uart_0:jtag_uart_0|qsysOUt_jtag_uart_0_scfifo_w:the_qsysOUt_jtag_uart_0_scfifo_w|scfifo:wfifo" CBX_FILE_NAME="scfifo_jr21.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|bitTest|qsysOUt:bridgeLOL|qsysOUt_up_clocks_0:up_clocks_0|altpll:DE_Clock_Generator_System" CBX_FILE_NAME="altpll_6rb2.tdf"/>
+	</PROJECT>
+</LOG_ROOT>

@@ -1,0 +1,122 @@
+LIBRARY ieee;
+USE ieee.std_logic_1164.all;
+USE ieee.std_logic_arith.all;
+
+ENTITY ArbiterStateMachine IS
+	PORT(
+		RAMDelay : IN std_logic;
+		
+		IRAddress : IN std_logic_vector (15 DOWNTO 0);
+		IREnable : IN std_logic;
+		
+		DWEnable, DREnable : IN std_logic;
+		DAddress : IN std_logic_vector (15 DOWNTO 0);
+		DWData : IN std_logic_vector (15 DOWNTO 0);
+		
+		REnable, WEnable : OUT std_logic;
+		Address : OUT std_logic_vector (15 DOWNTO 0);
+		WData : OUT std_logic_vector (15 DOWNTO 0);
+		
+		IHandshake : OUT std_logic;
+		
+		DHandshake : OUT std_logic;
+		
+		clock : IN std_logic
+	);
+END ENTITY ArbiterStateMachine;
+
+ARCHITECTURE Behavior OF ArbiterStateMachine IS
+	TYPE state IS (state_idle, state_dr, state_dw, state_ir);
+	SIGNAL current_state, next_state : state := state_idle;
+	
+	BEGIN
+	
+		update_new_state : PROCESS (clock)
+		BEGIN
+			IF rising_edge(clock) THEN
+				current_state <= next_state;
+			END IF;
+		END PROCESS;
+		
+		determine_next_state : PROCESS (current_state, IREnable, DREnable, DWEnable, RAMDelay)
+		BEGIN
+			IF (current_state = state_idle) THEN
+				IF (IREnable = '1' AND DREnable /= '1' AND DWEnable /= '1') THEN
+					next_state <= state_ir;
+				ELSIF (DREnable = '1') THEN
+					next_state <= state_dr;
+				ELSIF (DWEnable = '1') THEN
+					next_state <= state_dw;
+				ELSE
+					next_state <= state_idle;
+				END IF;
+			ELSIF (current_state = state_dr) THEN
+				IF (RAMDelay = '1') THEN
+					next_state <= state_dr;
+				ELSIF (RAMDelay = '0') THEN
+					next_state <= state_idle;
+				END IF;
+			ELSIF (current_state = state_dw) THEN
+				IF (RAMDelay = '1') THEN
+					next_state <= state_dw;
+				ELSIF(RAMDelay = '0' and IREnable = '0') THEN
+					next_state <= state_idle;
+				ELSIF(RAMDelay = '0' and IREnable = '1') THEN
+				  next_state <= state_ir;
+				END IF;
+			ELSIF (current_state = state_ir) THEN
+				IF (RAMDelay = '1') THEN
+					next_state <= state_ir;
+				ELSIF(RAMDelay = '0') THEN
+					next_state <= state_idle;
+				END IF;
+			END IF;
+		END PROCESS;
+		
+		update_outputs: PROCESS (current_state, IREnable, DREnable, DWEnable, RAMDelay)
+		BEGIN
+			IF (current_state = state_idle) THEN
+				REnable <= '0';
+				WEnable <= '0';
+				DHandshake <= '0';
+				IHandshake <= '0';
+			ELSIF (current_state = state_dr) THEN
+				Address <= DAddress;
+				REnable <= '1';
+				WEnable <= '0';
+				
+				IHandshake <= '0';
+				IF(RAMDelay = '1') THEN
+					DHandshake <= '0';
+				ELSIF (RAMDelay = '0') THEN
+					DHandshake <= '1';
+				END IF;
+			ELSIF (current_state = state_dw) THEN
+				Address <= DAddress;
+				WData <= DWData;
+				REnable <= '0';
+				WEnable <= '1';
+				
+				IHandshake <= '0';
+				IF(RAMDelay = '1') THEN
+					DHandshake <= '0';
+				ELSIF (RAMDelay = '0' and IREnable = '0') THEN
+					DHandshake <= '1';
+				END IF;
+			ELSIF (current_state = state_ir) THEN
+				Address <= IRAddress;
+				REnable <= '1';
+				WEnable <= '0';
+				
+				--DHandshake <= '0';
+				IF(RAMDelay = '1') THEN
+					IHandshake <= '0';
+				ELSIF (RAMDelay = '0') THEN
+					IF(DWEnable = '1') THEN
+            DHandshake <= '1';
+          END IF;
+					IHandshake <= '1';
+				END IF;
+			END IF;
+		END PROCESS;
+END ARCHITECTURE Behavior;

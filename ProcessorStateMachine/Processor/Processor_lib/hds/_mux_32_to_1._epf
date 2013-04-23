@@ -1,0 +1,2 @@
+DEFAULT_ARCHITECTURE atom Behavior
+DEFAULT_FILE atom Component_Library/Mux_32_to_1_Behavior.vhd

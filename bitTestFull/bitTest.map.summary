@@ -1,0 +1,14 @@
+Analysis & Synthesis Status : Successful - Tue Apr 23 00:16:13 2013
+Quartus II 32-bit Version : 12.1 Build 177 11/07/2012 SJ Web Edition
+Revision Name : bitTest
+Top-level Entity Name : bitTest
+Family : Cyclone IV E
+Total logic elements : 4,440
+    Total combinational functions : 3,003
+    Dedicated logic registers : 2,143
+Total registers : 2143
+Total pins : 145
+Total virtual pins : 0
+Total memory bits : 16
+Embedded Multiplier 9-bit elements : 0
+Total PLLs : 1

@@ -1,0 +1,2 @@
+DEFAULT_ARCHITECTURE atom Behavior
+DEFAULT_FILE atom InstructionFetch/IF_State_Machine_Behavioral.vhd
