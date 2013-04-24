@@ -17,7 +17,7 @@ ENTITY MemStage IS
     opType:IN std_logic_vector (8 DOWNTO 0);
     aluData:IN std_logic_vector (15 DOWNTO 0);
     rData: IN std_logic_vector (15 DOWNTO 0);
-    Dcache_stall: IN std_logic;
+    Dcache_stall, IF_memDelay: IN std_logic;
     
     mem_stall_toUpstream, bubble_preWB_pipeline : OUT std_logic;
     wEnable:OUT std_logic;
@@ -27,14 +27,31 @@ ENTITY MemStage IS
     wBackAddr : out std_logic_vector(3 downto 0));
 END ENTITY MemStage;
 
+--
+--Read => M_rEnable and (not IF_memDelay),
+-- Write => M_wEnable and (not IF_memDelay),
 
 ARCHITECTURE Behavior OF MemStage IS
   SIGNAL control:std_logic;
 BEGIN
   
+  determine_stalls : PROCESS(IF_memDelay, DCache_stall, opType) is
+  begin
+    if(DCache_stall = '1') then
+      mem_stall_toUpstream <= '1';
+      bubble_preWB_pipeline <= '1';
+    elsif( IF_memDelay = '1' and (opType(1) = '1' or opType(2) = '1' )) then
+      mem_stall_toUpstream <= '1';
+      bubble_preWB_pipeline <= '1';
+    else
+      mem_stall_toUpstream <= '0';
+      bubble_preWB_pipeline <= '0';
+    end if;
+  end process;
   
-  mem_stall_toUpstream <= DCache_stall;
-  bubble_preWB_pipeline <= DCache_stall;
+  
+--  mem_stall_toUpstream <= DCache_stall;
+--  bubble_preWB_pipeline <= DCache_stall;
   
   rEnable <= opType(1);
   wEnable <= opType(2);

@@ -172,7 +172,7 @@ RegisterFile : ENTITY WORK.RegisterFile(structure)
 
 Reservation_Station : ENTITY WORK.Full_Reservation_Station(Hybrid)
   PORT MAP( clock => clock, reset => reset, wb_enabled => Pre_WB_pipeline_M_WBackEnable, decode_stalled => decode_stall_toUpstream, Rselect0addr => D_RA0, Rselect1addr => D_RA1,
-    Wselectaddr => D_Dest_Reg, WselectWriteBackaddr => Pre_WB_pipeline_M_wBackAddr , dirty => dirty, decode_opType => D_Op_Type
+    Wselectaddr => D_Dest_Reg, WselectWriteBackaddr => Pre_WB_pipeline_M_wBackAddr , dirty => dirty, decode_opType => D_Op_Type, jumping => IF_JumpEnable
   );
 
     

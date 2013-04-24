@@ -153,7 +153,7 @@ Pipeline_Reg_preMem : ENTITY WORK.Pipeline_Reg_PreMem(Behavioral)
  MemStage : ENTITY WORK.MemStage(behavior)
   PORT MAP( addr => pre_M_pipeline_D_Dest_Reg, opType => pre_M_pipeline_D_Op_Type, aluData => pre_M_pipeline_E_ALU_Out, rData => M_rData,
     wEnable => M_wEnable, rEnable => M_rEnable, wBackEnable => M_WBackEnable, Dcache_stall =>DCacheDelay,  mem_stall_toUpstream => mem_stall_toUpstream, 
-    wBackData => M_wBackData, wBackAddr => M_wBackAddr, bubble_preWB_pipeline => bubble_preWB_pipeline);
+    wBackData => M_wBackData, wBackAddr => M_wBackAddr, bubble_preWB_pipeline => bubble_preWB_pipeline, IF_memDelay => IF_memDelay);
     
 
 Pipeline_Reg_PreWB : ENTITY WORK.pipeline_Reg_PreWB(Behavioral)
