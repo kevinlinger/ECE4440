@@ -7,7 +7,7 @@ ENTITY ExecuteStage IS
     ALU0, ALU1, Extra : IN std_logic_vector (15 DOWNTO 0);
     ALU_Ctrl : IN std_logic_vector(2 DOWNTO 0);
     Op_Type : IN std_logic_vector(8 DOWNTO 0);    
-    IF_memDelay : IN std_logic;
+    IF_memDelay, D_memDelay : IN std_logic;
     
     Branch_Inst : IN std_logic_vector(3 DOWNTO 0);
     Downstream_stall : IN std_logic;

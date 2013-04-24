@@ -40,9 +40,9 @@ BEGIN
     if(DCache_stall = '1') then
       mem_stall_toUpstream <= '1';
       bubble_preWB_pipeline <= '1';
-    elsif( IF_memDelay = '1' and (opType(1) = '1' or opType(2) = '1' )) then
-      mem_stall_toUpstream <= '1';
-      bubble_preWB_pipeline <= '1';
+--    elsif( IF_memDelay = '1' and (opType(1) = '1' or opType(2) = '1' )) then
+--      mem_stall_toUpstream <= '1';
+--      bubble_preWB_pipeline <= '1';
     else
       mem_stall_toUpstream <= '0';
       bubble_preWB_pipeline <= '0';

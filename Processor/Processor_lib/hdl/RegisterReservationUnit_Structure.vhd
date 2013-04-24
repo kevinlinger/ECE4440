@@ -69,7 +69,8 @@ BEGIN
    
    suppress_false_dirties : process(decode_opType, temp_dirty) is
    begin
-     if(decode_opType(0) = '1' or decode_opType(2) = '1' or decode_opType(7) = '1' ) then
+     --if(decode_opType(0) = '1' or decode_opType(2) = '1' or decode_opType(7) = '1' ) then
+     if(decode_opType(0) = '1' or decode_opType(7) = '1' ) then
        dirty <= '0';
      else
        dirty <= temp_dirty;
