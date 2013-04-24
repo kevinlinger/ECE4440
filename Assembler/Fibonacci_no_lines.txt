@@ -10,27 +10,21 @@ main: LIL R2 1
   LIL R1 <local_a_main
   LIH R1 >local_a_main		R1 = 55
   ST R2 R1 0				addr[55] = 1
-# Maximum value of m can be 22
   LIL R1 <local_c_main		R1 = 57
   LIH R1 >local_c_main
   ST R2 R1 0				addr[57] = 1
-# - - - - - - - - - - - - - - - line 6
   SUB R2 R2  # R2 <-- 0
   LIL R1 <local_n_main		R1 = 58
   LIH R1 >local_n_main		
   ST R2 R1 0				addr[58] = 0
-# - - - - - - - - - - - - - - - line 7
   LIL R1 <local_b_main		R1 = 56
   LIH R1 >local_b_main
   ST R2 R1 0				addr[56] = 0
-# - - - - - - - - - - - - - - - line 8
-# change the following LIL value to alter input (fibo(R1+1))
   LIL R1 22					R1 = 22
   LIH R1 0
   LIL R2 <local_m_main		R2 = 59
   LIH R2 >local_m_main		
   ST R1 R2 0				addr[59] = 22
-# - - - - - - - - - - - - - - - line 9
   BR enter_4290768384
 top_4290768384: LIL R2 <local_b_main
   LIH R2 >local_b_main		R2 = 56
@@ -38,15 +32,12 @@ top_4290768384: LIL R2 <local_b_main
   LIL R1 <local_a_main
   LIH R1 >local_a_main
   ST R3 R1 0
-# - - - - - - - - - - - - - - - line 12
   LIL R4 <local_c_main
   LIH R4 >local_c_main
   LD R1 R4 0
   ST R1 R2 0
-# - - - - - - - - - - - - - - - line 13
   ADD R1 R3
   ST R1 R4 0
-# - - - - - - - - - - - - - - - line 14
   LIL R3 <local_n_main
   LIH R3 >local_n_main
   LD R1 R3 0
@@ -54,17 +45,15 @@ top_4290768384: LIL R2 <local_b_main
   LIH R2 0
   ADD R1 R2
   ST R1 R3 0
-# - - - - - - - - - - - - - - - line 9
-enter_4290768384: LIL R1 <local_m_main
+enter_4290768384: LIL R1 <local_m_main 	R1 =59 
   LIH R1 >local_m_main
   LD R2 R1 0				m, addr[59] should be 22
-  LIL R1 <local_n_main
+  LIL R1 <local_n_main		
   LIH R1 >local_n_main
-  LD R3 R1 0
+  LD R3 R1 0				n, addr[58] should be 0
   MOV R15 R3
   SUB R15 R2
   BN top_4290768384
-# - - - - - - - - - - - - - - - line 16
   LIL R1 <local_c_main
   LIH R1 >local_c_main
   LD R0 R1 0
@@ -74,4 +63,3 @@ local_b_main: DATA 0
 local_c_main: DATA 0
 local_n_main: DATA 0
 local_m_main: DATA 0
-# - - - - - - - - - - - - - - - line 15
