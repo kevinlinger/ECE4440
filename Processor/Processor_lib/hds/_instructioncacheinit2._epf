@@ -1,2 +1,0 @@
-DEFAULT_ARCHITECTURE atom Behavior
-DEFAULT_FILE atom InstructionCacheInit2_Behavior.vhd

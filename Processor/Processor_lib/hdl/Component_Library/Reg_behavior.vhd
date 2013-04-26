@@ -1,6 +1,5 @@
-LIBRARY ieee;
-USE ieee.std_logic_1164.all;
-USE ieee.std_logic_arith.all;
+library ieee;
+use ieee.std_logic_1164.all;
 
 ENTITY reg IS
   GENERIC (size : POSITIVE := 16);

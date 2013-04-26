@@ -1,2 +1,0 @@
-DEFAULT_ARCHITECTURE atom Behavior
-DEFAULT_FILE atom ram_delay_16bit_Behavior.vhd

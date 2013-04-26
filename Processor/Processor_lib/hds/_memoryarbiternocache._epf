@@ -1,2 +1,0 @@
-DEFAULT_ARCHITECTURE atom Structure
-DEFAULT_FILE atom MemoryArbiterNoCache_Behavior.vhd
