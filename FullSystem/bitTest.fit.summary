@@ -1,0 +1,16 @@
+Fitter Status : Successful - Sat Apr 27 02:30:38 2013
+Quartus II 32-bit Version : 12.1 Build 177 11/07/2012 SJ Web Edition
+Revision Name : bitTest
+Top-level Entity Name : bitTest
+Family : Cyclone IV E
+Device : EP4CE115F29C7
+Timing Models : Final
+Total logic elements : 3,686 / 114,480 ( 3 % )
+    Total combinational functions : 3,097 / 114,480 ( 3 % )
+    Dedicated logic registers : 2,092 / 114,480 ( 2 % )
+Total registers : 2209
+Total pins : 145 / 529 ( 27 % )
+Total virtual pins : 0
+Total memory bits : 16 / 3,981,312 ( < 1 % )
+Embedded Multiplier 9-bit elements : 0 / 532 ( 0 % )
+Total PLLs : 1 / 4 ( 25 % )

@@ -1,0 +1,94 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.std_logic_arith.all;
+use ieee.std_logic_unsigned.all;
+
+library std;
+
+entity latchTest is
+port(
+
+	CLOCK_50 : in std_logic;
+	CLOCK2_50 : in std_logic;
+	CLOCK3_50 : in std_logic;
+
+
+	LEDG : out std_logic_vector(8 downto 0);
+	LEDR : out std_logic_vector(17 downto 0);
+
+
+	KEY : in std_logic_vector(3 downto 0);
+
+	SW : in std_logic_vector(17 downto 0);
+
+
+	DRAM_ADDR : out std_LOGIC_VECTOR (12 downto 0);
+	DRAM_BA : out std_LOGIC_VECTOR (1 downto 0);
+	DRAM_CAS_N : out std_logic;
+	DRAM_CKE : out std_logic;
+	DRAM_CLK : out std_logic;
+	DRAM_CS_N : out std_logic;
+	DRAM_DQ : inout std_logic_vector(31 downto 0);
+	DRAM_DQM : out std_logic_vector(3 downto 0);
+	DRAM_RAS_N : out std_logic;
+	DRAM_WE_N : out std_logic;
+
+	GPIO : inout std_logic_vector(35 downto 0)
+);
+
+end entity latchTest;
+
+architecture Structure of latchTest is
+
+signal bridgeAck : std_logic;
+signal kthx : std_logic;
+signal readData : std_logic_vector(15 downto 0);
+
+component qsysOut 
+port(
+		reset_reset_n : in std_logic;
+		clk_clk : in std_logic;
+		sdram_0_wire_addr : out std_logic_vector(11 downto 0);
+		sdram_0_wire_ba : out std_logic_vector(1 downto 0);
+		sdram_0_wire_cas_n : out std_logic;
+		sdram_0_wire_cke : out std_logic;
+		sdram_0_wire_cs_n : out std_logic;
+		sdram_0_wire_dq : inout std_logic_vector(31 downto 0);
+		sdram_0_wire_dqm : out std_logic_vector(3 downto 0);
+		sdram_0_wire_ras_n : out std_logic;
+		sdram_0_wire_we_n : out std_logic;
+		bridge_0_external_interface_address : in std_logic_vector(26 downto 0);
+		bridge_0_external_interface_byte_enable : in std_logic_vector(1 downto 0);
+		bridge_0_external_interface_read : in std_logic;
+		bridge_0_external_interface_write : in std_logic;
+		bridge_0_external_interface_write_data : in std_logic_vector(15 downto 0);
+		bridge_0_external_interface_acknowledge : out std_logic;
+		bridge_0_external_interface_read_data : out std_logic_vector(15 downto 0)
+);
+end component;
+begin
+
+
+
+bridgeLOL : qsysOUt
+port map(clk_clk => CLOCK_50, reset_reset_n => not(SW(17)), bridge_0_external_interface_acknowledge => bridgeAck, bridge_0_external_interface_address(26 downto 8) => "0000000000000000000",
+			bridge_0_external_interface_address(7 downto 0) => sw(7 downto 0),
+			bridge_0_external_interface_byte_enable => SW(12 downto 11), bridge_0_external_interface_read_data => readData, bridge_0_external_interface_read => not(key(3)),
+			bridge_0_external_interface_write_data => "1111000011110000",bridge_0_external_interface_write=> not(key(2)), sdram_0_wire_addr => DRAM_ADDR(11 downto 0), 
+			sdram_0_wire_ba => DRAM_BA, sdram_0_wire_cas_n => DRAM_CAS_N, sdram_0_wire_cke => DRAM_CKE, 
+			sdram_0_wire_cs_n => DRAM_CS_N, sdram_0_wire_dq => DRAM_DQ, sdram_0_wire_dqm => DRAM_DQM,
+			sdram_0_wire_ras_n => DRAM_RAS_N, sdram_0_wire_we_n => DRAM_WE_N);
+
+DRAM_ADDR(12) <= SW(16);
+LEDG(7) <= bridgeAck;
+kthx <= (not(key(3)) or not(key(2)));
+
+LOLlatch : entity work.FlipFlop(Behavior)
+port map(a => (not(key(3)) or not(key(2))), b => LEDG(6), clk => (bridgeAck or (not(kthx))), en => '1');
+		
+dataLatch : entity work.VarRegister(Behavior)
+generic map( size => 16)	
+port map(a => readData, b => LEDR(15 downto 0), clk => bridgeAck, en => '1' );
+
+	
+end Structure;
